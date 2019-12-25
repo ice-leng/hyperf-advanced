@@ -28,14 +28,5 @@ git clone https://github.com/ice-leng/hyperf-advanced.git
 
 
 
-- [] ss
-- auth 已实现， 支持路由白名单，可以通过注解实现
-- jwt  已实现， 用法在jwt类里面
-- db
-- view 
-
-
-
-
 
 
