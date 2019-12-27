@@ -41,7 +41,9 @@
         "ext-json": "*",
         "ext-intl": "*",
         "lengbin/hyperf-helper": "dev-master",
-        "lengbin/hyperf-swagger": "dev-master"
+        "lengbin/hyperf-swagger": "dev-master",
+        "lengbin/hyperf-jwt": "dev-master",
+        "lengbin/hyperf-auth": "dev-master"
     },
     "require-dev": {
         "swoft/swoole-ide-helper": "^4.2",

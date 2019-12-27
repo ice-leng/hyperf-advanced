@@ -2,9 +2,8 @@
 
 declare(strict_types=1);
 
-namespace Common\Middleware\Rest;
+namespace Common\Middleware;
 
-use Common\Auth\AuthAnnotation;
 use Common\Helper\CodeHelper;
 use FastRoute\Dispatcher;
 use Hyperf\Di\Annotation\AnnotationCollector;
@@ -13,12 +12,13 @@ use Hyperf\HttpServer\Exception\Http\NotFoundException;
 use Hyperf\HttpServer\Router\Dispatched;
 use Hyperf\Utils\Codec\Json;
 use Hyperf\Utils\Context;
+use Lengbin\Hyperf\Auth\AuthAnnotation;
+use Lengbin\Hyperf\Helper\Arrays\ArrayHelper;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Yiisoft\Arrays\ArrayHelper;
 
 class ServerMiddleware implements MiddlewareInterface
 {

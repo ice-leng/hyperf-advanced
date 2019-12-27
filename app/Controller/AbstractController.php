@@ -12,9 +12,11 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use Hyperf\Contract\ConfigInterface;
 use Hyperf\Di\Annotation\Inject;
 use Hyperf\HttpServer\Contract\RequestInterface;
 use Hyperf\HttpServer\Contract\ResponseInterface;
+use Lengbin\Hyperf\Auth\User\UserInterface;
 use Psr\Container\ContainerInterface;
 
 abstract class AbstractController
@@ -36,4 +38,16 @@ abstract class AbstractController
      * @var ResponseInterface
      */
     protected $response;
+
+    /**
+     * auth
+     * @return UserInterface
+     */
+    public function getAuth(): UserInterface
+    {
+        $config = $this->container->get(ConfigInterface::class);
+        $requestName = $config->get('auth.requestName', 'auth');
+        return $this->request->getAttribute($requestName);
+    }
+
 }

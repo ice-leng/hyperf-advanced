@@ -18,11 +18,13 @@ Either run
 ```
 git clone https://github.com/ice-leng/hyperf-advanced.git
 ```
-功能
+使用扩展
 --------------
- - [] API
+ - [ ] API
     - [x] [接口文档](https://github.com/ice-leng/hyperf-swagger)
-    - [x] [帮助类](https://github.com/ice-leng/hyperf-swagger)
+    - [x] [帮助类](https://github.com/ice-leng/hyperf-helper)
+    - [x] [token机制](https://github.com/ice-leng/hyperf-jwt)
+    - [x] [auth权限验证](https://github.com/ice-leng/hyperf-auth)
  - [ ] Backend
 
 
