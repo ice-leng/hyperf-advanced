@@ -25,6 +25,9 @@ git clone https://github.com/ice-leng/hyperf-advanced.git
     - [x] [帮助类](https://github.com/ice-leng/hyperf-helper)
     - [x] [token机制](https://github.com/ice-leng/hyperf-jwt)
     - [x] [auth权限验证](https://github.com/ice-leng/hyperf-auth)
+    - [ ] permission 权限
+    - [ ] elk 接入日志分析系统
+    - [ ] jaeger tracing 
  - [ ] Backend
 
 
