@@ -24,7 +24,7 @@ class SwaggerController extends AbstractController
     public $swagger;
 
     /**
-     * @GetMapping(path="/swaager")
+     * @GetMapping(path="/swagger")
      * @AuthAnnotation(isPublic=true)
      */
     public function index()
