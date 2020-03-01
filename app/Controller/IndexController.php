@@ -12,12 +12,10 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use Hyperf\Di\Annotation\Inject;
 use Hyperf\HttpServer\Annotation\Controller;
 use Hyperf\HttpServer\Annotation\GetMapping;
 use Hyperf\HttpServer\Annotation\RequestMapping;
 use Lengbin\Hyperf\Auth\AuthAnnotation;
-use Lengbin\Jwt\TokenInterface;
 
 /**
  * Class IndexController
@@ -26,12 +24,6 @@ use Lengbin\Jwt\TokenInterface;
  */
 class IndexController extends AbstractController
 {
-
-    /**
-     * @Inject()
-     * @var TokenInterface
-     */
-    protected $jwt;
 
     /**
      * @RequestMapping(path="/", methods={"get", "post"})
@@ -45,7 +37,6 @@ class IndexController extends AbstractController
         return [
             'method'  => $method,
             'message' => "Hello {$user}.",
-            'token' => $this->jwt->makeToken(["username"=> 'ice', 'face'=> ''], 12),
         ];
     }
 
