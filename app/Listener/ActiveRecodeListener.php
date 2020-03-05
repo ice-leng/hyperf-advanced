@@ -1,6 +1,6 @@
 <?php
 
-namespace Common\Listener;
+namespace App\Listener;
 
 use Hyperf\Event\Annotation\Listener;
 use Hyperf\Event\Contract\ListenerInterface;

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Common\Exception;
+namespace App\Exception;
 
-use Common\Helper\CodeHelper;
+use App\Helper\CodeHelper;
 use Hyperf\Server\Exception\ServerException;
 
 class BusinessException extends ServerException

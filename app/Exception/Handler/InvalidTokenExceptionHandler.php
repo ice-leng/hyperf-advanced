@@ -1,35 +1,32 @@
 <?php
 
-declare(strict_types=1);
+namespace App\Exception\Handler;
 
-namespace Common\Exception\Handler;
-
-use Common\Exception\BusinessException;
+use App\Helper\CodeHelper;
 use Hyperf\ExceptionHandler\ExceptionHandler;
 use Hyperf\HttpMessage\Stream\SwooleStream;
+use Lengbin\Hyperf\Auth\Exception\InvalidTokenException;
 use Nette\Utils\Json;
 use Psr\Http\Message\ResponseInterface;
 use Throwable;
 
-class BusinessExceptionHandler extends ExceptionHandler
+class InvalidTokenExceptionHandler extends ExceptionHandler
 {
-
     /**
      * Handle the exception, and return the specified result.
      *
-     * @param Throwable         $throwable
+     * @param \Throwable         $throwable
      * @param ResponseInterface $response
      *
      * @return ResponseInterface
      * @throws \Nette\Utils\JsonException
      */
-    public function handle(Throwable $throwable, ResponseInterface $response)
+    public function handle(\Throwable $throwable, ResponseInterface $response)
     {
-        // 判断被捕获到的异常是希望被捕获的异常
-        // 格式化输出
+        $code = CodeHelper::TOKEN_INVALID;
         $data = Json::encode([
-            'code'    => $throwable->getCode(),
-            'message' => $throwable->getMessage(),
+            'code'    => $code,
+            'message' => CodeHelper::getMessage($code),
         ]);
 
         $this->stopPropagation();
@@ -46,6 +43,6 @@ class BusinessExceptionHandler extends ExceptionHandler
      */
     public function isValid(Throwable $throwable): bool
     {
-        return $throwable instanceof BusinessException;
+        return $throwable instanceof InvalidTokenException;
     }
 }

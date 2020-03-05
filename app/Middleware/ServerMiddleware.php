@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Common\Middleware;
+namespace App\Middleware;
 
-use Common\Helper\CodeHelper;
+use App\Helper\CodeHelper;
 use FastRoute\Dispatcher;
 use Hyperf\Di\Annotation\AnnotationCollector;
 use Hyperf\HttpMessage\Stream\SwooleStream;

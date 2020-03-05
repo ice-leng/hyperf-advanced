@@ -2,8 +2,8 @@
 
 namespace App\Model;
 
-use Common\Exception\BusinessException;
-use Common\Helper\CodeHelper;
+use App\Exception\BusinessException;
+use App\Helper\CodeHelper;
 use Hyperf\Di\Annotation\Inject;
 use Lengbin\Hyperf\Auth\IdentityInterface;
 use Lengbin\Hyperf\Auth\IdentityRepositoryInterface;

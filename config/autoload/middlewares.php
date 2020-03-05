@@ -14,6 +14,6 @@ return [
     'http' => [
         \Lengbin\Hyperf\Auth\Middleware\CorsMiddleware::class,
         \Lengbin\Hyperf\Auth\Middleware\AuthMiddleware::class,
-        \Common\Middleware\ServerMiddleware::class
+        \App\Middleware\ServerMiddleware::class
     ],
 ];
