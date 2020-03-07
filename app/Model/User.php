@@ -2,15 +2,16 @@
 
 namespace App\Model;
 
-use App\Exception\BusinessException;
-use App\Helper\CodeHelper;
 use Hyperf\Di\Annotation\Inject;
-use Lengbin\Hyperf\Auth\IdentityInterface;
-use Lengbin\Hyperf\Auth\IdentityRepositoryInterface;
+use Lengbin\Auth\IdentityInterface;
+use Lengbin\Auth\IdentityRepositoryInterface;
+use Lengbin\Hyperf\Helper\CodeHelper;
+use Lengbin\Hyperf\Helper\Exception\BusinessException;
+use Lengbin\Hyperf\YiiDb\ActiveRecord;
 use Lengbin\Jwt\TokenInterface;
 
 
-class User extends Model implements IdentityRepositoryInterface, IdentityInterface
+class User extends ActiveRecord implements IdentityRepositoryInterface, IdentityInterface
 {
 
     /**

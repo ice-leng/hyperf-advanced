@@ -11,8 +11,6 @@ declare(strict_types=1);
  * @license  https://github.com/hyperf-cloud/hyperf/blob/master/LICENSE
  */
 
-use Lengbin\Hyperf\Auth\IdentityRepositoryInterface;
-
 return [
-    IdentityRepositoryInterface::class => \App\Model\User::class,
+
 ];

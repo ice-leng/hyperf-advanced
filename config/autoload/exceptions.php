@@ -13,8 +13,8 @@ declare(strict_types=1);
 return [
     'handler' => [
         'http' => [
-            App\Exception\Handler\InvalidTokenExceptionHandler::class,
-            App\Exception\Handler\BusinessExceptionHandler::class,
+            \Lengbin\Hyperf\Helper\Exception\Handler\InvalidTokenExceptionHandler::class,
+            \Lengbin\Hyperf\Helper\Exception\Handler\BusinessExceptionHandler::class,
             App\Exception\Handler\AppExceptionHandler::class,
         ],
     ],

@@ -13,7 +13,7 @@ use Psr\Log\LoggerInterface;
 /**
  * @Listener()
  */
-class ActiveRecodeListener implements ListenerInterface
+class ActiveRecordListener implements ListenerInterface
 {
 
     /**
