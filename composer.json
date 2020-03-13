@@ -46,7 +46,8 @@
         "lengbin/hyperf-yii-db": "dev-master",
         "ext-pdo": "*",
         "hyperf/retry": "^1.1",
-        "hyperf/snowflake": "^1.1"
+        "hyperf/snowflake": "^1.1",
+        "lengbin/hyperf-yii-rbac": "dev-master"
     },
     "require-dev": {
         "swoft/swoole-ide-helper": "^4.4.8",
