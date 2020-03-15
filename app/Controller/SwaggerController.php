@@ -14,7 +14,7 @@ use Lengbin\Hyperf\Swagger\Swagger;
  * @package App\Controller
  * @Controller()
  */
-class SwaggerController extends AbstractController
+class SwaggerController extends BaseController
 {
 
     /**

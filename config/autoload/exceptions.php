@@ -12,10 +12,13 @@ declare(strict_types=1);
 
 return [
     'handler' => [
-        'http' => [
+        'http'    => [
             \Lengbin\Hyperf\Helper\Exception\Handler\InvalidTokenExceptionHandler::class,
             \Lengbin\Hyperf\Helper\Exception\Handler\BusinessExceptionHandler::class,
             App\Exception\Handler\AppExceptionHandler::class,
+        ],
+        'backend' => [
+            \Backend\Exception\Handler\BackendExceptionHandler::class,
         ],
     ],
 ];

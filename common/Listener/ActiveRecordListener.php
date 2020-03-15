@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Listener;
+namespace Common\Listener;
 
 use Hyperf\Event\Annotation\Listener;
 use Hyperf\Event\Contract\ListenerInterface;
 use Hyperf\Logger\LoggerFactory;
-use Lengbin\YiiDb\ActiveRecord\AfterSaveEvent;
-use Lengbin\YiiDb\ActiveRecord\ModelEvent;
+use Lengbin\YiiDb\Event;
 use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerInterface;
 
@@ -23,7 +22,7 @@ class ActiveRecordListener implements ListenerInterface
 
     public function __construct(ContainerInterface $container)
     {
-        $this->logger = $container->get(LoggerFactory::class)->get('sql');
+        $this->logger = $container->get(LoggerFactory::class)->get('db');
     }
 
     /**
@@ -32,8 +31,7 @@ class ActiveRecordListener implements ListenerInterface
     public function listen(): array
     {
         return [
-            AfterSaveEvent::class,
-            ModelEvent::class,
+            Event::class
         ];
     }
 
@@ -42,6 +40,6 @@ class ActiveRecordListener implements ListenerInterface
      */
     public function process(object $event)
     {
-        $this->logger->info('class: ' . get_class($event) . ' eventName: ' . $event->name);
+        $this->logger->info('class: ' . get_class($event) . ' eventName: ' . $event->name . ' table ' . $event->sender->tableName(), $event->sender->getAttributes());
     }
 }

@@ -68,7 +68,9 @@
     "autoload": {
         "psr-4": {
             "App\\": "app/",
-            "Common\\": "common/"
+            "Common\\": "common/",
+            "Backend\\": "backend/",
+            "Service\\": "service/"
         },
         "files": []
     },

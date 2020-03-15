@@ -14,7 +14,9 @@ return [
     'scan' => [
         'paths' => [
             BASE_PATH . '/app',
-            BASE_PATH . '/common'
+            BASE_PATH . '/common',
+            BASE_PATH . '/backend',
+            BASE_PATH . '/service'
         ],
         'ignore_annotations' => [
             'mixin',

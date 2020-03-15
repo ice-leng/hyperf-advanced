@@ -10,52 +10,40 @@ declare(strict_types=1);
  * @license  https://github.com/hyperf-cloud/hyperf/blob/master/LICENSE
  */
 
-namespace App\Controller;
+namespace Backend\Controller;
 
+use Hyperf\Di\Annotation\Inject;
 use Hyperf\HttpServer\Annotation\Controller;
-use Hyperf\HttpServer\Annotation\GetMapping;
 use Hyperf\HttpServer\Annotation\RequestMapping;
-use Lengbin\Hyperf\Auth\AuthAnnotation;
+use Service\Demo\DemoInterface;
 
 /**
  * Class IndexController
- * @package App\Controller
- * @Controller()
+ * @package Backend\Controller
+ * @Controller(server="backend")
  */
 class IndexController extends BaseController
 {
 
     /**
+     * @Inject()
+     * @var DemoInterface
+     */
+    protected $demo;
+
+    /**
      * @RequestMapping(path="/", methods={"get", "post"})
-     * @AuthAnnotation(isPublic=true)
      * @return array
      */
     public function index()
     {
         $user = $this->request->input('user', 'Hyperf');
         $method = $this->request->getMethod();
+
         return [
             'method'  => $method,
             'message' => "Hello {$user}.",
-        ];
-    }
-
-    /**
-     * @GetMapping(path="/test/{id:\d{1,3}}")
-     * @AuthAnnotation(isWhitelist=true)
-     */
-    public function test($id)
-    {
-        return ['11' =>  $id];
-    }
-
-    /**
-     * @GetMapping(path="/test2")
-     */
-    public function test2()
-    {
-        return [
-            'id' => $this->getAuth()->getId()
+            'data'    => $this->getList($this->demo->getDemo($this->request->getQueryParams())),
         ];
     }
 

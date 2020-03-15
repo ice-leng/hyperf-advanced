@@ -16,4 +16,7 @@ return [
         \Lengbin\Hyperf\Auth\Middleware\ApiMiddleware::class,
         \Lengbin\Hyperf\Helper\Middleware\ServerMiddleware::class
     ],
+    'backend' => [
+
+    ],
 ];

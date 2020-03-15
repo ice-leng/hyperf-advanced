@@ -1,28 +1,19 @@
 <?php
 
-declare(strict_types=1);
-/**
- * This file is part of Hyperf.
- *
- * @link     https://www.hyperf.io
- * @document https://doc.hyperf.io
- * @contact  group@hyperf.io
- * @license  https://github.com/hyperf-cloud/hyperf/blob/master/LICENSE
- */
-
-namespace App\Controller;
+namespace Common\Controller;
 
 use Hyperf\Contract\ConfigInterface;
 use Hyperf\Di\Annotation\Inject;
 use Hyperf\HttpServer\Contract\RequestInterface;
 use Hyperf\HttpServer\Contract\ResponseInterface;
 use Lengbin\Auth\User\UserInterface;
+use Lengbin\Helper\Util\FormatHelper;
 use Psr\Container\ContainerInterface;
 
 abstract class AbstractController
 {
     /**
-     * @Inject
+     * @Inject()
      * @var ContainerInterface
      */
     protected $container;
@@ -46,13 +37,22 @@ abstract class AbstractController
     protected $config;
 
     /**
-     * auth
-     * @return UserInterface
+     * 获得 user
+     * @return UserInterface|null
      */
-    public function getAuth(): ?UserInterface
-    {
-        $requestName = $this->config->get('auth.api.requestName');
-        return $this->request->getAttribute($requestName);
-    }
+    abstract protected function getAuth(): ?UserInterface;
 
+    /**
+     *
+     * refactoring page data and process params
+     *
+     * @param array $result
+     * @param array $params
+     *
+     * @return array
+     */
+    protected function getList(array $result, array $params = [])
+    {
+        return FormatHelper::formatPage($result, $params, $this->request->input('page', 1));
+    }
 }

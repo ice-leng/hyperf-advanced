@@ -10,6 +10,8 @@ If You Like This Please Give Me Star
 
 基于 yii 扩展的高级hyerf框架
 
+目前还在研发中，请慎用
+
 安装
 ------------
 
@@ -34,6 +36,7 @@ git clone https://github.com/ice-leng/hyperf-advanced.git
  - [ ] Backend
     - [x] [permission 权限](https://github.com/ice-leng/hyperf-yii-rbac)
     - [ ] [session访问权限](https://github.com/ice-leng/hyperf-auth)
+    - [ ] 导航menu
     - [ ] 混编模版
 
 
