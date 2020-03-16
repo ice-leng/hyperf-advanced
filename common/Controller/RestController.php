@@ -10,15 +10,14 @@ declare(strict_types=1);
  * @license  https://github.com/hyperf-cloud/hyperf/blob/master/LICENSE
  */
 
-namespace App\Controller;
+namespace Common\Controller;
 
-use Common\Controller\AbstractController;
 use Lengbin\Auth\User\UserInterface;
 use Lengbin\Hyperf\Helper\CodeHelper;
 use Lengbin\Hyperf\Helper\Exception\BusinessException;
 use Lengbin\Hyperf\YiiDb\ActiveRecord;
 
-class BaseController extends AbstractController
+class RestController extends AbstractController
 {
     /**
      * @inheritDoc

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use Common\Controller\RestController;
 use Hyperf\Di\Annotation\Inject;
 use Hyperf\HttpServer\Annotation\Controller;
 use Hyperf\HttpServer\Annotation\GetMapping;
@@ -14,7 +15,7 @@ use Lengbin\Hyperf\Swagger\Swagger;
  * @package App\Controller
  * @Controller()
  */
-class SwaggerController extends BaseController
+class SwaggerController extends RestController
 {
 
     /**

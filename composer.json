@@ -39,15 +39,19 @@
         "hyperf/rate-limit": "^1.1.11",
         "hyperf/constants": "^1.1.13",
         "ext-json": "*",
+        "ext-pdo": "*",
+        "hyperf/retry": "^1.1",
+        "hyperf/snowflake": "^1.1",
         "lengbin/hyperf-helper": "dev-master",
         "lengbin/hyperf-swagger": "dev-master",
         "lengbin/hyperf-jwt": "dev-master",
         "lengbin/hyperf-auth": "dev-master",
         "lengbin/hyperf-yii-db": "dev-master",
-        "ext-pdo": "*",
-        "hyperf/retry": "^1.1",
-        "hyperf/snowflake": "^1.1",
-        "lengbin/hyperf-yii-rbac": "dev-master"
+        "lengbin/hyperf-yii-rbac": "dev-master",
+        "hyperf/task": "^1.1",
+        "hyperf/view": "^1.1",
+        "duncan3dc/blade": "^4.8",
+        "hyperf/session": "^1.1"
     },
     "require-dev": {
         "swoft/swoole-ide-helper": "^4.4.8",

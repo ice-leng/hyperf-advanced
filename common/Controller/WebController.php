@@ -10,12 +10,15 @@ declare(strict_types=1);
  * @license  https://github.com/hyperf-cloud/hyperf/blob/master/LICENSE
  */
 
-namespace Backend\Controller;
+namespace Common\Controller;
 
-use Common\Controller\AbstractController;
+use Hyperf\HttpServer\Router\Dispatched;
+use Hyperf\View\RenderInterface;
 use Lengbin\Auth\User\UserInterface;
+use Lengbin\Helper\Util\FormatHelper;
+use Lengbin\Helper\YiiSoft\StringHelper;
 
-class BaseController extends AbstractController
+class WebController extends AbstractController
 {
     /**
      * auth
@@ -78,6 +81,22 @@ class BaseController extends AbstractController
     public function errorAlert($message = '保存失败')
     {
         $this->setFlash('error', $message);
+    }
+
+    /**
+     * @param string|null $template
+     * @param array       $data
+     *
+     * @return \Psr\Http\Message\ResponseInterface
+     */
+    public function render(array $data = [], ?string $template = null)
+    {
+        if ($template === null || strncmp($template, '/', 1) !== 0) {
+            [$class, $method] = $this->request->getAttribute(Dispatched::class)->handler->callback;
+            $template = ($template ?? FormatHelper::uncamelize(StringHelper::basename($class, 'Controller'), '-')) . DIRECTORY_SEPARATOR . $method;
+        }
+        $render = $this->container->get(RenderInterface::class);
+        return $render->render($template, $data);
     }
 
 }

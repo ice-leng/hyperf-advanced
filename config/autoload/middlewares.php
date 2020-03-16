@@ -17,6 +17,6 @@ return [
         \Lengbin\Hyperf\Helper\Middleware\ServerMiddleware::class
     ],
     'backend' => [
-
+        \Hyperf\Session\Middleware\SessionMiddleware::class,
     ],
 ];

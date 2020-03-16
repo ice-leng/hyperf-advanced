@@ -12,6 +12,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use Common\Controller\RestController;
 use Hyperf\HttpServer\Annotation\Controller;
 use Hyperf\HttpServer\Annotation\GetMapping;
 use Hyperf\HttpServer\Annotation\RequestMapping;
@@ -22,7 +23,7 @@ use Lengbin\Hyperf\Auth\AuthAnnotation;
  * @package App\Controller
  * @Controller()
  */
-class IndexController extends BaseController
+class IndexController extends RestController
 {
 
     /**

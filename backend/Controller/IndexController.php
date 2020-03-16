@@ -12,6 +12,7 @@ declare(strict_types=1);
 
 namespace Backend\Controller;
 
+use Common\Controller\WebController;
 use Hyperf\Di\Annotation\Inject;
 use Hyperf\HttpServer\Annotation\Controller;
 use Hyperf\HttpServer\Annotation\RequestMapping;
@@ -22,7 +23,7 @@ use Service\Demo\DemoInterface;
  * @package Backend\Controller
  * @Controller(server="backend")
  */
-class IndexController extends BaseController
+class IndexController extends WebController
 {
 
     /**
@@ -33,18 +34,11 @@ class IndexController extends BaseController
 
     /**
      * @RequestMapping(path="/", methods={"get", "post"})
-     * @return array
+     * @return string
      */
     public function index()
     {
-        $user = $this->request->input('user', 'Hyperf');
-        $method = $this->request->getMethod();
-
-        return [
-            'method'  => $method,
-            'message' => "Hello {$user}.",
-            'data'    => $this->getList($this->demo->getDemo($this->request->getQueryParams())),
-        ];
+        return $this->render(['name' => '我是谁']);
     }
 
 }
