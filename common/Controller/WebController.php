@@ -84,6 +84,40 @@ class WebController extends AbstractController
     }
 
     /**
+     * get view template path by controller
+     *
+     * $template
+     * eg:
+     *   null
+     *  'index'
+     * '/index'
+     *
+     * @param string|null $template
+     *
+     * @return string
+     */
+    public function getTemplate(?string $template = null): string
+    {
+        if ($template === null || strncmp($template, '/', 1) !== 0) {
+            [$class, $method] = $this->request->getAttribute(Dispatched::class)->handler->callback;
+            $name = 'Controller';
+            $path = StringHelper::substr($class, 1 + strpos($class, $name) + StringHelper::strlen($name));
+            $paths = StringHelper::explode($path, "\\");
+            $controllerName = array_pop($paths);
+            $template = implode(DIRECTORY_SEPARATOR,
+                    array_map('strtolower', $paths)) . DIRECTORY_SEPARATOR . FormatHelper::uncamelize(StringHelper::basename($controllerName, $name),
+                    '-') . DIRECTORY_SEPARATOR . ($template ?? $method);
+        }
+        return $template;
+    }
+
+    /**
+     * render template
+     *
+     * eg:
+     *
+     * $this->container->get(RenderInterface::class)->render($this->getTemplate(), []);
+     *
      * @param string|null $template
      * @param array       $data
      *
@@ -91,10 +125,7 @@ class WebController extends AbstractController
      */
     public function render(array $data = [], ?string $template = null)
     {
-        if ($template === null || strncmp($template, '/', 1) !== 0) {
-            [$class, $method] = $this->request->getAttribute(Dispatched::class)->handler->callback;
-            $template = ($template ?? FormatHelper::uncamelize(StringHelper::basename($class, 'Controller'), '-')) . DIRECTORY_SEPARATOR . $method;
-        }
+        $template = $this->getTemplate($template);
         $render = $this->container->get(RenderInterface::class);
         return $render->render($template, $data);
     }
