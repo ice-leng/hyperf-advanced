@@ -16,6 +16,7 @@ use Common\Controller\WebController;
 use Hyperf\Di\Annotation\Inject;
 use Hyperf\HttpServer\Annotation\Controller;
 use Hyperf\HttpServer\Annotation\RequestMapping;
+use Lengbin\Hyperf\Auth\AuthAnnotation;
 use Service\Demo\DemoInterface;
 
 /**

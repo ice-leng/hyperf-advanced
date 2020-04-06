@@ -18,5 +18,6 @@ return [
     ],
     'backend' => [
         \Hyperf\Session\Middleware\SessionMiddleware::class,
+        \Lengbin\Hyperf\Auth\Middleware\WebMiddleware::class,
     ],
 ];

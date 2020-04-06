@@ -53,13 +53,12 @@ return [
     ],
     'web'  => [
         // 全局变量 名称
-        'requestName' => 'auth',
-        'identityClass' => \App\Model\User::class,
-        'method' => [
-            \Lengbin\Auth\Method\HttpHeaderAuth::class,
-            \Lengbin\Auth\Method\QueryParamAuth::class,
-        ],
-        'whitelist' => [],
+        'requestName' => 'web',
+        'identityClass' => \Backend\Model\User::class,
+        // 过期时间
+        'timeout' => 8 * 60 * 60,
+        // 跳转页面
+        'redirect' => '/',
         'public'    => [],
     ],
     'sign' => [
