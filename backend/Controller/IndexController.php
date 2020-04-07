@@ -35,6 +35,7 @@ class IndexController extends WebController
 
     /**
      * @RequestMapping(path="/", methods={"get", "post"})
+     * @AuthAnnotation(isPublic=true)
      * @return string
      */
     public function index()
