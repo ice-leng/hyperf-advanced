@@ -8,7 +8,7 @@
 
 If You Like This Please Give Me Star
 
-基于 yii 扩展的高级hyerf框架
+基于 yii3.0 扩展 的 高级 hyperf 2.0 框架
 
 目前还在研发中，请慎用
 
@@ -20,25 +20,13 @@ The preferred way to install this extension is through [composer](http://getcomp
 Either run
 
 ```
-git clone https://github.com/ice-leng/hyperf-advanced.git
+git clone -b 2.0 https://github.com/ice-leng/hyperf-advanced.git
 ```
 使用扩展
 --------------
- - [ ] API
-    - [x] [接口文档](https://github.com/ice-leng/hyperf-swagger)
-    - [x] [帮助类](https://github.com/ice-leng/hyperf-helper)
-    - [x] [token机制](https://github.com/ice-leng/hyperf-jwt)
-    - [x] [auth访问权限](https://github.com/ice-leng/hyperf-auth)
-    - [x] [Yii Db](https://github.com/ice-leng/hyperf-yii-db)
-    - [ ] ActiveRecode 文件生成脚手架
-    - [ ] elk 接入日志分析系统
-    - [ ] jaeger tracing 
- - [ ] Backend
-    - [x] [permission 权限](https://github.com/ice-leng/hyperf-yii-rbac)
-    - [ ] [session访问权限](https://github.com/ice-leng/hyperf-auth)
-    - [ ] 导航menu
-    - [ ] 混编模版
 
 
 
-
+感谢
+--------------
+Yii 团队
