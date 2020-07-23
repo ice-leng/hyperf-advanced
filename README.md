@@ -12,6 +12,10 @@ If You Like This Please Give Me Star
 
 目前还在研发中，请慎用
 
+停更， 坐等 yii3 db
+yii2 的 db 不是独立扩展，不易于后期维护
+
+
 安装
 ------------
 
