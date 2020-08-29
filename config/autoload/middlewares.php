@@ -11,5 +11,7 @@ declare(strict_types=1);
  */
 return [
     'http' => [
+        \Lengbin\Hyperf\Common\Middleware\CorsMiddleware::class,
+        \Lengbin\Hyperf\Auth\Middleware\ApiMiddleware::class,
     ],
 ];
