@@ -12,11 +12,9 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use Hyperf\Di\Annotation\Inject;
 use Hyperf\HttpServer\Annotation\Controller;
 use Hyperf\HttpServer\Annotation\RequestMapping;
 use Lengbin\Hyperf\Auth\RouterAuthAnnotation;
-use Lengbin\Jwt\JwtInterface;
 
 /**
  * Class IndexController
@@ -27,13 +25,8 @@ class IndexController extends AuthController
 {
 
     /**
-     * @Inject()
-     * @var JwtInterface
-     */
-    public $jwt;
-
-    /**
      * @RequestMapping(path="/", methods={"get"})
+     * @RouterAuthAnnotation(isPublic=true)
      *
      * @return mixed
      */
@@ -41,11 +34,9 @@ class IndexController extends AuthController
     {
         $user = $this->request->input('user', 'Hyperf');
         $method = $this->request->getMethod();
-        $token = $this->jwt->generate(['user_id' => 1, 'a' => 1]);
         return $this->success([
             'method'  => $method,
             'message' => "Hello {$user}.",
-            'token'   => $token,
         ]);
     }
 
@@ -54,7 +45,9 @@ class IndexController extends AuthController
      */
     public function user()
     {
-        return $this->success($this->getAuth()->getId());
+        return $this->success([
+            'abc' => $this->getAuth()->getId(),
+        ]);
     }
 
     /**
@@ -63,7 +56,9 @@ class IndexController extends AuthController
      */
     public function test()
     {
-        return $this->success([]);
+        return $this->success([
+            'abc' => $this->getAuth()->getId(),
+        ]);
     }
 
 }
