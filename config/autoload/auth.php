@@ -49,6 +49,8 @@ return [
         //路由白名单。列如 /test/{id}, 可以使用*来通配, /test/*
         'whitelist'     => [],
         //公共访问，不走验证。列如 /test/{id}, 可以使用*来通配, /test/*
-        'public'        => [],
+        'public'        => [
+            '/favicon.ico'
+        ],
     ],
 ];
