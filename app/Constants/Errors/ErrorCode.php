@@ -9,15 +9,11 @@ declare(strict_types=1);
  * @contact  group@hyperf.io
  * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
-namespace App\Constants;
+namespace App\Constants\Errors;
 
-use Hyperf\Constants\AbstractConstants;
-use Hyperf\Constants\Annotation\Constants;
+use Lengbin\ErrorCode\BaseEnum;
 
-/**
- * @Constants
- */
-class ErrorCode extends AbstractConstants
+class ErrorCode extends BaseEnum
 {
     /**
      * @Message("Server Error！")

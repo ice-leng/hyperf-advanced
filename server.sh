@@ -9,3 +9,4 @@ fi
 rm -rf runtime/container
 php bin/hyperf.php start
 
+php bin/hyperf.php gen:error-code
