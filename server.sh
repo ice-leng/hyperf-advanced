@@ -1,6 +1,12 @@
 #!/bin/sh
 
-pidFile="runtime/hyperf.pid"
+#pidFile="runtime/hyperf.pid"
+#
+#if [ -f "$pidFile" ]; then
+#  kill -15 `cat $pidFile`
+#fi
+#
+#rm -rf runtime/container
 
 php bin/hyperf.php gen:error-code
 
