@@ -16,6 +16,7 @@ return [
     'app_name' => env('APP_NAME', 'skeleton'),
     'app_env' => env('APP_ENV', 'dev'),
     'scan_cacheable' => env('SCAN_CACHEABLE', false),
+    'image_url' => env('IMAGE_URL', ''),
     StdoutLoggerInterface::class => [
         'log_level' => [
             LogLevel::ALERT,

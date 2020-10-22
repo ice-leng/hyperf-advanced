@@ -11,7 +11,7 @@ declare(strict_types=1);
  */
 namespace App\Constant\Errors;
 
-use Lengbin\ErrorCode\BaseEnum;
+use Lengbin\Hyperf\ErrorCode\BaseEnum;
 
 class ErrorCode extends BaseEnum
 {
