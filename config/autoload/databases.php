@@ -32,7 +32,8 @@ return [
             'gen:model' => [
                 'path' => 'app/Model',
                 'force_casts' => true,
-                'inheritance' => 'Model',
+                'inheritance' => 'BaseModel',
+                'uses' => 'Lengbin\Hyperf\Common\Framework\BaseModel',
             ],
         ],
     ],
