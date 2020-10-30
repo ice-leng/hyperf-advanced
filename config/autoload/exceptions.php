@@ -10,14 +10,14 @@ declare(strict_types=1);
  * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
 
-use App\Exception\Handler\TokenExceptionHandler;
 use Lengbin\Hyperf\Common\Exception\Handler\AppExceptionHandler;
 use Lengbin\Hyperf\Common\Exception\Handler\BusinessExceptionHandler;
+use Lengbin\Hyperf\Exception\Handler\AuthTokenExceptionHandler;
 
 return [
     'handler' => [
         'http' => [
-            TokenExceptionHandler::class,
+            AuthTokenExceptionHandler::class,
             BusinessExceptionHandler::class,
             AppExceptionHandler::class,
         ],

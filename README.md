@@ -8,7 +8,7 @@
 
 If You Like This Please Give Me Star
 
-基于 hyperf 2.0 框架
+基于 Hyperf 2.0 && YII3.0 框架
 
 目前还在研发中，请慎用
 
@@ -25,9 +25,12 @@ git clone -b 2.0 https://github.com/ice-leng/hyperf-advanced.git
 使用扩展
 --------------
 - [jwt](https://github.com/ice-leng/hyperf-jwt)
-- [授权验证](https://github.com/ice-leng/hyperf-auth)
+- [授权验证-yii](https://github.com/ice-leng/hyperf-auth)
 - [枚举，错误码合并生成](https://github.com/ice-leng/hyperf-error-code)
+- [swagger](https://github.com/daodao97/apidog)
 
 感谢
 --------------
 Yii 团队
+
+Hyperf 团队
