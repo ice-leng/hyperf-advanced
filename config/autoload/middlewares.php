@@ -9,9 +9,15 @@ declare(strict_types=1);
  * @contact  group@hyperf.io
  * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
+
+use Hyperf\Apidog\Middleware\ApiValidationMiddleware;
+use Lengbin\Hyperf\Auth\Middleware\ApiMiddleware;
+use Lengbin\Hyperf\Common\Middleware\CorsMiddleware;
+
 return [
     'http' => [
-        \Lengbin\Hyperf\Common\Middleware\CorsMiddleware::class,
-        \Lengbin\Hyperf\Auth\Middleware\ApiMiddleware::class,
+        CorsMiddleware::class,
+        ApiMiddleware::class,
+        ApiValidationMiddleware::class
     ],
 ];

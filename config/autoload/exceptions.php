@@ -10,14 +10,16 @@ declare(strict_types=1);
  * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
 
+use App\Exception\Handler\ApiDogExceptionHandler;
 use Lengbin\Hyperf\Common\Exception\Handler\AppExceptionHandler;
 use Lengbin\Hyperf\Common\Exception\Handler\BusinessExceptionHandler;
-use Lengbin\Hyperf\Exception\Handler\AuthTokenExceptionHandler;
+use Lengbin\Hyperf\Auth\Exception\Handler\AuthTokenExceptionHandler;
 
 return [
     'handler' => [
         'http' => [
             AuthTokenExceptionHandler::class,
+            ApiDogExceptionHandler::class,
             BusinessExceptionHandler::class,
             AppExceptionHandler::class,
         ],
