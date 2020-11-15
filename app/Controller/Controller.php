@@ -3,10 +3,11 @@
 namespace App\Controller;
 
 use Hyperf\Contract\ConfigInterface;
+use Hyperf\Utils\Context;
 use Lengbin\Auth\User\UserInterface;
 use Lengbin\Hyperf\Common\Framework\BaseController;
 
-class AuthController extends BaseController
+class Controller extends BaseController
 {
     /**
      * auth
@@ -18,4 +19,22 @@ class AuthController extends BaseController
         $requestName = $config->get('auth.api.requestName', 'api');
         return $this->request->getAttribute($requestName);
     }
+
+    /**
+     * api dog validate data
+     */
+    public function getValidateData(): array
+    {
+        return Context::get('validator.data', []);
+    }
+
+    /**
+     * 初始化 配置参数 设置
+     * @return array
+     */
+    public function init(): array
+    {
+        return [];
+    }
+
 }

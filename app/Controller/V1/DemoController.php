@@ -2,7 +2,7 @@
 
 namespace App\Controller\V1;
 
-use App\Controller\AuthController;
+use App\Controller\Controller;
 use Hyperf\Apidog\Annotation\ApiController;
 use Hyperf\Apidog\Annotation\ApiDefinition;
 use Hyperf\Apidog\Annotation\ApiDefinitions;
@@ -39,7 +39,7 @@ use Lengbin\Hyperf\Auth\RouterAuthAnnotation;
  *
  * @RouterAuthAnnotation(isPublic=true)
  */
-class DemoController extends AuthController
+class DemoController extends Controller
 {
 
     /**
@@ -100,9 +100,10 @@ class DemoController extends AuthController
 
     /**
      * @GetApi(path="/demo", description="获取用户详情")
-     * @Query(key="id", rule="required|integer|max:0")
+     * @Query(key="id", rule="required|integer|max:10")
      * @ApiResponse(code="-1", description="参数错误")
      * @ApiResponse(code="0", schema={"id":1,"name":"张三","age":1}, template="success")
+     * @RouterAuthAnnotation(isWhitelist=true)
      */
     public function get()
     {
@@ -111,6 +112,8 @@ class DemoController extends AuthController
             'id'   => 1,
             'name' => '张三',
             'age'  => 1,
+            'data' => $this->getValidateData(),
+            'user_id' => $this->getAuth()->getId()
         ];
     }
 
