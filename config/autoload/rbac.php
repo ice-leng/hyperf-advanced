@@ -40,9 +40,8 @@
  * ];
  */
 
-use Lengbin\YiiSoft\Rbac\Manager\PhpManagerFile;
+use Lengbin\YiiSoft\Rbac\Manager\DbManager;
 
 return [
-    'driver'    => PhpManagerFile::class,
-    'directory' => BASE_PATH . '/runtime/role',
+    'driver'    => DbManager::class,
 ];
