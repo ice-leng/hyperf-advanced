@@ -108,12 +108,12 @@ class DemoController extends Controller
     public function get()
     {
         return [
-            'code' => 0,
-            'id'   => 1,
-            'name' => '张三',
-            'age'  => 1,
-            'data' => $this->getValidateData(),
-            'user_id' => $this->getAuth()->getId()
+            'code'    => 0,
+            'id'      => 1,
+            'name'    => '张三',
+            'age'     => 1,
+            'data'    => $this->getValidateData(),
+            'user_id' => $this->getAuth()->getId(),
         ];
     }
 

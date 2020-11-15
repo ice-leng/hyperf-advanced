@@ -43,6 +43,6 @@
 use Lengbin\YiiSoft\Rbac\Manager\PhpManagerFile;
 
 return [
-    'driver' => PhpManagerFile::class,
-    'directory' => BASE_PATH . '/runtime/role'
+    'driver'    => PhpManagerFile::class,
+    'directory' => BASE_PATH . '/runtime/role',
 ];
