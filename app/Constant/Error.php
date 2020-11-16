@@ -39,8 +39,33 @@ class Error extends BaseEnum
    const ERROR_COMMENTERRORCODE_INVALID_TOKEN = 'F-000-000-403';
    
     /**
-     * @Message("Server Error！")
+     * @Message("账号被冻结，请联系管理员")
      */
-   const ERROR_ERRORCODE_SERVER_ERROR = '500';
+   const ERROR_ADMINERROR_ERROR_ADMIN_FREEZE = 'B-001-001-001';
+   
+    /**
+     * @Message("账号不存在")
+     */
+   const ERROR_ADMINERROR_ERROR_ADMIN_NOT_FOUND = 'B-001-001-002';
+   
+    /**
+     * @Message("账号创建失败")
+     */
+   const ERROR_ADMINERROR_ERROR_ADMIN_CREATE_FAIL = 'B-001-001-003';
+   
+    /**
+     * @Message("账号更新失败")
+     */
+   const ERROR_ADMINERROR_ERROR_ADMIN_UPDATE_FAIL = 'B-001-001-004';
+   
+    /**
+     * @Message("账号删除失败")
+     */
+   const ERROR_ADMINERROR_ERROR_ADMIN_DELETE_FAIL = 'B-001-001-005';
+   
+    /**
+     * @Message("账号或密码错误")
+     */
+   const ERROR_ADMINERROR_ERROR_ADMIN_ACCOUNT_OR_PASSWORD_FAIL = 'B-001-001-006';
    
 }

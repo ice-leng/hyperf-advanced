@@ -28,12 +28,14 @@
  * ];
  */
 
+use App\Service\Admin\LoginService;
+
 return [
     'api'  => [
         // 全局变量 名称
         'requestName'   => 'api',
         // 实现类，请实现接口 \Lengbin\Auth\IdentityRepositoryInterface::class
-        'identityClass' => \App\Model\UserModel::class,
+        'identityClass' => LoginService::class,
         // 验证器方法，支持
         // header: \Lengbin\Auth\Method\HttpHeaderAuth::class //默认接收参数名称：X-Api-Token
         // query : \Lengbin\Auth\Method\QueryParamAuth::class //默认接收参数名称：access-token
@@ -44,7 +46,7 @@ return [
         // key => val  接收参数名称 => 验证类
         'method' => [
             \Lengbin\Auth\Method\HttpHeaderAuth::class,
-            \Lengbin\Auth\Method\QueryParamAuth::class,
+//            \Lengbin\Auth\Method\QueryParamAuth::class,
         ],
         //路由白名单。列如 /test/{id}, 可以使用*来通配, /test/*
         'whitelist'     => [],

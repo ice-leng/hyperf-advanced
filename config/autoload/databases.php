@@ -34,6 +34,8 @@ return [
                 'force_casts' => true,
                 'inheritance' => 'BaseModel',
                 'uses' => 'Lengbin\Hyperf\Common\Framework\BaseModel',
+                'refresh_fillable' => true,
+                'with_comments' => true,
             ],
         ],
     ],

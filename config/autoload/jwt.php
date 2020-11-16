@@ -8,5 +8,5 @@ return [
     'ttl' => 24 * 3600 * 30,
     // 是否 单点登录
     'sso' => true,
-    'ssoKey' => 'user_id'
+    'ssoKey' => 'admin_id'
 ];
