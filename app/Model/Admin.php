@@ -14,6 +14,7 @@ use Lengbin\Hyperf\Common\Framework\BaseModel;
  * @property string $role     角色
  * @property string $nickname 昵称
  * @property int    $number   工号
+ * @property int    $status   状态
  * @property int    $enable   状态
  * @property int    $create_at
  * @property int    $update_at
@@ -31,13 +32,13 @@ class Admin extends BaseModel implements IdentityInterface
      *
      * @var array
      */
-    protected $fillable = ['admin_id', 'account', 'password', 'role', 'nickname', 'number', 'enable', 'create_at', 'update_at'];
+    protected $fillable = ['admin_id', 'account', 'password', 'role', 'nickname', 'number', 'status', 'enable', 'create_at', 'update_at'];
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $casts = ['number' => 'integer', 'enable' => 'integer', 'create_at' => 'datetime', 'update_at' => 'datetime'];
+    protected $casts = ['admin_id' => 'string', 'number' => 'integer', 'status' => 'integer', 'enable' => 'integer', 'create_at' => 'datetime', 'update_at' => 'datetime'];
 
     /**
      * Returns an ID that can uniquely identify a user identity.

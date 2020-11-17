@@ -8,9 +8,9 @@ use App\Model\Admin;
 use Hyperf\Di\Annotation\Inject;
 use Lengbin\Auth\IdentityInterface;
 use Lengbin\Auth\IdentityRepositoryInterface;
+use Lengbin\Helper\Util\PasswordHelper;
 use Lengbin\Helper\YiiSoft\Arrays\ArrayHelper;
 use Lengbin\Helper\YiiSoft\StringHelper;
-use Lengbin\Hyperf\Common\Constant\SoftDeleted;
 use Lengbin\Hyperf\Common\Exception\BusinessException;
 use Lengbin\Hyperf\Common\Framework\BaseService;
 use Lengbin\Jwt\JwtInterface;
@@ -51,17 +51,17 @@ class LoginService extends BaseService implements IdentityRepositoryInterface
             return null;
         }
         $admin = $this->findIdentity($data['admin_id']);
-        $this->checkAdmin($admin);
+        $this->checkAdminStatus($admin);
         return $admin;
     }
 
-    protected function checkAdmin($admin): void
+    /**
+     * check status
+     * @param $admin
+     */
+    protected function checkAdminStatus($admin): void
     {
-        if (StringHelper::isEmpty($admin)) {
-            throw new BusinessException(AdminError::ERROR_ADMIN_NOT_FOUND);
-        }
-
-        if ($admin->status === AdminStatus::FROZEN) {
+        if (StringHelper::isEmpty($admin) || $admin->status === AdminStatus::FROZEN) {
             throw new BusinessException(AdminError::ERROR_ADMIN_FREEZE);
         }
     }
@@ -76,15 +76,26 @@ class LoginService extends BaseService implements IdentityRepositoryInterface
      */
     public function login(array $params, string $ip): array
     {
-        $admin = Admin::findOneCondition($params, ['admin_id', 'status']);
-        $this->checkAdmin($admin);
+        $admin = Admin::findOneCondition([
+            'account' => $params['account'],
+        ], ['admin_id', 'password', 'status']);
+
+        if (StringHelper::isEmpty($admin)) {
+            throw new BusinessException(AdminError::ERROR_ADMIN_ACCOUNT_OR_PASSWORD_FAIL);
+        }
+
+        if (!PasswordHelper::verifyPassword($params['password'], $admin->password)) {
+            throw new BusinessException(AdminError::ERROR_ADMIN_ACCOUNT_OR_PASSWORD_FAIL);
+        }
+
+        $this->checkAdminStatus($admin);
 
         $token = $this->jwt->generate([
             'admin_id' => $admin->admin_id,
         ]);
         // todo 登录日志
         return [
-            'token'        => $token,
+            'token'         => $token,
             'refresh_token' => $this->jwt->generateRefreshToken($token),
         ];
     }
@@ -102,7 +113,7 @@ class LoginService extends BaseService implements IdentityRepositoryInterface
         // todo 登录日志
         $token = $this->jwt->refreshToken($refreshToken);
         return [
-            'token'        => $token,
+            'token'         => $token,
             'refresh_token' => $refreshToken,
         ];
     }
