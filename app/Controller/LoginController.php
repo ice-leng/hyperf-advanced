@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Service\Admin\LoginService;
+use App\Service\Admin\AdminLoginService;
 use Hyperf\Apidog\Annotation\ApiController;
 use Hyperf\Apidog\Annotation\ApiResponse;
 use Hyperf\Apidog\Annotation\Body;
@@ -25,7 +25,7 @@ class LoginController extends Controller
 
     /**
      * @Inject()
-     * @var LoginService
+     * @var AdminLoginService
      */
     protected $loginService;
 
