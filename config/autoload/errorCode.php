@@ -4,6 +4,7 @@ return [
     // 错误码文件 目录
     'path'             => [
         BASE_PATH . '/vendor/lengbin/hyperf-common/src/Error',
+        BASE_PATH . '/app/Component/AntDesign/Errors',
         BASE_PATH . '/app/Constant/Errors',
     ],
     // 合并生成 类 文件名称

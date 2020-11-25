@@ -39,6 +39,26 @@ class Error extends BaseEnum
    const ERROR_COMMENTERRORCODE_INVALID_TOKEN = 'F-000-000-403';
    
     /**
+     * @Message("值类型不支持")
+     */
+   const ERROR_TABLEERROR_ERROR_ANTDESIGN_COLUMN_VALUETYPE_NOT_SUPPORT = 'A-001-001-001';
+   
+    /**
+     * @Message("列表参数错误")
+     */
+   const ERROR_TABLEERROR_ERROR_ANTDESIGN_TABLE_PARAM_ERROR = 'A-001-001-002';
+   
+    /**
+     * @Message("配置搜索框在该行所占的栅格, 范围 1 - 24")
+     */
+   const ERROR_TABLEERROR_ERROR_ANTDESIGN_TABLE_SPAN_RANGE_ERROR = 'A-001-001-003';
+   
+    /**
+     * @Message("列选择类型错误")
+     */
+   const ERROR_TABLEERROR_ERROR_ANTDESIGN_TABLE_ROWSELECTION_TYPE_ERROR = 'A-001-001-004';
+   
+    /**
      * @Message("账号被冻结，请联系管理员")
      */
    const ERROR_ADMINERROR_ERROR_ADMIN_FREEZE = 'B-001-001-001';
