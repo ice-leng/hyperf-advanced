@@ -2,6 +2,7 @@
 
 namespace App\Component\AntDesign;
 
+use App\Component\AntDesign\Column\Column;
 use App\Component\AntDesign\Errors\TableError;
 use App\Component\AntDesign\Table\Config;
 use App\Component\AntDesign\Table\Search;

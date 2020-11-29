@@ -1,12 +1,15 @@
 <?php
 
-namespace App\Component\AntDesign;
+namespace App\Component\AntDesign\Column;
 
-use App\Component\AntDesign\Errors\TableError;
+use App\Component\AntDesign\Constant\Column\ValueType;
 use Lengbin\Common\Component\BaseObject;
-use Lengbin\Hyperf\Common\Exception\BusinessException;
-use stdClass;
 
+/**
+ * Class Column
+ * @package App\Component\AntDesign
+ * @document https://github.com/coderlfm/CMS
+ */
 class Column extends BaseObject
 {
     /**
@@ -22,85 +25,85 @@ class Column extends BaseObject
     private $title;
 
     /**
-     * 列的小提示字
-     * @var string|null
+     * 搜索时请求服务器的key名
+     * @var string
      */
-    private $tip;
+    private $key;
 
     /**
      * 是否拷贝
      * @var bool
      */
-    private $copyable = false;
+    private $copyable;
 
     /**
      * 超出换行
      * @var bool
      */
-    private $ellipsis = true;
+    private $ellipsis;
 
     /**
-     * 是否展示在搜索框,默认值false
+     * 是否展示在搜索框,默认值true
      * @var bool
      */
-    private $search = false;
+    private $search;
 
     /**
      * 值类型, 默认值text
-     * @var string
+     * @var ValueType
      */
-    private $valueType = 'text';
+    private $valueType;
 
     /**
      * 表头筛选项,默认值 true 当值为 true 时, 自动使用 valueEnum 生成   类型: boolean | object[]
      * @var bool
      */
-    private $filters = true;
+    private $filters;
 
     /**
      * 当前列值的枚举
-     * @var object|array
+     * @var array
+     * @see valueType
      */
-    private $valueEnum = [];
+    private $valueEnum;
 
     /**
-     * @var string[]
+     * 会在 title 之后展示一个 icon，hover 之后提示一些信息
+     * @var string
      */
-    private $valueTypeAllows = [
-        'money',        //转化值为金额	¥10, 000.26
-        'date',         //日期	2019 - 11 - 16
-        'dateRange',    //日期区间	2019 - 11 - 16 2019 - 11 - 18
-        'dateTime',     //日期和时间	2019 - 11 - 16 12: 50: 00
-        'dateTimeRange', //日期和时间区间	2019 - 11 - 16 12: 50: 00 2019 - 11 - 18 12: 50: 00
-        'time',          //时间	12: 50: 00
-        'option',        //操作项，会自动增加 marginRight，只支持一个数组, 表单中会自动忽略[<a>操作a</a>, <a>操作b</a>]
-        'text',          //默认值，不做任何处理 -
-        'select',       //选择 -
-        'textarea',     //与 text 相同， form 转化时会转为 textarea 组件 -
-        'index',        //序号列 -
-        'indexBorder',  //带 border 的序号列 -
-        'progress',     //进度条 -
-        'digit',        //格式化数字展示，form 转化时会转为 inputNumber -
-        'percent',      //百分比 + 1.12
-        'code',         //代码块	const a = b
-        'avatar',       //头像	展示一个头像
-        'password',     //密码框	密码相关的展示
-    ];
-
-    public function init()
-    {
-        parent::init();
-        if (!in_array($this->getValueType(), $this->valueTypeAllows)) {
-            throw new BusinessException(TableError::ERROR_ANTDESIGN_COLUMN_VALUETYPE_NOT_SUPPORT);
-        }
-    }
+    private $tooltip;
 
     /**
-     * @return mixed
+     * 宽度
+     * @var string
      */
-    public function getValueEnum()
+    private $width;
+
+    /**
+     * 在查询表单中不展示此项
+     * @var bool
+     */
+    private $hideInSearch;
+
+    /**
+     * 在 Table 中不展示此列
+     * @var bool
+     */
+    private $hideInTable;
+
+    /**
+     * valueType为 select | radio | radioButton | checkbox 时可设置在表单搜索时的默认值
+     * select |checkbox 为数组 ['string'],单选为 string
+     * @var string | array
+     */
+    private $initialValue;
+
+    /**
+     * @return array
+     */
+    public function getValueEnum(): array
     {
-        return is_array($this->valueEnum) ? new stdClass() : $this->valueEnum;
+        return $this->valueEnum;
     }
 
     /**
@@ -248,21 +251,116 @@ class Column extends BaseObject
     }
 
     /**
-     * @return string|null
+     * @return string
      */
-    public function getTip(): ?string
+    public function getKey(): string
     {
-        return $this->tip;
+        return $this->key;
     }
 
     /**
-     * @param string|null $tip
+     * @param string $key
      *
      * @return Column
      */
-    public function setTip(?string $tip): Column
+    public function setKey(string $key): Column
     {
-        $this->tip = $tip;
+        $this->key = $key;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTooltip(): string
+    {
+        return $this->tooltip;
+    }
+
+    /**
+     * @param string $tooltip
+     *
+     * @return Column
+     */
+    public function setTooltip(string $tooltip): Column
+    {
+        $this->tooltip = $tooltip;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getWidth(): string
+    {
+        return $this->width;
+    }
+
+    /**
+     * @param string $width
+     *
+     * @return Column
+     */
+    public function setWidth(string $width): Column
+    {
+        $this->width = $width;
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isHideInSearch(): bool
+    {
+        return $this->hideInSearch;
+    }
+
+    /**
+     * @param bool $hideInSearch
+     *
+     * @return Column
+     */
+    public function setHideInSearch(bool $hideInSearch): Column
+    {
+        $this->hideInSearch = $hideInSearch;
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isHideInTable(): bool
+    {
+        return $this->hideInTable;
+    }
+
+    /**
+     * @param bool $hideInTable
+     *
+     * @return Column
+     */
+    public function setHideInTable(bool $hideInTable): Column
+    {
+        $this->hideInTable = $hideInTable;
+        return $this;
+    }
+
+    /**
+     * @return array|string
+     */
+    public function getInitialValue()
+    {
+        return $this->initialValue;
+    }
+
+    /**
+     * @param array|string $initialValue
+     *
+     * @return Column
+     */
+    public function setInitialValue($initialValue): Column
+    {
+        $this->initialValue = $initialValue;
         return $this;
     }
 }
