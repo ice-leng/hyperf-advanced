@@ -368,6 +368,9 @@ class BaseColumn extends BaseObject
 
     public function init()
     {
+        // 必填项验证
+
+        // 进度条
         if ($this->valueType->getValue() === ValueType::PROGRESS) {
             $progress = [];
             foreach ($this->getValueEnum() as $item) {
@@ -379,6 +382,7 @@ class BaseColumn extends BaseObject
             $this->valueEnum = $progress;
         }
 
+        // 具有 drop 属性
         if (in_array($this->valueType->getValue(), [
             ValueType::SELECT,
             ValueType::CHECKBOX,
@@ -394,6 +398,7 @@ class BaseColumn extends BaseObject
             }
             $this->valueEnum = $drops;
 
+            // 如果是 select 或者 checkbox 默认为数组
             $initValue = $this->getInitialValue();
             if (in_array($this->valueType->getValue(), [ValueType::SELECT, ValueType::CHECKBOX,], true) && !is_array($initValue)) {
                 $this->setInitialValue([$initValue]);
