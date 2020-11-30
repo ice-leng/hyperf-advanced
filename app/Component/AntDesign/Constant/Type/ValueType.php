@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Component\AntDesign\Constant\Column;
+namespace App\Component\AntDesign\Constant\Type;
 
 use Lengbin\Hyperf\ErrorCode\BaseEnum;
 

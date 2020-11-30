@@ -2,7 +2,7 @@
 
 namespace App\Component\AntDesign;
 
-use App\Component\AntDesign\Column\Column;
+use App\Component\AntDesign\Column\BaseColumn;
 use App\Component\AntDesign\Errors\TableError;
 use App\Component\AntDesign\Table\Config;
 use App\Component\AntDesign\Table\Search;
@@ -40,13 +40,13 @@ class Table extends BaseObject
                 if (count($data) !== 2) {
                     throw new BusinessException(TableError::ERROR_ANTDESIGN_TABLE_PARAM_ERROR);
                 }
-                $item = new Column([
+                $item = new BaseColumn([
                     'dataIndex' => $data[0],
                     'title'     => $data[1],
                 ]);
             } elseif (is_array($item)) {
-                $item = new Column($item);
-            } elseif ($item instanceof Column) {
+                $item = new BaseColumn($item);
+            } elseif ($item instanceof BaseColumn) {
 
             } else {
                 throw new BusinessException(TableError::ERROR_ANTDESIGN_TABLE_PARAM_ERROR);
