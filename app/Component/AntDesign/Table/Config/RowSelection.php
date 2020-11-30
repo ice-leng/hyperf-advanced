@@ -2,24 +2,33 @@
 
 namespace App\Component\AntDesign\Table\Config;
 
-use App\Component\AntDesign\Errors\TableError;
+use App\Component\AntDesign\Constant\Type\RowSelectionType;
 use Lengbin\Common\Component\BaseObject;
-use Lengbin\Hyperf\Common\Exception\BusinessException;
 
 class RowSelection extends BaseObject
 {
     /**
      * 列选择 类型
-     * @var string
+     * @var RowSelectionType
      */
-    public $type;
+    private $type;
 
-    private $typeAllows = ['radio', 'checkbox'];
-
-    public function init()
+    /**
+     * @return RowSelectionType
+     */
+    public function getType(): RowSelectionType
     {
-        if ($this->type !== null && !in_array($this->type, $this->typeAllows)) {
-            throw new BusinessException(TableError::ERROR_ANTDESIGN_TABLE_ROWSELECTION_TYPE_ERROR);
-        }
+        return $this->type;
+    }
+
+    /**
+     * @param RowSelectionType $type
+     *
+     * @return RowSelection
+     */
+    public function setType(RowSelectionType $type): RowSelection
+    {
+        $this->type = $type;
+        return $this;
     }
 }

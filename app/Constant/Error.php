@@ -44,11 +44,6 @@ class Error extends BaseEnum
    const ERROR_TABLEERROR_ERROR_ANTDESIGN_TABLE_PARAM_ERROR = 'A-001-001-001';
    
     /**
-     * @Message("配置搜索框在该行所占的栅格, 范围 1 - 24")
-     */
-   const ERROR_TABLEERROR_ERROR_ANTDESIGN_TABLE_SPAN_RANGE_ERROR = 'A-001-001-002';
-   
-    /**
      * @Message("列选择类型错误")
      */
    const ERROR_TABLEERROR_ERROR_ANTDESIGN_TABLE_ROWSELECTION_TYPE_ERROR = 'A-001-001-003';

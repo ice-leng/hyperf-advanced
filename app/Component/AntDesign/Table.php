@@ -7,7 +7,7 @@ use App\Component\AntDesign\Errors\TableError;
 use App\Component\AntDesign\Table\Column\Column;
 use App\Component\AntDesign\Table\Column\Search;
 use App\Component\AntDesign\Table\Config\ColumnConfig;
-use App\Component\AntDesign\Table\Config\TableConfig;
+use App\Component\AntDesign\Table\Config\FormConfig;
 use Lengbin\Common\Component\BaseObject;
 use Lengbin\Hyperf\Common\Exception\BusinessException;
 
@@ -28,20 +28,14 @@ class Table extends BaseObject
     public $columnConfig;
 
     /**
-     * @var TableConfig
+     * @var FormConfig
      */
-    public $tableConfig;
+    public $formConfig;
 
     /**
      * @var Search[]
      */
     public $search;
-
-
-    /**
-     * @var Config
-     */
-    public $config;
 
     public function init()
     {
@@ -66,10 +60,6 @@ class Table extends BaseObject
                 throw new BusinessException(TableError::ERROR_ANTDESIGN_TABLE_PARAM_ERROR);
             }
             $this->column[$key] = $item->toArray();
-        }
-
-        if ($this->tableConfig === null) {
-            $this->tableConfig = new TableConfig();
         }
 
         if ($this->columnConfig === null) {
