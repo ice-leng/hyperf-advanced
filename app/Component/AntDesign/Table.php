@@ -2,11 +2,12 @@
 
 namespace App\Component\AntDesign;
 
-use App\Component\AntDesign\Column\Column;
 use App\Component\AntDesign\Constant\Type\ValueType;
 use App\Component\AntDesign\Errors\TableError;
-use App\Component\AntDesign\Table\Config;
-use App\Component\AntDesign\Table\Search;
+use App\Component\AntDesign\Table\Column\Column;
+use App\Component\AntDesign\Table\Column\Search;
+use App\Component\AntDesign\Table\Config\ColumnConfig;
+use App\Component\AntDesign\Table\Config\TableConfig;
 use Lengbin\Common\Component\BaseObject;
 use Lengbin\Hyperf\Common\Exception\BusinessException;
 
@@ -22,9 +23,20 @@ class Table extends BaseObject
     public $column = [];
 
     /**
-     * @var Search
+     * @var ColumnConfig
+     */
+    public $columnConfig;
+
+    /**
+     * @var TableConfig
+     */
+    public $tableConfig;
+
+    /**
+     * @var Search[]
      */
     public $search;
+
 
     /**
      * @var Config
@@ -56,13 +68,12 @@ class Table extends BaseObject
             $this->column[$key] = $item->toArray();
         }
 
-        // TableSearch
-        if ($this->search === null) {
-            $this->search = new Search();
+        if ($this->tableConfig === null) {
+            $this->tableConfig = new TableConfig();
         }
 
-        if ($this->config === null) {
-            $this->config = new Config();
+        if ($this->columnConfig === null) {
+            $this->columnConfig = new ColumnConfig();
         }
     }
 }

@@ -39,11 +39,6 @@ class Error extends BaseEnum
    const ERROR_COMMENTERRORCODE_INVALID_TOKEN = 'F-000-000-403';
    
     /**
-     * @Message("值类型不支持")
-     */
-   const ERROR_COLUMNERROR_ERROR_ANTDESIGN_COLUMN_VALUEENUMTYPE_NOT_SUPPORT = 'A-002-001-001';
-   
-    /**
      * @Message("列表参数错误")
      */
    const ERROR_TABLEERROR_ERROR_ANTDESIGN_TABLE_PARAM_ERROR = 'A-001-001-001';

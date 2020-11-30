@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Component\AntDesign\Table;
+namespace App\Component\AntDesign\Table\Config;
 
 use Lengbin\Common\Component\BaseObject;
 
-class Config extends BaseObject
+class ColumnConfig extends BaseObject
 {
 
     /**

@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Component\AntDesign\Table;
+namespace App\Component\AntDesign\Table\Config;
 
 use App\Component\AntDesign\Errors\TableError;
 use Lengbin\Common\Component\BaseObject;
 use Lengbin\Hyperf\Common\Exception\BusinessException;
 
-class Search extends BaseObject
+class TableConfig extends BaseObject
 {
     /**
      * 查询按钮的文本
