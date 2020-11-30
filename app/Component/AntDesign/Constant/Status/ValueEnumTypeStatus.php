@@ -7,6 +7,11 @@ use Lengbin\Hyperf\ErrorCode\BaseEnum;
 class ValueEnumTypeStatus extends BaseEnum
 {
     /**
+     * @Message("未知")
+     */
+    public const UNKNOWN = '';
+
+    /**
      * @Message("成功")
      */
     public const SUCCESS = 'Success';

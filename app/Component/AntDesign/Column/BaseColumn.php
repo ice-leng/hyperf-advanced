@@ -2,15 +2,13 @@
 
 namespace App\Component\AntDesign\Column;
 
-use App\Component\AntDesign\Constant\Status\ProgressTypeStatus;
-use App\Component\AntDesign\Constant\Status\ValueEnumTypeStatus;
 use App\Component\AntDesign\Constant\Type\ValueType;
 use Lengbin\Common\Component\BaseObject;
 
 /**
  * Class Column
  * @package App\Component\AntDesign
- * @document https://github.com/coderlfm/CMS
+ * @see     https://github.com/coderlfm/CMS
  */
 class BaseColumn extends BaseObject
 {
@@ -18,87 +16,87 @@ class BaseColumn extends BaseObject
      * 后端返回数据key
      * @var string
      */
-    private $dataIndex;
+    protected $dataIndex;
 
     /**
      * 表格/表单标题名
      * @var string
      */
-    private $title;
+    protected $title;
 
     /**
      * 搜索时请求服务器的key名
      * @var string
      */
-    private $key;
+    protected $key;
 
     /**
      * 是否拷贝
      * @var bool
      */
-    private $copyable;
+    protected $copyable;
 
     /**
      * 超出换行
      * @var bool
      */
-    private $ellipsis;
+    protected $ellipsis;
 
     /**
      * 是否展示在搜索框,默认值true
      * @var bool
      */
-    private $search;
+    protected $search;
 
     /**
      * 值类型, 默认值text
      * @var ValueType
      */
-    private $valueType;
+    protected $valueType;
 
     /**
      * 表头筛选项,默认值 true 当值为 true 时, 自动使用 valueEnum 生成   类型: boolean | object[]
      * @var bool
      */
-    private $filters;
+    protected $filters;
 
     /**
      * 当前列值的枚举
      * @var ValueEnum[]
      * @see valueType
      */
-    private $valueEnum;
+    protected $valueEnum;
 
     /**
      * 会在 title 之后展示一个 icon，hover 之后提示一些信息
      * @var string
      */
-    private $tooltip;
+    protected $tooltip;
 
     /**
      * 宽度
      * @var string
      */
-    private $width;
+    protected $width;
 
     /**
      * 在查询表单中不展示此项
      * @var bool
      */
-    private $hideInSearch;
+    protected $hideInSearch;
 
     /**
      * 在 Table 中不展示此列
      * @var bool
      */
-    private $hideInTable;
+    protected $hideInTable;
 
     /**
      * valueType为 select | radio | radioButton | checkbox 时可设置在表单搜索时的默认值
      * select |checkbox 为数组 ['string'],单选为 string
-     * @var string | array
+     * @var string|array
      */
-    private $initialValue;
+    protected $initialValue;
 
     /**
      * @return bool
@@ -158,19 +156,19 @@ class BaseColumn extends BaseObject
     }
 
     /**
-     * @return string
+     * @return ValueType
      */
-    public function getValueType(): string
+    public function getValueType(): ValueType
     {
         return $this->valueType;
     }
 
     /**
-     * @param string $valueType
+     * @param ValueType $valueType
      *
      * @return BaseColumn
      */
-    public function setValueType(string $valueType): BaseColumn
+    public function setValueType(ValueType $valueType): BaseColumn
     {
         $this->valueType = $valueType;
         return $this;
@@ -369,15 +367,15 @@ class BaseColumn extends BaseObject
     public function init()
     {
         // 必填项验证
-
+        $this->getDataIndex();
         // 进度条
         if ($this->valueType->getValue() === ValueType::PROGRESS) {
             $progress = [];
             foreach ($this->getValueEnum() as $item) {
-                $progress[$item->getKey()] = [
+                $progress[$item->getKey()] = new ProgressType([
                     'text'   => $item->getValue(),
-                    'status' => $item->getStatus() !== '' ? ProgressTypeStatus::byValue($item->getStatus())->getValue() : $item->getStatus(),
-                ];
+                    'status' => $item->getStatus(),
+                ]);
             }
             $this->valueEnum = $progress;
         }
@@ -391,10 +389,10 @@ class BaseColumn extends BaseObject
         ], true)) {
             $drops = [];
             foreach ($this->getValueEnum() as $item) {
-                $drops[$item->getKey()] = [
+                $drops[$item->getKey()] = new ValueEnumType([
                     'text'   => $item->getValue(),
-                    'status' => $item->getStatus() !== '' ? ValueEnumTypeStatus::byValue($item->getStatus())->getValue() : $item->getStatus(),
-                ];
+                    'status' => $item->getStatus(),
+                ]);
             }
             $this->valueEnum = $drops;
 

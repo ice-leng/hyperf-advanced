@@ -17,6 +17,7 @@ class ValueEnum extends BaseObject
     private $value;
 
     /**
+     * 渲染的状态
      * @var string
      */
     private $status = '';

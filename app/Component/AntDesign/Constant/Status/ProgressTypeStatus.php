@@ -6,6 +6,12 @@ use Lengbin\Hyperf\ErrorCode\BaseEnum;
 
 class ProgressTypeStatus extends BaseEnum
 {
+
+    /**
+     * @Message("未知")
+     */
+    public const UNKNOWN = '';
+
     /**
      * @Message("成功")
      */

@@ -7,7 +7,6 @@ use Lengbin\Hyperf\ErrorCode\BaseEnum;
 /**
  * value type
  * @package App\Component\AntDesign\Column
- * @document https://github.com/coderlfm/CMS
  */
 class ValueType extends BaseEnum
 {
