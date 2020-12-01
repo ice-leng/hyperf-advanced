@@ -1,10 +1,8 @@
 <?php
 
-namespace App\Component\AntDesign\Table\Config;
+namespace App\Component\AntDesign\Config;
 
-use App\Component\AntDesign\Errors\TableError;
 use Lengbin\Common\Component\BaseObject;
-use Lengbin\Hyperf\Common\Exception\BusinessException;
 
 class FormConfig extends BaseObject
 {

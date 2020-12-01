@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Component\AntDesign;
+namespace App\Component\AntDesign\Form;
 
 use Lengbin\Common\Component\BaseObject;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Component\AntDesign\Table\Column;
+namespace App\Component\AntDesign\Column;
 
 class Search extends BaseColumn
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Component\AntDesign\Table\Config;
+namespace App\Component\AntDesign\Config;
 
 use Lengbin\Common\Component\BaseObject;
 

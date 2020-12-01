@@ -4,10 +4,11 @@ namespace App\Component\AntDesign;
 
 use App\Component\AntDesign\Constant\Type\ValueType;
 use App\Component\AntDesign\Errors\TableError;
-use App\Component\AntDesign\Table\Column\Column;
-use App\Component\AntDesign\Table\Column\Search;
-use App\Component\AntDesign\Table\Config\ColumnConfig;
-use App\Component\AntDesign\Table\Config\FormConfig;
+use App\Component\AntDesign\Column\BaseColumn;
+use App\Component\AntDesign\Column\Column;
+use App\Component\AntDesign\Column\Search;
+use App\Component\AntDesign\Config\ColumnConfig;
+use App\Component\AntDesign\Config\FormConfig;
 use Lengbin\Common\Component\BaseObject;
 use Lengbin\Hyperf\Common\Exception\BusinessException;
 
@@ -36,6 +37,8 @@ class Table extends BaseObject
      * @var Search[]
      */
     public $search;
+
+    public $form;
 
     public function init()
     {

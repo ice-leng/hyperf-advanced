@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Component\AntDesign\Table\Column;
+namespace App\Component\AntDesign\Column;
 
 use App\Component\AntDesign\Constant\Status\ValueEnumTypeStatus;
 use Lengbin\Common\Component\BaseObject;

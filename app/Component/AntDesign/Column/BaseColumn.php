@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Component\AntDesign\Table\Column;
+namespace App\Component\AntDesign\Column;
 
 use App\Component\AntDesign\Constant\Type\ValueType;
 use Lengbin\Common\Component\BaseObject;
