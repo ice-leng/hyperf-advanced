@@ -5,6 +5,11 @@ namespace App\Component\AntDesign\Column;
 use App\Component\AntDesign\Constant\Status\ValueEnumTypeStatus;
 use Lengbin\Common\Component\BaseObject;
 
+/**
+ * 列值的枚举 - 枚举
+ *
+ * @package App\Component\AntDesign\Column
+ */
 class ValueEnumType extends BaseObject
 {
     /**

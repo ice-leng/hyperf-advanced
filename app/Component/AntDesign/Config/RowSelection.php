@@ -5,6 +5,11 @@ namespace App\Component\AntDesign\Config;
 use App\Component\AntDesign\Constant\Type\RowSelectionType;
 use Lengbin\Common\Component\BaseObject;
 
+/**
+ * 列 配置
+ *
+ * @package App\Component\AntDesign\Config
+ */
 class RowSelection extends BaseObject
 {
     /**

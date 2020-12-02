@@ -5,6 +5,10 @@ namespace App\Component\AntDesign\Column;
 use App\Component\AntDesign\Constant\Status\ProgressTypeStatus;
 use Lengbin\Common\Component\BaseObject;
 
+/**
+ * 列值的枚举 - 进度条
+ * @package App\Component\AntDesign\Column
+ */
 class ProgressType extends BaseObject
 {
     /**

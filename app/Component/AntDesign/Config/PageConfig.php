@@ -4,10 +4,14 @@ namespace App\Component\AntDesign\Config;
 
 use Lengbin\Common\Component\BaseObject;
 
-class FormConfig extends BaseObject
+/**
+ * 页 配置
+ * @package App\Component\AntDesign\Config
+ */
+class PageConfig extends BaseObject
 {
     /**
-     * 查询按钮的文本
+     * 查询按钮的PageConfig文本
      * @var string
      */
     private $searchText;

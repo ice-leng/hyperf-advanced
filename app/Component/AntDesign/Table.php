@@ -8,7 +8,8 @@ use App\Component\AntDesign\Column\BaseColumn;
 use App\Component\AntDesign\Column\Column;
 use App\Component\AntDesign\Column\Search;
 use App\Component\AntDesign\Config\ColumnConfig;
-use App\Component\AntDesign\Config\FormConfig;
+use App\Component\AntDesign\Config\PageConfig;
+use App\Component\AntDesign\Form\Form;
 use Lengbin\Common\Component\BaseObject;
 use Lengbin\Hyperf\Common\Exception\BusinessException;
 
@@ -29,15 +30,18 @@ class Table extends BaseObject
     public $columnConfig;
 
     /**
-     * @var FormConfig
+     * @var
      */
-    public $formConfig;
+    public $pageConfig;
 
     /**
      * @var Search[]
      */
     public $search;
 
+    /**
+     * @var Form[]
+     */
     public $form;
 
     public function init()

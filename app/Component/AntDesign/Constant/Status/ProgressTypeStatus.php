@@ -4,6 +4,10 @@ namespace App\Component\AntDesign\Constant\Status;
 
 use Lengbin\Hyperf\ErrorCode\BaseEnum;
 
+/**
+ * 该值要渲染的状态
+ * @package App\Component\AntDesign\Constant\Status
+ */
 class ProgressTypeStatus extends BaseEnum
 {
 

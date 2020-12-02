@@ -2,6 +2,10 @@
 
 namespace App\Component\AntDesign\Column;
 
+/**
+ * 列
+ * @package App\Component\AntDesign\Column
+ */
 class Column extends BaseColumn
 {
     public function init()

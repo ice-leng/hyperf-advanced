@@ -4,6 +4,11 @@ namespace App\Component\AntDesign\Column;
 
 use Lengbin\Common\Component\BaseObject;
 
+/**
+ * 当前列值的枚举
+ *
+ * @package App\Component\AntDesign\Column
+ */
 class ValueEnum extends BaseObject
 {
     /**

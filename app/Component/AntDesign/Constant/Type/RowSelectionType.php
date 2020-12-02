@@ -4,6 +4,10 @@ namespace App\Component\AntDesign\Constant\Type;
 
 use Lengbin\Hyperf\ErrorCode\BaseEnum;
 
+/**
+ *  列 类型
+ * @package App\Component\AntDesign\Constant\Type
+ */
 class RowSelectionType extends BaseEnum
 {
     /**
