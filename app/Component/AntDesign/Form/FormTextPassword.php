@@ -9,4 +9,24 @@ class FormTextPassword extends FormText
      * @var bool
      */
     private $visibilityToggle;
+
+    /**
+     * @return bool
+     */
+    public function getVisibilityToggle(): bool
+    {
+        return $this->visibilityToggle;
+    }
+
+    /**
+     * @param bool $visibilityToggle
+     *
+     * @return FormTextPassword
+     */
+    public function setVisibilityToggle(bool $visibilityToggle): FormTextPassword
+    {
+        $this->visibilityToggle = $visibilityToggle;
+        return $this;
+    }
+
 }

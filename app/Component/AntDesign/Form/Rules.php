@@ -25,7 +25,7 @@ class Rules extends BaseObject
     /**
      * @return bool
      */
-    public function isRequired(): bool
+    public function getRequired(): bool
     {
         return $this->required;
     }

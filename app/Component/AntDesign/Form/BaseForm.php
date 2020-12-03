@@ -42,10 +42,16 @@ class BaseForm extends BaseObject
     protected $rules;
 
     /**
-     * 	不可选中
+     *    不可选中
      * @var bool
      */
     protected $disabled;
+
+    /**
+     * 表单类型
+     * @var string
+     */
+    protected $inputType;
 
     /**
      * @return string
@@ -145,7 +151,7 @@ class BaseForm extends BaseObject
     /**
      * @return bool
      */
-    public function isDisabled(): bool
+    public function getDisabled(): bool
     {
         return $this->disabled;
     }
@@ -165,5 +171,24 @@ class BaseForm extends BaseObject
     {
         $this->getName();
         return parent::toArray($object);
+    }
+
+    /**
+     * @return string
+     */
+    public function getInputType(): string
+    {
+        return $this->inputType;
+    }
+
+    /**
+     * @param string $inputType
+     *
+     * @return BaseForm
+     */
+    public function setInputType(string $inputType): BaseForm
+    {
+        $this->inputType = $inputType;
+        return $this;
     }
 }

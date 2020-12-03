@@ -150,7 +150,7 @@ class PageConfig extends BaseObject
     /**
      * @return bool
      */
-    public function isDefaultCollapsed(): bool
+    public function getDefaultCollapsed(): bool
     {
         return $this->defaultCollapsed;
     }
@@ -169,7 +169,7 @@ class PageConfig extends BaseObject
     /**
      * @return bool
      */
-    public function isCollapsed(): bool
+    public function getCollapsed(): bool
     {
         return $this->collapsed;
     }

@@ -55,7 +55,7 @@ class FormRate extends BaseForm
     /**
      * @return bool
      */
-    public function isAllowClear(): bool
+    public function getAllowClear(): bool
     {
         return $this->allowClear;
     }
@@ -74,7 +74,7 @@ class FormRate extends BaseForm
     /**
      * @return bool
      */
-    public function isAllowHalf(): bool
+    public function getAllowHalf(): bool
     {
         return $this->allowHalf;
     }

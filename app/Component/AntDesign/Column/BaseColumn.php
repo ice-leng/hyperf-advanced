@@ -291,7 +291,7 @@ class BaseColumn extends BaseObject
     /**
      * @return bool
      */
-    public function isHideInSearch(): bool
+    public function getHideInSearch(): bool
     {
         return $this->hideInSearch;
     }
@@ -310,7 +310,7 @@ class BaseColumn extends BaseObject
     /**
      * @return bool
      */
-    public function isHideInTable(): bool
+    public function getHideInTable(): bool
     {
         return $this->hideInTable;
     }
@@ -397,9 +397,9 @@ class BaseColumn extends BaseObject
             $this->valueEnum = $drops;
 
             // 如果是 select 或者 checkbox 默认为数组
-            $initValue = $this->getInitialValue();
-            if (in_array($this->valueType->getValue(), [ValueType::SELECT, ValueType::CHECKBOX,], true) && !is_array($initValue)) {
-                $this->setInitialValue([$initValue]);
+            $initValue = $this->getInitialValue() ?? '';
+            if (in_array($this->valueType->getValue(), [ValueType::SELECT, ValueType::CHECKBOX], true) && !is_array($initValue)) {
+                $initValue ? $this->setInitialValue([$initValue]) : $this->setInitialValue([]) ;
             }
         }
     }

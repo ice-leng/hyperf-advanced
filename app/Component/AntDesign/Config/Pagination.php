@@ -13,5 +13,5 @@ class Pagination extends BaseObject
     /**
      * @var int
      */
-    public $pageSize = 2;
+    public $pageSize = 10;
 }

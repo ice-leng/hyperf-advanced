@@ -37,7 +37,7 @@ class FormSlider extends BaseForm
     /**
      * @return bool
      */
-    public function isRange(): bool
+    public function getRange(): bool
     {
         return $this->range;
     }
@@ -113,7 +113,7 @@ class FormSlider extends BaseForm
     /**
      * @return bool
      */
-    public function isTooltipVisible(): bool
+    public function getTooltipVisible(): bool
     {
         return $this->tooltipVisible;
     }

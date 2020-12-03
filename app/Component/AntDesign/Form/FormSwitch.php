@@ -33,7 +33,7 @@ class FormSwitch extends BaseForm
     /**
      * @return bool
      */
-    public function isDefaultChecked(): bool
+    public function getDefaultChecked(): bool
     {
         return $this->defaultChecked;
     }

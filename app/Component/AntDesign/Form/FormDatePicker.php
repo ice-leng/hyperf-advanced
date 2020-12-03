@@ -46,7 +46,7 @@ class FormDatePicker extends BaseForm
     /**
      * @return bool
      */
-    public function isRange(): bool
+    public function getRange(): bool
     {
         return $this->range;
     }

@@ -31,12 +31,4 @@ class ColumnConfig extends BaseObject
      * @var Pagination
      */
     public $pagination;
-
-    public function init()
-    {
-        if ($this->pagination === null) {
-            $this->pagination = new Pagination();
-        }
-    }
-
 }

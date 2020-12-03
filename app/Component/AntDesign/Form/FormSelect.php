@@ -160,7 +160,7 @@ class FormSelect extends BaseForm
     /**
      * @return bool
      */
-    public function isShowSearch(): bool
+    public function getShowSearch(): bool
     {
         return $this->showSearch;
     }
@@ -179,7 +179,7 @@ class FormSelect extends BaseForm
     /**
      * @return bool
      */
-    public function isAllowClear(): bool
+    public function getAllowClear(): bool
     {
         return $this->allowClear;
     }
@@ -198,7 +198,7 @@ class FormSelect extends BaseForm
     /**
      * @return bool
      */
-    public function isAutoClearSearchValue(): bool
+    public function getAutoClearSearchValue(): bool
     {
         return $this->autoClearSearchValue;
     }
@@ -217,7 +217,7 @@ class FormSelect extends BaseForm
     /**
      * @return bool
      */
-    public function isBordered(): bool
+    public function getBordered(): bool
     {
         return $this->bordered;
     }
@@ -236,7 +236,7 @@ class FormSelect extends BaseForm
     /**
      * @return bool
      */
-    public function isDefaultActiveFirstOption(): bool
+    public function getDefaultActiveFirstOption(): bool
     {
         return $this->defaultActiveFirstOption;
     }
@@ -255,7 +255,7 @@ class FormSelect extends BaseForm
     /**
      * @return bool
      */
-    public function isDefaultOpen(): bool
+    public function getDefaultOpen(): bool
     {
         return $this->defaultOpen;
     }

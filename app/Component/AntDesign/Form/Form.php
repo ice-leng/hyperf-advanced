@@ -2,6 +2,7 @@
 
 namespace App\Component\AntDesign\Form;
 
+use App\Component\AntDesign\Constant\Type\InputType;
 use Lengbin\Common\Component\BaseObject;
 
 class Form extends BaseObject
@@ -50,7 +51,13 @@ class Form extends BaseObject
      */
     public function setItem(array $item): Form
     {
-        $this->item = $item;
+        $data = [];
+        foreach ($item as $form) {
+            $type = $form['inputType'];
+            $class = __NAMESPACE__ . '\\' . InputType::byName(strtoupper($type))->getValue();
+            $data[] = new $class($form);
+        }
+        $this->item = $data;
         return $this;
     }
 }

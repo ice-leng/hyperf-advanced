@@ -25,7 +25,7 @@ class FormText extends BaseForm
     /**
      * @return bool
      */
-    public function isBordered(): bool
+    public function getBordered(): bool
     {
         return $this->bordered;
     }
@@ -44,7 +44,7 @@ class FormText extends BaseForm
     /**
      * @return bool
      */
-    public function isAllowClear(): bool
+    public function getAllowClear(): bool
     {
         return $this->allowClear;
     }
@@ -63,7 +63,7 @@ class FormText extends BaseForm
     /**
      * @return bool
      */
-    public function isShowCount(): bool
+    public function getShowCount(): bool
     {
         return $this->showCount;
     }
