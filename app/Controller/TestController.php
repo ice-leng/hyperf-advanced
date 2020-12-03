@@ -6,6 +6,7 @@ use App\Component\AntDesign\Table;
 use App\Service\Admin\AdminService;
 use Hyperf\Di\Annotation\Inject;
 use Hyperf\HttpServer\Annotation\GetMapping;
+use Hyperf\HttpServer\Annotation\PostMapping;
 use Lengbin\Hyperf\Auth\RouterAuthAnnotation;
 use Lengbin\Hyperf\Common\Entity\PageEntity;
 use Lengbin\Hyperf\Common\Framework\BaseController;
@@ -27,6 +28,23 @@ class TestController extends BaseController
     protected $adminService;
 
     /**
+     * @GetMapping(path="/init")
+     *
+     * @return mixed
+     */
+    public function init()
+    {
+        $table = new Table([
+            'column' => [
+                'admin_id|id',
+                'nickname|昵称',
+                [],
+            ],
+        ]);
+        return $this->success($table->toArray());
+    }
+
+    /**
      * @GetMapping(path="/")
      *
      * @return mixed
@@ -39,22 +57,31 @@ class TestController extends BaseController
             'pageSize' => !empty($params['pageSize']) ? (int)$params['pageSize'] : 2,
         ]);
         $list = $this->adminService->getList([], ['admin_id', 'nickname'], $page);
-        return $this->success($list);
+        $data = array_merge($list, $params);
+        return $this->success($data);
     }
 
     /**
-     * @GetMapping(path="/init")
-     *
-     * @return mixed
+     * @PostMapping(path="/create")
      */
-    public function init()
+    public function create()
     {
-        $table = new Table([
-            'column' => [
-                'admin_id|id',
-                'nickname|昵称',
-            ],
-        ]);
-        return $this->success($table->toArray());
+        return $this->success($this->request->post());
+    }
+
+    /**
+     * @PostMapping(path="/update")
+     */
+    public function update()
+    {
+        return $this->success($this->request->post());
+    }
+
+    /**
+     * @PostMapping(path="/remove")
+     */
+    public function remove()
+    {
+        return $this->success($this->request->post());
     }
 }

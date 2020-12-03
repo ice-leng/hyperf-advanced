@@ -63,9 +63,9 @@ class PageConfig extends BaseObject
     /**
      * @param string $searchText
      *
-     * @return FormConfig
+     * @return PageConfig
      */
-    public function setSearchText(string $searchText): FormConfig
+    public function setSearchText(string $searchText): PageConfig
     {
         $this->searchText = $searchText;
         return $this;
@@ -82,9 +82,9 @@ class PageConfig extends BaseObject
     /**
      * @param string $resetText
      *
-     * @return FormConfig
+     * @return PageConfig
      */
-    public function setResetText(string $resetText): FormConfig
+    public function setResetText(string $resetText): PageConfig
     {
         $this->resetText = $resetText;
         return $this;
@@ -101,9 +101,9 @@ class PageConfig extends BaseObject
     /**
      * @param string $submitText
      *
-     * @return FormConfig
+     * @return PageConfig
      */
-    public function setSubmitText(string $submitText): FormConfig
+    public function setSubmitText(string $submitText): PageConfig
     {
         $this->submitText = $submitText;
         return $this;
@@ -120,7 +120,7 @@ class PageConfig extends BaseObject
     /**
      * @param int|string $labelWidth
      *
-     * @return FormConfig
+     * @return PageConfig
      */
     public function setLabelWidth($labelWidth)
     {
@@ -139,9 +139,9 @@ class PageConfig extends BaseObject
     /**
      * @param int $span
      *
-     * @return FormConfig
+     * @return PageConfig
      */
-    public function setSpan(int $span): FormConfig
+    public function setSpan(int $span): PageConfig
     {
         $this->span = $span;
         return $this;
@@ -158,9 +158,9 @@ class PageConfig extends BaseObject
     /**
      * @param bool $defaultCollapsed
      *
-     * @return FormConfig
+     * @return PageConfig
      */
-    public function setDefaultCollapsed(bool $defaultCollapsed): FormConfig
+    public function setDefaultCollapsed(bool $defaultCollapsed): PageConfig
     {
         $this->defaultCollapsed = $defaultCollapsed;
         return $this;
@@ -177,9 +177,9 @@ class PageConfig extends BaseObject
     /**
      * @param bool $collapsed
      *
-     * @return FormConfig
+     * @return PageConfig
      */
-    public function setCollapsed(bool $collapsed): FormConfig
+    public function setCollapsed(bool $collapsed): PageConfig
     {
         $this->collapsed = $collapsed;
         return $this;

@@ -2,14 +2,12 @@
 
 namespace App\Component\AntDesign;
 
+use App\Component\AntDesign\Config\PageConfig;
 use App\Component\AntDesign\Constant\Type\ValueType;
 use App\Component\AntDesign\Errors\TableError;
 use App\Component\AntDesign\Column\BaseColumn;
 use App\Component\AntDesign\Column\Column;
-use App\Component\AntDesign\Column\Search;
 use App\Component\AntDesign\Config\ColumnConfig;
-use App\Component\AntDesign\Config\PageConfig;
-use App\Component\AntDesign\Form\Form;
 use Lengbin\Common\Component\BaseObject;
 use Lengbin\Hyperf\Common\Exception\BusinessException;
 
@@ -30,17 +28,17 @@ class Table extends BaseObject
     public $columnConfig;
 
     /**
-     * @var
+     * @var PageConfig
      */
     public $pageConfig;
 
     /**
-     * @var Search[]
+     * @var array
      */
     public $search;
 
     /**
-     * @var Form[]
+     * @var array
      */
     public $form;
 
