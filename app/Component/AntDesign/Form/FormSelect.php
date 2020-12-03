@@ -75,7 +75,7 @@ class FormSelect extends BaseForm
     private $defaultOpen;
 
     /**
-     * @return array
+     * @return ValueEnum[]
      */
     public function getValueEnum(): array
     {
@@ -89,14 +89,7 @@ class FormSelect extends BaseForm
      */
     public function setValueEnum(array $valueEnum): FormSelect
     {
-        $drops = [];
-        foreach ($valueEnum as $item) {
-            $drops[$item->getKey()] = new ValueEnumType([
-                'text'   => $item->getValue(),
-                'status' => $item->getStatus(),
-            ]);
-        }
-        $this->valueEnum = $drops;
+        $this->valueEnum = $valueEnum;
         return $this;
     }
 

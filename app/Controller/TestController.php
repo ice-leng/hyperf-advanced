@@ -41,8 +41,8 @@ class TestController extends BaseController
         $table = new Table([
             'column'       => [
                 [
-                    'dataIndex' => 'admin_id',
-                    'title'     => 'id',
+                    'dataIndex' => '',
+                    'title'     => '序号',
                     'valueType' => ValueType::INDEX,
                 ],
                 [

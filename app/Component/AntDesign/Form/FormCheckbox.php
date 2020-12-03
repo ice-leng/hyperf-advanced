@@ -54,14 +54,7 @@ class FormCheckbox extends BaseForm
      */
     public function setValueEnum(array $valueEnum): FormCheckbox
     {
-        $drops = [];
-        foreach ($valueEnum as $item) {
-            $drops[$item->getKey()] = new ValueEnumType([
-                'text'   => $item->getValue(),
-                'status' => $item->getStatus(),
-            ]);
-        }
-        $this->valueEnum = $drops;
+        $this->valueEnum = $valueEnum;
         return $this;
     }
 }
