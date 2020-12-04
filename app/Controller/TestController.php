@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Component\AntDesign\Constant\Type\FormDateType;
 use App\Component\AntDesign\Constant\Type\ValueType;
 use App\Component\AntDesign\Table;
+use App\Component\Generate\Template;
 use App\Constant\Status\AdminStatus;
 use App\Service\Admin\AdminService;
 use Hyperf\Di\Annotation\Inject;
@@ -195,5 +196,14 @@ class TestController extends BaseController
     public function remove()
     {
         return $this->success($this->request->post());
+    }
+
+    /**
+     * @GetMapping(path="/generate")
+     */
+    public function generate()
+    {
+        $str = (new Template())->generateCurd(['namespace' => ""]);
+        return $this->success(['string'=> $str]);
     }
 }
