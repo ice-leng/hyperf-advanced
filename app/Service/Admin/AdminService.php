@@ -8,6 +8,13 @@ use Lengbin\Hyperf\Common\Framework\BaseService;
 
 class AdminService extends BaseService
 {
+    /**
+     * @param array           $params
+     * @param array|string[]  $field
+     * @param PageEntity|null $pageEntity
+     *
+     * @return array
+     */
     public function getList(array $params = [], array $field = ['*'], ?PageEntity $pageEntity = null): array
     {
         $query = Admin::query();

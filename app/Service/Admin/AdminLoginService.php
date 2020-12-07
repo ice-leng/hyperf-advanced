@@ -25,7 +25,7 @@ class AdminLoginService extends BaseService
     /**
      * check status
      *
-     * @param $admin
+     * @param Admin|null $admin
      */
     protected function checkAdminStatus($admin): void
     {
@@ -37,9 +37,9 @@ class AdminLoginService extends BaseService
     /**
      * @param array $params
      *
-     * @return Admin
+     * @return Admin|null
      */
-    public function findIdentity(array $params): IdentityInterface
+    public function findIdentity(array $params): ?IdentityInterface
     {
         $admin = Admin::findOneCondition($params);
         $this->checkAdminStatus($admin);

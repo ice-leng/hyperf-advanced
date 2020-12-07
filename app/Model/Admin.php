@@ -21,6 +21,7 @@ use Lengbin\Hyperf\Common\Framework\BaseModel;
  */
 class Admin extends BaseModel implements IdentityInterface
 {
+    protected $primaryKey = 'admin_id';
     /**
      * The table associated with the model.
      *

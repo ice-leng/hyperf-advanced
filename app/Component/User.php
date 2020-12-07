@@ -52,12 +52,8 @@ class User implements IdentityRepositoryInterface
         $data = $this->jwt->verifyToken($token);
         $channel = ArrayHelper::get($data, 'channel', null);
         // 多服务器 渠道 判断
-        switch ($channel) {
-            case 'admin':
-                if (ArrayHelper::isValidValue($data, 'admin_id')) {
-                    $user = $this->adminLoginService->findIdentity(['admin_id' => $data['admin_id']]);
-                }
-                break;
+        if ($channel === 'admin' && ArrayHelper::isValidValue($data, 'admin_id')) {
+            $user = $this->adminLoginService->findIdentity(['admin_id' => $data['admin_id']]);
         }
         return $user;
     }
