@@ -89,12 +89,13 @@ class Generate extends BaseObject
      */
     public function getFilePath(string $suffix = 'php'): string
     {
+        $ext = FileHelper::getExtension($suffix);
         $classname = $this->getConfig()->getClassname();
         return implode(DIRECTORY_SEPARATOR, [
             $this->getPath(),
             $classname,
             '.',
-            $suffix,
+            $ext,
         ]);
     }
 
