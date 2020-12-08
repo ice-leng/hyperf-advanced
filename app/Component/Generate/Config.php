@@ -29,6 +29,11 @@ class Config extends BaseObject
     /**
      * @var array
      */
+    private $comments;
+
+    /**
+     * @var array
+     */
     private $implements = [];
 
     /**
@@ -174,4 +179,22 @@ class Config extends BaseObject
         return $this;
     }
 
+    /**
+     * @return array
+     */
+    public function getComments(): array
+    {
+        return $this->comments;
+    }
+
+    /**
+     * @param array $comments
+     *
+     * @return Config
+     */
+    public function setComments(array $comments): Config
+    {
+        $this->comments = $comments;
+        return $this;
+    }
 }

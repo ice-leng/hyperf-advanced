@@ -27,9 +27,9 @@ class ClassBase extends BaseObject
     protected $public = true;
 
     /**
-     * @var string
+     * @var array
      */
-    protected $comment = '';
+    protected $comments = [];
 
     /**
      * @var string
@@ -127,25 +127,6 @@ class ClassBase extends BaseObject
     /**
      * @return string
      */
-    public function getComment(): string
-    {
-        return $this->comment;
-    }
-
-    /**
-     * @param string $comment
-     *
-     * @return ClassBase
-     */
-    public function setComment(string $comment): ClassBase
-    {
-        $this->comment = $comment;
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return $this->name;
@@ -159,6 +140,36 @@ class ClassBase extends BaseObject
     public function setName(string $name): ClassBase
     {
         $this->name = $name;
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getComments(): array
+    {
+        return $this->comments;
+    }
+
+    /**
+     * @param array $comments
+     *
+     * @return ClassBase
+     */
+    public function setComments(array $comments): ClassBase
+    {
+        $this->comments = $comments;
+        return $this;
+    }
+
+    /**
+     * @param string $comment
+     *
+     * @return ClassBase
+     */
+    public function addComment(string $comment): ClassBase
+    {
+        $this->comments[] = $comment;
         return $this;
     }
 }

@@ -49,7 +49,18 @@ class ClassMethod extends ClassBase
     public function setParams(array $params): ClassMethod
     {
         $this->params = $params;
+        $this->init();
         return $this;
+    }
+    public function init()
+    {
+        parent::init();
+        if (!empty($this->getParams())) {
+            foreach ($this->getParams() as $params) {
+                $name = '$' . $params->getName();
+                $this->addComment("@param {$params->getType()} {$name}");
+            }
+        }
     }
 
 }
