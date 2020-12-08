@@ -6,7 +6,7 @@ use Lengbin\Common\Component\BaseObject;
 use Smarty;
 use SmartyException;
 
-class Template extends BaseObject
+class Template extends BaseObject implements TemplateInterface
 {
 
     /**

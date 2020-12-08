@@ -12,12 +12,24 @@ use {{$use}}
 
 class {{$classname}} {{if $inheritance }}extends {{$inheritance}}{{/if}} {{if $implement }}implements {{$implement}} {{/if}}
 {
-{{if $functions}}
-{{foreach $functions as $name => $fun}}
-    {{if $annotation[$name]}}
+
+{{if $properties}}
+{{foreach $properties as $name => $property}}
+{{if $annotation[$name]}}
     {{$annotation[$name]}}
-    {{/if}}
-    {{$fun}}
+{{/if}}
+    {{$property}}
+
+{{/foreach}}
+{{/if}}
+
+{{if $methods}}
+{{foreach $methods as $key => $method}}
+{{if $annotation[$key]}}
+    {{$annotation[$key]}}
+{{/if}}
+    {{$method}}
+
 {{/foreach}}
 {{/if}}
 }

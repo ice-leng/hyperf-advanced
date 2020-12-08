@@ -17,8 +17,8 @@ class Generate extends BaseObject
     private $template;
 
     /**
-     * 输出目录
+     * 输出路径
      * @var string
      */
-    private $output;
+    private $path;
 }

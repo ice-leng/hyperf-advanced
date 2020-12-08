@@ -7,14 +7,14 @@ use Lengbin\Common\Component\BaseObject;
 class Config extends BaseObject
 {
     /**
-     * @var string
+     * @var ?string
      */
     private $namespace;
 
     /**
      * @var array
      */
-    private $uses;
+    private $uses = [];
 
     /**
      * @var string
@@ -22,29 +22,29 @@ class Config extends BaseObject
     private $classname;
 
     /**
-     * @var string
+     * @var ?string
      */
     private $inheritance;
 
     /**
-     * @var string
-     */
-    private $implement;
-
-    /**
      * @var array
      */
-    private $functions;
+    private $implements = [];
 
     /**
-     * @var array
+     * @var ClassMethod[]
      */
-    private $annotations;
+    private $methods = [];
 
     /**
-     * @return string
+     * @var ClassProperty[]
      */
-    public function getNamespace(): string
+    private $properties = [];
+
+    /**
+     * @return ?string
+     */
+    public function getNamespace(): ?string
     {
         return $this->namespace;
     }
@@ -99,9 +99,9 @@ class Config extends BaseObject
     }
 
     /**
-     * @return string
+     * @return ?string
      */
-    public function getInheritance(): string
+    public function getInheritance(): ?string
     {
         return $this->inheritance;
     }
@@ -118,59 +118,60 @@ class Config extends BaseObject
     }
 
     /**
-     * @return string
-     */
-    public function getImplement(): string
-    {
-        return $this->implement;
-    }
-
-    /**
-     * @param string $implement
-     *
-     * @return Config
-     */
-    public function setImplement(string $implement): Config
-    {
-        $this->implement = $implement;
-        return $this;
-    }
-
-    /**
      * @return array
      */
-    public function getFunctions(): array
+    public function getImplements(): array
     {
-        return $this->functions;
+        return $this->implements;
     }
 
     /**
-     * @param array $functions
+     * @param array $implements
      *
      * @return Config
      */
-    public function setFunctions(array $functions): Config
+    public function setImplements(array $implements): Config
     {
-        $this->functions = $functions;
+        $this->implements = $implements;
         return $this;
     }
 
     /**
-     * @return array
+     * @return ClassMethod[]
      */
-    public function getAnnotations(): array
+    public function getMethods(): array
     {
-        return $this->annotations;
+        return $this->methods;
     }
 
     /**
-     * @param array $annotations
+     * @param ClassMethod[] $methods
      *
      * @return Config
      */
-    public function setAnnotations(array $annotations): Config
+    public function setMethods(array $methods): Config
     {
-        $this->annotations = $annotations;
+        $this->methods = $methods;
         return $this;
     }
+
+    /**
+     * @return ClassProperty[]
+     */
+    public function getProperties(): ?array
+    {
+        return $this->properties;
+    }
+
+    /**
+     * @param ClassProperty[] $properties
+     *
+     * @return Config
+     */
+    public function setProperties(array $properties): Config
+    {
+        $this->properties = $properties;
+        return $this;
+    }
+
 }
