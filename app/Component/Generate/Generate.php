@@ -82,6 +82,7 @@ class Generate extends BaseObject
     }
 
     /**
+     * 获得 输出文件 path
      *
      * @param string $suffix
      *
@@ -100,6 +101,8 @@ class Generate extends BaseObject
     }
 
     /**
+     * 获得 模版内容
+     *
      * @param string $view
      *
      * @return string
@@ -111,6 +114,8 @@ class Generate extends BaseObject
     }
 
     /**
+     * 输出
+     *
      * @param string $suffix
      * @param string $view
      *
