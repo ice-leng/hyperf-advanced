@@ -4,6 +4,9 @@ namespace App\Component\Generate;
 
 use Lengbin\Common\Component\BaseObject;
 
+/**
+ * Class ClassBase
+ */
 class ClassBase extends BaseObject
 {
     /**

@@ -10,6 +10,13 @@ use {{$use}}
 {{/foreach}}
 {{/if}}
 
+/**
+{{if $comments }}
+{{foreach $comments as $comment}}
+ *{{$comment}}
+{{/foreach}}
+{{/if}}
+ */
 class {{$classname}} {{if $inheritance }}extends {{$inheritance}}{{/if}} {{if $implements }}implements {{foreach $implements as $implement }}{{$implement}}, {{/foreach}} {{/if}}
 {
 
