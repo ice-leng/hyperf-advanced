@@ -25,6 +25,31 @@ class Generate extends BaseObject
     private $path;
 
     /**
+     * 模版
+     * @var string
+     */
+    private $tpl = 'class.tpl';
+
+    /**
+     * @return string
+     */
+    public function getTpl(): string
+    {
+        return $this->tpl;
+    }
+
+    /**
+     * @param string $tpl
+     *
+     * @return Generate
+     */
+    public function setTpl(string $tpl): Generate
+    {
+        $this->tpl = $tpl;
+        return $this;
+    }
+
+    /**
      * @return Config
      */
     public function getConfig(): Config
@@ -103,27 +128,24 @@ class Generate extends BaseObject
     /**
      * 获得 模版内容
      *
-     * @param string $view
-     *
      * @return string
      * @throws SmartyException
      */
-    public function getContent($view = 'Class.tpl'): string
+    public function getContent(): string
     {
-        return $this->getTemplate()->render($view, $this->getConfig()->toArray());
+        return $this->getTemplate()->render($this->getTpl(), $this->getConfig()->toArray());
     }
 
     /**
      * 输出
      *
      * @param string $suffix
-     * @param string $view
      *
      * @return bool
      * @throws SmartyException
      */
-    public function output(string $suffix = 'php', $view = 'Class.tpl'): bool
+    public function output(string $suffix = 'php'): bool
     {
-        return FileHelper::putFile($this->getFilePath($suffix), $this->getContent($view));
+        return FileHelper::putFile($this->getFilePath($suffix), $this->getContent());
     }
 }

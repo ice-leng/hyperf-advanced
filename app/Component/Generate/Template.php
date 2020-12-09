@@ -140,7 +140,7 @@ class Template extends BaseObject implements TemplateInterface
     public function init()
     {
         if ($this->getView() === null) {
-            $this->setView(__DIR__ . DIRECTORY_SEPARATOR . 'View' . DIRECTORY_SEPARATOR);
+            $this->setView(__DIR__ . DIRECTORY_SEPARATOR . 'tpl' . DIRECTORY_SEPARATOR);
         }
 
         $temp = sys_get_temp_dir();
