@@ -5,8 +5,8 @@ namespace App\Controller;
 use App\Component\AntDesign\Constant\Type\FormDateType;
 use App\Component\AntDesign\Constant\Type\ValueType;
 use App\Component\AntDesign\Table;
-use App\Component\Generate\Template;
-use App\Constant\Status\AdminStatus;
+use App\Component\Generate\Config;
+//use App\Constant\Status\AdminStatus;
 use App\Service\Admin\AdminService;
 use Hyperf\Di\Annotation\Inject;
 use Hyperf\HttpServer\Annotation\GetMapping;
@@ -203,7 +203,31 @@ class TestController extends BaseController
      */
     public function generate()
     {
-        $str = (new Template())->generateCurd(['namespace' => ""]);
-        return $this->success(['string'=> $str]);
+        $data = [
+            'namespace' => 'App\Controller',
+            'classname' => 'AdminController',
+            'uses'      => [
+                'Hyperf\HttpServer\Annotation\Controller',
+                'Lengbin\Hyperf\Auth\RouterAuthAnnotation',
+                'Lengbin\Hyperf\Common\Framework\BaseController'
+            ],
+            'comments'  => [
+                'Class AdminController',
+                '@package App\Controller',
+                '@Controller()',
+                '@RouterAuthAnnotation(isPublic=true)'
+            ],
+            'inheritance' => 'BaseController',
+            'properties' => [
+                ["name" => 'abc'],
+                ["name" => 'abc2']
+            ],
+        ];
+        $config = new Config($data);
+
+        $str = $config->__toObjectString();
+        file_put_contents(BASE_PATH . '/app/Controller/a.php', "<?php\n" . $str);
+
+        return $this->success(['array' => $config->toArray(), 'string' => $str]);
     }
 }

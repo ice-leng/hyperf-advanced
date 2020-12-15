@@ -2,9 +2,7 @@
 
 namespace App\Component\Generate;
 
-use Lengbin\Common\Component\BaseObject;
-
-class ClassProperty extends BaseObject
+class ClassProperty extends ClassBase
 {
     /**
      * @var bool

@@ -4,7 +4,6 @@ namespace App\Component\Generate;
 
 use Lengbin\Common\Component\BaseObject;
 use Lengbin\Helper\Util\FileHelper;
-use SmartyException;
 
 class Generate extends BaseObject
 {
@@ -14,7 +13,7 @@ class Generate extends BaseObject
     private $config;
 
     /**
-     * @var Template
+     * @var TemplateInterface
      */
     private $template;
 
@@ -69,19 +68,19 @@ class Generate extends BaseObject
     }
 
     /**
-     * @return Template
+     * @return TemplateInterface
      */
-    public function getTemplate(): Template
+    public function getTemplate(): TemplateInterface
     {
         return $this->template;
     }
 
     /**
-     * @param Template $template
+     * @param TemplateInterface $template
      *
      * @return Generate
      */
-    public function setTemplate(Template $template): Generate
+    public function setTemplate(TemplateInterface $template): Generate
     {
         $this->template = $template;
         return $this;
@@ -93,6 +92,16 @@ class Generate extends BaseObject
     public function getPath(): string
     {
         return $this->path;
+    }
+
+    /**
+     * 获得 模版内容
+     *
+     * @return string
+     */
+    public function getContent(): string
+    {
+        return $this->getTemplate()->render($this->getTpl(), $this->getConfig()->toArray());
     }
 
     /**
@@ -126,23 +135,11 @@ class Generate extends BaseObject
     }
 
     /**
-     * 获得 模版内容
-     *
-     * @return string
-     * @throws SmartyException
-     */
-    public function getContent(): string
-    {
-        return $this->getTemplate()->render($this->getTpl(), $this->getConfig()->toArray());
-    }
-
-    /**
      * 输出
      *
      * @param string $suffix
      *
      * @return bool
-     * @throws SmartyException
      */
     public function output(string $suffix = 'php'): bool
     {
