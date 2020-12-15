@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Component\Generate;
+namespace App\Component\Generate\ClassFile;
 
 use Lengbin\Common\Component\BaseObject;
 

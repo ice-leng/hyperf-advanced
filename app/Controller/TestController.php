@@ -5,8 +5,8 @@ namespace App\Controller;
 use App\Component\AntDesign\Constant\Type\FormDateType;
 use App\Component\AntDesign\Constant\Type\ValueType;
 use App\Component\AntDesign\Table;
-use App\Component\Generate\Config;
-//use App\Constant\Status\AdminStatus;
+use App\Component\Generate\ClassFile\Config;
+use App\Component\Generate\Generate;
 use App\Service\Admin\AdminService;
 use Hyperf\Di\Annotation\Inject;
 use Hyperf\HttpServer\Annotation\GetMapping;
@@ -204,30 +204,30 @@ class TestController extends BaseController
     public function generate()
     {
         $data = [
-            'namespace' => 'App\Controller',
-            'classname' => 'AdminController',
-            'uses'      => [
+            'namespace'   => 'App\Controller',
+            'classname'   => 'AdminController',
+            'uses'        => [
                 'Hyperf\HttpServer\Annotation\Controller',
                 'Lengbin\Hyperf\Auth\RouterAuthAnnotation',
-                'Lengbin\Hyperf\Common\Framework\BaseController'
+                'Lengbin\Hyperf\Common\Framework\BaseController',
             ],
-            'comments'  => [
+            'comments'    => [
                 'Class AdminController',
                 '@package App\Controller',
                 '@Controller()',
-                '@RouterAuthAnnotation(isPublic=true)'
+                '@RouterAuthAnnotation(isPublic=true)',
             ],
             'inheritance' => 'BaseController',
-            'properties' => [
-                ["name" => 'abc'],
-                ["name" => 'abc2']
-            ],
+//            'properties'  => [
+//                ["name" => 'abc'],
+//                ["name" => 'abc2'],
+//            ],
         ];
-        $config = new Config($data);
 
-        $str = $config->__toObjectString();
-        file_put_contents(BASE_PATH . '/app/Controller/a.php', "<?php\n" . $str);
+        $generate = new Generate();
+        $generate->setPath(BASE_PATH . '/app/Controller');
+        $generate->setConfig(new Config($data));
 
-        return $this->success(['array' => $config->toArray(), 'string' => $str]);
+        return $this->success(['a' => $generate->output('php')]);
     }
 }

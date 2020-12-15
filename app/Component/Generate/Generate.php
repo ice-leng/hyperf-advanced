@@ -2,21 +2,10 @@
 
 namespace App\Component\Generate;
 
-use Lengbin\Common\Component\BaseObject;
 use Lengbin\Helper\Util\FileHelper;
 
-class Generate extends BaseObject
+class Generate
 {
-    /**
-     * @var Config
-     */
-    private $config;
-
-    /**
-     * @var TemplateInterface
-     */
-    private $template;
-
     /**
      * 输出路径
      * @var string
@@ -24,67 +13,9 @@ class Generate extends BaseObject
     private $path;
 
     /**
-     * 模版
-     * @var string
+     * @var AbstractConfig
      */
-    private $tpl = 'class.tpl';
-
-    /**
-     * @return string
-     */
-    public function getTpl(): string
-    {
-        return $this->tpl;
-    }
-
-    /**
-     * @param string $tpl
-     *
-     * @return Generate
-     */
-    public function setTpl(string $tpl): Generate
-    {
-        $this->tpl = $tpl;
-        return $this;
-    }
-
-    /**
-     * @return Config
-     */
-    public function getConfig(): Config
-    {
-        return $this->config;
-    }
-
-    /**
-     * @param Config $config
-     *
-     * @return Generate
-     */
-    public function setConfig(Config $config): Generate
-    {
-        $this->config = $config;
-        return $this;
-    }
-
-    /**
-     * @return TemplateInterface
-     */
-    public function getTemplate(): TemplateInterface
-    {
-        return $this->template;
-    }
-
-    /**
-     * @param TemplateInterface $template
-     *
-     * @return Generate
-     */
-    public function setTemplate(TemplateInterface $template): Generate
-    {
-        $this->template = $template;
-        return $this;
-    }
+    private $config;
 
     /**
      * @return string
@@ -92,16 +23,6 @@ class Generate extends BaseObject
     public function getPath(): string
     {
         return $this->path;
-    }
-
-    /**
-     * 获得 模版内容
-     *
-     * @return string
-     */
-    public function getContent(): string
-    {
-        return $this->getTemplate()->render($this->getTpl(), $this->getConfig()->toArray());
     }
 
     /**
@@ -116,33 +37,35 @@ class Generate extends BaseObject
     }
 
     /**
-     * 获得 输出文件 path
-     *
-     * @param string $suffix
-     *
-     * @return string
+     * @return AbstractConfig
      */
-    public function getFilePath(string $suffix = 'php'): string
+    public function getConfig(): AbstractConfig
     {
-        $ext = FileHelper::getExtension($suffix);
-        $classname = $this->getConfig()->getClassname();
-        return implode(DIRECTORY_SEPARATOR, [
-            $this->getPath(),
-            $classname,
-            '.',
-            $ext,
-        ]);
+        return $this->config;
     }
 
     /**
-     * 输出
+     * @param AbstractConfig $config
      *
+     * @return Generate
+     */
+    public function setConfig(AbstractConfig $config): Generate
+    {
+        $this->config = $config;
+        return $this;
+    }
+
+    /**
      * @param string $suffix
      *
      * @return bool
      */
-    public function output(string $suffix = 'php'): bool
+    public function output(string $suffix): bool
     {
-        return FileHelper::putFile($this->getFilePath($suffix), $this->getContent());
+        $file = implode(DIRECTORY_SEPARATOR, [
+                $this->getPath(),
+                $this->getConfig()->getFileName(),
+            ]) . '.' . FileHelper::getExtension($suffix);
+        return FileHelper::putFile($file, $this->getConfig()->getContent());
     }
 }
