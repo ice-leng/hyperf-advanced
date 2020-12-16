@@ -530,7 +530,7 @@ class Config extends AbstractConfig
             // properties
             $this->renderProperty(),
             // methods
-//            $str = $this->renderMethod($str),
+            $this->renderMethod(),
             '}',
         ]));
 
