@@ -76,7 +76,7 @@ class ClassBase extends BaseObject
      *
      * @return ClassBase
      */
-    public function setPrivate(bool $private = true): ClassBase
+    public function setPrivate(bool $private): ClassBase
     {
         $this->private = $private;
         if ($private === true) {
@@ -99,7 +99,7 @@ class ClassBase extends BaseObject
      *
      * @return ClassBase
      */
-    public function setProtected(bool $protected = true): ClassBase
+    public function setProtected(bool $protected): ClassBase
     {
         $this->protected = $protected;
         if ($protected === true) {
@@ -122,7 +122,7 @@ class ClassBase extends BaseObject
      *
      * @return ClassBase
      */
-    public function setPublic(bool $public = true): ClassBase
+    public function setPublic(bool $public): ClassBase
     {
         $this->public = $public;
         if ($public === true) {
@@ -179,5 +179,57 @@ class ClassBase extends BaseObject
     {
         $this->comments[] = $comment;
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDefault()
+    {
+        return $this->default;
+    }
+
+    /**
+     * @param mixed $default
+     *
+     * @return ClassBase
+     */
+    public function setDefault($default): ClassBase
+    {
+        $this->default = $default;
+        return $this;
+    }
+
+    /**
+     * @param $value
+     *
+     * @return string
+     */
+    public function getValueType($value): string
+    {
+        switch (gettype($value)) {
+            case 'boolean':
+                $value = $value ? 'true' : 'false';
+                break;
+            case 'integer':
+            case 'double':
+                $value = (string)$value;
+                break;
+            case 'string':
+                $value = "'" . $value . "'";
+                break;
+            case 'resource':
+                $value = '{resource}';
+                break;
+            case 'NULL':
+                $value = 'null';
+                break;
+            case 'unknown type':
+                $value = '{unknown}';
+                break;
+            default:
+                break;
+        }
+        return $value;
     }
 }

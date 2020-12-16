@@ -3,7 +3,6 @@
 namespace App\Component\Generate\ClassFile;
 
 use App\Component\Generate\AbstractConfig;
-use Lengbin\Helper\YiiSoft\StringHelper;
 
 class Config extends AbstractConfig
 {
@@ -227,6 +226,11 @@ class Config extends AbstractConfig
         return $this->getClassname();
     }
 
+    /**
+     * @param string $use
+     *
+     * @return $this
+     */
     public function addUse(string $use): Config
     {
         $this->uses[] = $use;
@@ -356,6 +360,7 @@ class Config extends AbstractConfig
      */
     public function getInterface(): bool
     {
+        $this->setImplements([]);
         return $this->interface;
     }
 
@@ -370,21 +375,79 @@ class Config extends AbstractConfig
         return $this;
     }
 
+    /**
+     * @return string
+     */
+    protected function renderUses(): string
+    {
+        $data = [];
+        if (!empty($this->getUses())) {
+            foreach ($this->getUses() as $use) {
+                $data[] = "use {$use};";
+            }
+        }
+        return implode("\n", $data);
+    }
 
     /**
-     * @param string $str
-     * @param array  $comments
+     * @param array $comments
+     * @param int   $level
      *
      * @return string
      */
-    protected function renderComment(string $str, array $comments = []): string
+    protected function renderComment(array $comments = [], int $level = 0): string
     {
-        $str .= "/**\n";
-        foreach ($comments as $comment) {
-            $str .= " * {$comment}\n";
+        $data = [];
+        if (!empty($comments)) {
+            $data[] = "{$this->getSpaces($level)}/**";
+            foreach ($comments as $comment) {
+                $data[] = "{$this->getSpaces($level)} * {$comment}";
+            }
+            $data[] = "{$this->getSpaces($level)} */";
         }
-        $str .= " */\n";
+        return implode("\n", $data);
+    }
+
+    /**
+     * @return string
+     */
+    protected function renderClassname(): string
+    {
+        $str = '';
+        if ($this->getFinal()) {
+            $str .= "final";
+        }
+        if ($this->getAbstract()) {
+            $str .= "abstract";
+        }
+
+        $str .= ($this->getInterface() ? 'interface' : 'class') . " {$this->getClassname()}";
+
+        if (!empty($this->getInheritance())) {
+            $str .= " extends {$this->getInheritance()}";
+        }
+        if (!empty($this->getImplements())) {
+            $implement = implode(', ', $this->getImplements());
+            $str .= " implements {$implement}";
+        }
         return $str;
+    }
+
+    /**
+     * @return string
+     */
+    protected function renderConst(): string
+    {
+        $data = [];
+        if (!empty($this->getConstants())) {
+            foreach ($this->getConstants() as $constant) {
+                if (!empty($constant->getComments())) {
+                    $data[] = $this->renderComment($constant->getComments(), 1);
+                }
+                $data[] = ("{$this->getSpaces()}{$this->getScope($constant)} const " . strtoupper($constant->getName()) . " = " . $constant->getValueType($constant->getDefault()) . ";\n");
+            }
+        }
+        return implode("\n", $data);
     }
 
     /**
@@ -415,36 +478,62 @@ class Config extends AbstractConfig
         return $str;
     }
 
-    protected function renderProperty(string $str): string
+    /**
+     * @return string
+     */
+    protected function renderProperty(): string
     {
+        $data = [];
         if (!empty($this->getProperties())) {
-            // constant
             foreach ($this->getProperties() as $classProperty) {
-                if (!$classProperty->getConst()) {
-                    continue;
+                // if not comment, add default value type
+                if (empty($classProperty->getComments()) && !is_null($classProperty->getDefault())) {
+                    $classProperty->addComment("@var " . gettype($classProperty->getDefault()));
                 }
                 if (!empty($classProperty->getComments())) {
-                    $str = $this->renderComment($str, $classProperty->getComments());
+                    $data[] = $this->renderComment($classProperty->getComments(), 1);
                 }
-                $str .= "{$this->getScope($classProperty)}" . StringHelper::strtoupper($classProperty->getName(), 'utf8') . ";\n";
-            }
-            // property
-            foreach ($this->getProperties() as $classProperty) {
-                if ($classProperty->getConst()) {
-                    continue;
+                $property = "{$this->getSpaces()}{$this->getScope($classProperty)} $" . $classProperty->getName();
+                if (is_null($classProperty->getDefault())) {
+                    $property .= ";";
+                } else {
+                    $property .= (" = " . $classProperty->getValueType($classProperty->getDefault()) . ";");
                 }
-                if (!empty($classProperty->getComments())) {
-                    $str = $this->renderComment($str, $classProperty->getComments());
-                }
-                $str .= "{$this->getScope($classProperty)} $" . $classProperty->getName() . ";\n";
+                $data[] = $property . "\n";
             }
         }
-        return $str;
+        return implode("\n", $data);
     }
 
-    protected function renderMethod(string $str): string
+    /**
+     * @return string
+     */
+    protected function renderMethod(): string
     {
-        return $str;
+        $data = [];
+        return implode("\n", $data);
+    }
+
+    /**
+     * @return string
+     */
+    protected function renderClass(): string
+    {
+        return implode("\n", array_filter([
+            // class comment
+            !empty($this->getComments()) ? $this->renderComment($this->getComments()) : "",
+            // classname
+            $this->renderClassname(),
+            '{',
+            // const
+            $this->renderConst(),
+            // properties
+            $this->renderProperty(),
+            // methods
+//            $str = $this->renderMethod($str),
+            '}',
+        ]));
+
     }
 
     /**
@@ -452,56 +541,16 @@ class Config extends AbstractConfig
      */
     public function getContent(): string
     {
-        // <?php
-        $str = "<?php\n\ndeclare(strict_types=1);\n\n";
-
-        // namespace
-        if (!empty($this->getNamespace())) {
-            $str .= "namespace {$this->getNamespace()};\n\n";
-        }
-
-        // uses
-        if (!empty($this->getUses())) {
-            foreach ($this->getUses() as $use) {
-                $str .= "use {$use};\n";
-            }
-            $str .= "\n";
-        }
-
-        // class comment
-        if (!empty($this->getComments())) {
-            $str = $this->renderComment($str, $this->getComments());
-        }
-        // class
-
-        //
-        if ($this->getFinal()) {
-
-        }
-
-        if ($this->getAbstract()) {
-
-        }
-
-        $str .= "class {$this->getClassname()}";
-        if (!empty($this->getInheritance())) {
-            $str .= " extends {$this->getInheritance()}";
-        }
-        if (!empty($this->getImplements())) {
-            $implement = implode(', ', $this->getImplements());
-            $str .= " implements {$implement}";
-        }
-
-        $str .= "\n{\n";
-        if (empty($this->getProperties()) && empty($this->getMethods())) {
-            $str .= "{$this->getSpaces()}\n";
-        } else {
-            // properties
-            $str = $this->renderProperty($str);
-            // methods
-            $str = $this->renderMethod($str);
-        }
-        $str .= "}\n";
-        return $str;
+        return implode("\n\n", array_filter([
+            // <?php
+            "<?php",
+            "declare(strict_types=1);",
+            // namespace
+            !empty($this->getNamespace()) ? "namespace {$this->getNamespace()};" : "",
+            // uses
+            $this->renderUses(),
+            // class
+            $this->renderClass(),
+        ]));
     }
 }

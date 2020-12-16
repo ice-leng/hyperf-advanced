@@ -32,7 +32,8 @@
         "lengbin/hyperf-common": "dev-master",
         "lengbin/hyperf-error-code": "dev-main",
         "daodao97/apidog": "^1.5",
-        "lengbin/hyperf-yii-rbac": "9999999-dev"
+        "lengbin/hyperf-yii-rbac": "9999999-dev",
+        "ext-json": "*"
     },
     "require-dev": {
         "swoole/ide-helper": "^4.4",

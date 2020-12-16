@@ -26,7 +26,6 @@ use Hyperf\HttpServer\Annotation\Controller;
  */
 class TestController extends BaseController
 {
-
     /**
      * @Inject()
      * @var AdminService
@@ -220,12 +219,28 @@ class TestController extends BaseController
             ],
             'inheritance' => 'BaseController',
             'constants'   => [
-                ['name' => 'success', 'default' => 0],
+                [
+                    'name'     => 'success',
+                    'default'  => 1,
+                    'comments' => [
+                        '成功',
+                        '@Message("成功")',
+                    ],
+                ],
+                [
+                    'name'     => 'fail',
+                    'default'  => "2",
+                    'comments' => [
+                        '失败',
+                        '@Message("失败")',
+                    ],
+                ],
             ],
             'properties'  => [
                 ["name" => 'abc', 'default' => 1.3],
                 ["name" => 'abc2', 'default' => "hello world"],
                 ["name" => 'abc3', 'default' => true],
+                ["name" => 'abc4'],
             ],
         ];
 
