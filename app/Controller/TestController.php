@@ -7,6 +7,7 @@ use App\Component\AntDesign\Constant\Type\ValueType;
 use App\Component\AntDesign\Table;
 use App\Component\Generate\ClassFile\Config;
 use App\Component\Generate\Generate;
+use App\Constant\Status\AdminStatus;
 use App\Service\Admin\AdminService;
 use Hyperf\Di\Annotation\Inject;
 use Hyperf\HttpServer\Annotation\GetMapping;
@@ -218,10 +219,14 @@ class TestController extends BaseController
                 '@RouterAuthAnnotation(isPublic=true)',
             ],
             'inheritance' => 'BaseController',
-//            'properties'  => [
-//                ["name" => 'abc'],
-//                ["name" => 'abc2'],
-//            ],
+            'constants'   => [
+                ['name' => 'success', 'default' => 0],
+            ],
+            'properties'  => [
+                ["name" => 'abc', 'default' => 1.3],
+                ["name" => 'abc2', 'default' => "hello world"],
+                ["name" => 'abc3', 'default' => true],
+            ],
         ];
 
         $generate = new Generate();

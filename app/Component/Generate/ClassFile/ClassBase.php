@@ -40,6 +40,11 @@ class ClassBase extends BaseObject
     protected $name;
 
     /**
+     * @var mixed
+     */
+    protected $default;
+
+    /**
      * @return bool
      */
     public function getStatic(): bool

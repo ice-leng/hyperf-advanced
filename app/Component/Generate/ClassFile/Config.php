@@ -3,9 +3,25 @@
 namespace App\Component\Generate\ClassFile;
 
 use App\Component\Generate\AbstractConfig;
+use Lengbin\Helper\YiiSoft\StringHelper;
 
 class Config extends AbstractConfig
 {
+    /**
+     * @var bool
+     */
+    private $final = false;
+
+    /**
+     * @var bool
+     */
+    private $abstract = false;
+
+    /**
+     * @var bool
+     */
+    private $interface = false;
+
     /**
      * @var ?string
      */
@@ -29,12 +45,17 @@ class Config extends AbstractConfig
     /**
      * @var array
      */
-    private $comments;
+    private $comments = [];
 
     /**
      * @var array
      */
     private $implements = [];
+
+    /**
+     * @var ClassConstant[]
+     */
+    private $constants = [];
 
     /**
      * @var ClassMethod[]
@@ -206,6 +227,150 @@ class Config extends AbstractConfig
         return $this->getClassname();
     }
 
+    public function addUse(string $use): Config
+    {
+        $this->uses[] = $use;
+        return $this;
+    }
+
+    /**
+     * @param string $comment
+     *
+     * @return $this
+     */
+    public function addComment(string $comment): Config
+    {
+        $this->comments[] = $comment;
+        return $this;
+    }
+
+    /**
+     * @param string $implement
+     *
+     * @return $this
+     */
+    public function addImplement(string $implement): Config
+    {
+        $this->implements[] = $implement;
+        return $this;
+    }
+
+    /**
+     * @param ClassMethod $classMethod
+     *
+     * @return $this
+     */
+    public function addMethod(ClassMethod $classMethod): Config
+    {
+        $this->methods[] = $classMethod;
+        return $this;
+    }
+
+    /**
+     * @param ClassProperty $classProperty
+     *
+     * @return $this
+     */
+    public function addProperty(ClassProperty $classProperty): Config
+    {
+        $this->properties[] = $classProperty;
+        return $this;
+    }
+
+    /**
+     * @param ClassConstant $constant
+     *
+     * @return $this
+     */
+    public function addCont(ClassConstant $constant): Config
+    {
+        $this->constants[] = $constant;
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getFinal(): bool
+    {
+        return $this->final;
+    }
+
+    /**
+     * @param bool $final
+     *
+     * @return Config
+     */
+    public function setFinal(bool $final): Config
+    {
+        $this->final = $final;
+        if ($final === true) {
+            $this->setAbstract(false);
+        }
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getAbstract(): bool
+    {
+        return $this->abstract;
+    }
+
+    /**
+     * @param bool $abstract
+     *
+     * @return Config
+     */
+    public function setAbstract(bool $abstract): Config
+    {
+        $this->abstract = $abstract;
+        if ($abstract === true) {
+            $this->setFinal(false);
+        }
+        return $this;
+    }
+
+    /**
+     * @return ClassConstant[]
+     */
+    public function getConstants(): array
+    {
+        return $this->constants;
+    }
+
+    /**
+     * @param ClassConstant[] $constants
+     *
+     * @return Config
+     */
+    public function setConstants(array $constants): Config
+    {
+        $this->constants = $constants;
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getInterface(): bool
+    {
+        return $this->interface;
+    }
+
+    /**
+     * @param bool $interface
+     *
+     * @return Config
+     */
+    public function setInterface(bool $interface): Config
+    {
+        $this->interface = $interface;
+        return $this;
+    }
+
+
     /**
      * @param string $str
      * @param array  $comments
@@ -223,6 +388,8 @@ class Config extends AbstractConfig
     }
 
     /**
+     * 获取 作用域
+     *
      * @param ClassBase $classBase
      *
      * @return string
@@ -259,7 +426,7 @@ class Config extends AbstractConfig
                 if (!empty($classProperty->getComments())) {
                     $str = $this->renderComment($str, $classProperty->getComments());
                 }
-                $str .= "{$this->getScope($classProperty)} $" . $classProperty->getName() . ";\n";
+                $str .= "{$this->getScope($classProperty)}" . StringHelper::strtoupper($classProperty->getName(), 'utf8') . ";\n";
             }
             // property
             foreach ($this->getProperties() as $classProperty) {
@@ -305,8 +472,17 @@ class Config extends AbstractConfig
         if (!empty($this->getComments())) {
             $str = $this->renderComment($str, $this->getComments());
         }
-
         // class
+
+        //
+        if ($this->getFinal()) {
+
+        }
+
+        if ($this->getAbstract()) {
+
+        }
+
         $str .= "class {$this->getClassname()}";
         if (!empty($this->getInheritance())) {
             $str .= " extends {$this->getInheritance()}";
@@ -315,8 +491,8 @@ class Config extends AbstractConfig
             $implement = implode(', ', $this->getImplements());
             $str .= " implements {$implement}";
         }
-        $str .= "\n{\n";
 
+        $str .= "\n{\n";
         if (empty($this->getProperties()) && empty($this->getMethods())) {
             $str .= "{$this->getSpaces()}\n";
         } else {
