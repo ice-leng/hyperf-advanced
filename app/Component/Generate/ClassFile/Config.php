@@ -441,6 +441,10 @@ class Config extends AbstractConfig
         $data = [];
         if (!empty($this->getConstants())) {
             foreach ($this->getConstants() as $constant) {
+                // if not comment, add name
+                if (empty($constant->getComments()) && !is_null($constant->getDefault())) {
+                    $constant->addComment($constant->getName());
+                }
                 if (!empty($constant->getComments())) {
                     $data[] = $this->renderComment($constant->getComments(), 1);
                 }
@@ -511,6 +515,9 @@ class Config extends AbstractConfig
     protected function renderMethod(): string
     {
         $data = [];
+        if (!empty($this->getMethods())) {
+            var_dump($this->getMethods());
+        }
         return implode("\n", $data);
     }
 
@@ -524,6 +531,7 @@ class Config extends AbstractConfig
             !empty($this->getComments()) ? $this->renderComment($this->getComments()) : "",
             // classname
             $this->renderClassname(),
+            // start
             '{',
             // const
             $this->renderConst(),
@@ -531,6 +539,7 @@ class Config extends AbstractConfig
             $this->renderProperty(),
             // methods
             $this->renderMethod(),
+            // end
             '}',
         ]));
 

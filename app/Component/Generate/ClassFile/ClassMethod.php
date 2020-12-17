@@ -15,6 +15,11 @@ class ClassMethod extends ClassBase
     private $params = [];
 
     /**
+     * @var mixed
+     */
+    private $return;
+
+    /**
      * @return bool
      */
     public function getFinal(): bool
@@ -49,18 +54,36 @@ class ClassMethod extends ClassBase
     public function setParams(array $params): ClassMethod
     {
         $this->params = $params;
-        $this->init();
         return $this;
     }
-    public function init()
+
+    /**
+     * @return mixed
+     */
+    public function getReturn()
     {
-        parent::init();
-        if (!empty($this->getParams())) {
-            foreach ($this->getParams() as $params) {
-                $name = '$' . $params->getName();
-                $this->addComment("@param {$params->getType()} {$name}");
-            }
-        }
+        return $this->return;
     }
 
+    /**
+     * @param mixed $return
+     *
+     * @return ClassMethod
+     */
+    public function setReturn($return): ClassMethod
+    {
+        $this->return = $return;
+        return $this;
+    }
+
+    /**
+     * @param ClassParams $params
+     *
+     * @return $this
+     */
+    public function addParams(ClassParams $params): ClassMethod
+    {
+        $this->params[] = $params;
+        return $this;
+    }
 }

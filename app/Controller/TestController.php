@@ -220,20 +220,14 @@ class TestController extends BaseController
             'inheritance' => 'BaseController',
             'constants'   => [
                 [
-                    'name'     => 'success',
-                    'default'  => 1,
-                    'comments' => [
-                        '成功',
-                        '@Message("成功")',
-                    ],
+                    'name'    => 'success',
+                    'default' => 1,
+
                 ],
                 [
-                    'name'     => 'fail',
-                    'default'  => "2",
-                    'comments' => [
-                        '失败',
-                        '@Message("失败")',
-                    ],
+                    'name'    => 'fail',
+                    'default' => "2",
+
                 ],
             ],
             'properties'  => [
@@ -242,6 +236,15 @@ class TestController extends BaseController
                 ["name" => 'abc3', 'default' => true],
                 ["name" => 'abc4'],
             ],
+//            'methods'     => [
+//                [
+//                    "name"   => 'abc',
+//                    'params' => [
+//                        [],
+//                    ],
+//                    'return' => 'int',
+//                ],
+//            ],
         ];
 
         $generate = new Generate();

@@ -40,11 +40,6 @@ class ClassBase extends BaseObject
     protected $name;
 
     /**
-     * @var mixed
-     */
-    protected $default;
-
-    /**
      * @return bool
      */
     public function getStatic(): bool
@@ -178,25 +173,6 @@ class ClassBase extends BaseObject
     public function addComment(string $comment): ClassBase
     {
         $this->comments[] = $comment;
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getDefault()
-    {
-        return $this->default;
-    }
-
-    /**
-     * @param mixed $default
-     *
-     * @return ClassBase
-     */
-    public function setDefault($default): ClassBase
-    {
-        $this->default = $default;
         return $this;
     }
 
