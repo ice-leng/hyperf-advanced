@@ -20,9 +20,9 @@ class ClassProperty extends ClassBase
     /**
      * @param mixed $default
      *
-     * @return ClassBase
+     * @return ClassProperty
      */
-    public function setDefault($default): ClassBase
+    public function setDefault($default): ClassProperty
     {
         $this->default = $default;
         return $this;

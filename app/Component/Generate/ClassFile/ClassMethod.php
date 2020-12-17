@@ -20,6 +20,11 @@ class ClassMethod extends ClassBase
     private $return;
 
     /**
+     * @var ?string
+     */
+    private $content;
+
+    /**
      * @return bool
      */
     public function getFinal(): bool
@@ -86,4 +91,24 @@ class ClassMethod extends ClassBase
         $this->params[] = $params;
         return $this;
     }
+
+    /**
+     * @return string
+     */
+    public function getContent(): string
+    {
+        return $this->content;
+    }
+
+    /**
+     * @param ?string $content
+     *
+     * @return ClassMethod
+     */
+    public function setContent(?string $content): ClassMethod
+    {
+        $this->content = $content;
+        return $this;
+    }
+
 }

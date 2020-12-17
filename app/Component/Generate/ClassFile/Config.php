@@ -516,7 +516,51 @@ class Config extends AbstractConfig
     {
         $data = [];
         if (!empty($this->getMethods())) {
-            var_dump($this->getMethods());
+            foreach ($this->getMethods() as $classMethod) {
+                $params = [];
+                if (!empty($classMethod->getParams())) {
+                    foreach ($classMethod->getParams() as $classParams) {
+                        $classParamName = "$" . $classParams->getName();
+                        if (empty($classParams->getType()) && !empty($classParams->getDefault())) {
+                            $classParams->setType($classMethod->valueType($classParams->getDefault()));
+                        }
+                        $classParam = '';
+                        if (!empty($classParams->getType())) {
+                            $classParam .= "{$classParams->getType()} ";
+                        } else {
+                            $classParams->setType("mixed");
+                        }
+                        $classParam .= $classParamName;
+                        if (!empty($classParams->getDefault())) {
+                            $classParam .= (" = " . $classMethod->getValueType($classParams->getDefault()));
+                        }
+                        $params[] = $classParam;
+                        $classMethod->addComment("@Params {$classParams->getType()} {$classParamName} {$classParams->getComment()}");
+                    }
+                }
+                $param = implode(", ", $params);
+
+                $method = $this->getSpaces();
+                if ($classMethod->getFinal()) {
+                    $method .= "final";
+                }
+                $method .= "{$this->getScope($classMethod)} function {$classMethod->getName()}({$param})";
+                if (!empty($classMethod->getReturn())) {
+                    $method .= ": {$classMethod->getReturn()}";
+                } else {
+                    $classMethod->setReturn('mixed');
+                }
+                $classMethod->addComment("@return {$classMethod->getReturn()}");
+
+                $data[] = $this->renderComment($classMethod->getComments(), 1);
+                $data[] = $method;
+                $data[] = "{$this->getSpaces()}{";
+                if (empty($classMethod->getContent())) {
+                    $classMethod->setContent("{$this->getSpaces(2)}// TODO: Implement {$classMethod->getName()}() method.");
+                }
+                $data[] = $classMethod->getContent();
+                $data[] = "{$this->getSpaces()}}";
+            }
         }
         return implode("\n", $data);
     }

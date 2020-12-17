@@ -20,9 +20,9 @@ class ClassConstant extends ClassBase
     /**
      * @param mixed $default
      *
-     * @return ClassBase
+     * @return ClassConstant
      */
-    public function setDefault($default): ClassBase
+    public function setDefault($default): ClassConstant
     {
         $this->default = $default;
         return $this;

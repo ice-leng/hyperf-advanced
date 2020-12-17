@@ -176,6 +176,27 @@ class ClassBase extends BaseObject
         return $this;
     }
 
+    public function valueType($value): string
+    {
+        switch (gettype($value)) {
+            case 'boolean':
+                $value = 'bool';
+                break;
+            case 'integer':
+                $value = 'int';
+                break;
+            case 'double':
+                $value = 'float';
+                break;
+            case 'NULL':
+                $value = 'null';
+                break;
+            default:
+                break;
+        }
+        return $value;
+    }
+
     /**
      * @param $value
      *

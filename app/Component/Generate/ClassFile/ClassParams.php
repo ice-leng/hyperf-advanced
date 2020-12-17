@@ -22,6 +22,30 @@ class ClassParams extends BaseObject
     private $comment = '';
 
     /**
+     * @var mixed
+     */
+    private $default;
+
+    /**
+     * @return mixed
+     */
+    public function getDefault()
+    {
+        return $this->default;
+    }
+
+    /**
+     * @param mixed $default
+     *
+     * @return ClassParams
+     */
+    public function setDefault($default): ClassParams
+    {
+        $this->default = $default;
+        return $this;
+    }
+
+    /**
      * @return string
      */
     public function getName(): string

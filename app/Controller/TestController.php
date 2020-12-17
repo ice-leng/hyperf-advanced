@@ -236,21 +236,25 @@ class TestController extends BaseController
                 ["name" => 'abc3', 'default' => true],
                 ["name" => 'abc4'],
             ],
-//            'methods'     => [
-//                [
-//                    "name"   => 'abc',
-//                    'params' => [
-//                        [],
-//                    ],
-//                    'return' => 'int',
-//                ],
-//            ],
+            'methods'     => [
+                [
+                    "name"   => 'abc',
+                    'params' => [
+                        ['name' => 'a', 'type' => 'int', 'default' => 1, 'comment' => '左边'],
+                        ['name' => 'b', 'default' => 2, 'comment' => '中间'],
+                        ['name' => 'c', 'type' => 'int'],
+                        ['name' => 'd', 'comment' => '右边' ],
+                    ],
+                    'return' => 'int',
+                    'content' => '',
+                ],
+            ],
         ];
 
         $generate = new Generate();
         $generate->setPath(BASE_PATH . '/app/Controller');
-        $generate->setConfig(new Config($data));
-
-        return $this->success(['a' => $generate->output('php')]);
+        $config = new Config($data);
+        $generate->setConfig($config);
+        return $this->success(['a' => $generate->output('php'), 'b' => $config->__toObjectString(), 'c' => $config->__getClassname()]);
     }
 }
