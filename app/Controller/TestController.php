@@ -238,14 +238,14 @@ class TestController extends BaseController
             ],
             'methods'     => [
                 [
-                    "name"   => 'abc',
-                    'params' => [
+                    "name"    => 'abc',
+                    'params'  => [
                         ['name' => 'a', 'type' => 'int', 'default' => 1, 'comment' => '左边'],
                         ['name' => 'b', 'default' => 2, 'comment' => '中间'],
                         ['name' => 'c', 'type' => 'int'],
-                        ['name' => 'd', 'comment' => '右边' ],
+                        ['name' => 'd', 'comment' => '右边'],
                     ],
-                    'return' => 'int',
+                    'return'  => 'int',
                     'content' => '',
                 ],
             ],

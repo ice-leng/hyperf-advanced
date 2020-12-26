@@ -535,7 +535,7 @@ class Config extends AbstractConfig
                             $classParam .= (" = " . $classMethod->getValueType($classParams->getDefault()));
                         }
                         $params[] = $classParam;
-                        $classMethod->addComment("@Params {$classParams->getType()} {$classParamName} {$classParams->getComment()}");
+                        $classMethod->addComment("@param {$classParams->getType()} {$classParamName} {$classParams->getComment()}");
                     }
                 }
                 $param = implode(", ", $params);
