@@ -10,4 +10,4 @@
 
 php bin/hyperf.php gen:error-code
 
-#php bin/hyperf.php start
+# php -d swoole.use_shortname=Off -e bin/hyperf.php start
