@@ -77,9 +77,9 @@ class ClassConfig extends AbstractConfig
     /**
      * @param string $namespace
      *
-     * @return Config
+     * @return ClassConfig
      */
-    public function setNamespace(string $namespace): Config
+    public function setNamespace(string $namespace): ClassConfig
     {
         $this->namespace = $namespace;
         return $this;
@@ -96,9 +96,9 @@ class ClassConfig extends AbstractConfig
     /**
      * @param array $uses
      *
-     * @return Config
+     * @return ClassConfig
      */
-    public function setUses(array $uses): Config
+    public function setUses(array $uses): ClassConfig
     {
         $this->uses = $uses;
         return $this;
@@ -115,9 +115,9 @@ class ClassConfig extends AbstractConfig
     /**
      * @param string $classname
      *
-     * @return Config
+     * @return ClassConfig
      */
-    public function setClassname(string $classname): Config
+    public function setClassname(string $classname): ClassConfig
     {
         $this->classname = $classname;
         return $this;
@@ -134,9 +134,9 @@ class ClassConfig extends AbstractConfig
     /**
      * @param string $inheritance
      *
-     * @return Config
+     * @return ClassConfig
      */
-    public function setInheritance(string $inheritance): Config
+    public function setInheritance(string $inheritance): ClassConfig
     {
         $this->inheritance = $inheritance;
         return $this;
@@ -153,9 +153,9 @@ class ClassConfig extends AbstractConfig
     /**
      * @param array $implements
      *
-     * @return Config
+     * @return ClassConfig
      */
-    public function setImplements(array $implements): Config
+    public function setImplements(array $implements): ClassConfig
     {
         $this->implements = $implements;
         return $this;
@@ -172,9 +172,9 @@ class ClassConfig extends AbstractConfig
     /**
      * @param ClassMethod[] $methods
      *
-     * @return Config
+     * @return ClassConfig
      */
-    public function setMethods(array $methods): Config
+    public function setMethods(array $methods): ClassConfig
     {
         $this->methods = $methods;
         return $this;
@@ -191,9 +191,9 @@ class ClassConfig extends AbstractConfig
     /**
      * @param ClassProperty[] $properties
      *
-     * @return Config
+     * @return ClassConfig
      */
-    public function setProperties(array $properties): Config
+    public function setProperties(array $properties): ClassConfig
     {
         $this->properties = $properties;
         return $this;
@@ -210,9 +210,9 @@ class ClassConfig extends AbstractConfig
     /**
      * @param array $comments
      *
-     * @return Config
+     * @return ClassConfig
      */
-    public function setComments(array $comments): Config
+    public function setComments(array $comments): ClassConfig
     {
         $this->comments = $comments;
         return $this;
@@ -229,9 +229,9 @@ class ClassConfig extends AbstractConfig
     /**
      * @param string $use
      *
-     * @return $this
+     * @return ClassConfig
      */
-    public function addUse(string $use): Config
+    public function addUse(string $use): ClassConfig
     {
         $this->uses[] = $use;
         return $this;
@@ -240,9 +240,9 @@ class ClassConfig extends AbstractConfig
     /**
      * @param string $comment
      *
-     * @return $this
+     * @return ClassConfig
      */
-    public function addComment(string $comment): Config
+    public function addComment(string $comment): ClassConfig
     {
         $this->comments[] = $comment;
         return $this;
@@ -251,9 +251,9 @@ class ClassConfig extends AbstractConfig
     /**
      * @param string $implement
      *
-     * @return $this
+     * @return ClassConfig
      */
-    public function addImplement(string $implement): Config
+    public function addImplement(string $implement): ClassConfig
     {
         $this->implements[] = $implement;
         return $this;
@@ -262,9 +262,9 @@ class ClassConfig extends AbstractConfig
     /**
      * @param ClassMethod $classMethod
      *
-     * @return $this
+     * @return ClassConfig
      */
-    public function addMethod(ClassMethod $classMethod): Config
+    public function addMethod(ClassMethod $classMethod): ClassConfig
     {
         $this->methods[] = $classMethod;
         return $this;
@@ -273,9 +273,9 @@ class ClassConfig extends AbstractConfig
     /**
      * @param ClassProperty $classProperty
      *
-     * @return $this
+     * @return ClassConfig
      */
-    public function addProperty(ClassProperty $classProperty): Config
+    public function addProperty(ClassProperty $classProperty): ClassConfig
     {
         $this->properties[] = $classProperty;
         return $this;
@@ -284,9 +284,9 @@ class ClassConfig extends AbstractConfig
     /**
      * @param ClassConstant $constant
      *
-     * @return $this
+     * @return ClassConfig
      */
-    public function addCont(ClassConstant $constant): Config
+    public function addCont(ClassConstant $constant): ClassConfig
     {
         $this->constants[] = $constant;
         return $this;
@@ -303,9 +303,9 @@ class ClassConfig extends AbstractConfig
     /**
      * @param bool $final
      *
-     * @return Config
+     * @return ClassConfig
      */
-    public function setFinal(bool $final): Config
+    public function setFinal(bool $final): ClassConfig
     {
         $this->final = $final;
         if ($final === true) {
@@ -325,9 +325,9 @@ class ClassConfig extends AbstractConfig
     /**
      * @param bool $abstract
      *
-     * @return Config
+     * @return ClassConfig
      */
-    public function setAbstract(bool $abstract): Config
+    public function setAbstract(bool $abstract): ClassConfig
     {
         $this->abstract = $abstract;
         if ($abstract === true) {
@@ -347,9 +347,9 @@ class ClassConfig extends AbstractConfig
     /**
      * @param ClassConstant[] $constants
      *
-     * @return Config
+     * @return ClassConfig
      */
-    public function setConstants(array $constants): Config
+    public function setConstants(array $constants): ClassConfig
     {
         $this->constants = $constants;
         return $this;
@@ -367,9 +367,9 @@ class ClassConfig extends AbstractConfig
     /**
      * @param bool $interface
      *
-     * @return Config
+     * @return ClassConfig
      */
-    public function setInterface(bool $interface): Config
+    public function setInterface(bool $interface): ClassConfig
     {
         $this->interface = $interface;
         return $this;

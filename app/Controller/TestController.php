@@ -5,7 +5,7 @@ namespace App\Controller;
 use App\Component\AntDesign\Constant\Type\FormDateType;
 use App\Component\AntDesign\Constant\Type\ValueType;
 use App\Component\AntDesign\Table;
-use App\Component\Generate\ClassFile\Config;
+use App\Component\Generate\ClassFile\ClassConfig;
 use App\Component\Generate\Generate;
 use App\Constant\Status\AdminStatus;
 use App\Service\Admin\AdminService;
@@ -198,6 +198,37 @@ class TestController extends BaseController
         return $this->success($this->request->post());
     }
 
+    protected function generateCurd(array $params): array
+    {
+        $params = [
+            'controller' => 'app/Controller/AdminController',
+            'model'      => 'app/Model/Ad',
+            'actions'    => [],
+        ];
+        return [
+            'namespace'   => 'App\Controller',
+            'classname'   => 'AdminController',
+            'uses'        => [
+                'Hyperf\HttpServer\Annotation\Controller',
+                'Lengbin\Hyperf\Auth\RouterAuthAnnotation',
+                'Lengbin\Hyperf\Common\Framework\BaseController',
+            ],
+            'comments'    => [
+                'Class AdminController',
+                '@package App\Controller',
+                '@Controller()',
+                '@RouterAuthAnnotation(isPublic=true)',
+            ],
+            'inheritance' => 'BaseController',
+            'properties'  => [
+
+            ],
+            'methods'     => [
+
+            ],
+        ];
+    }
+
     /**
      * @GetMapping(path="/generate")
      */
@@ -253,7 +284,7 @@ class TestController extends BaseController
 
         $generate = new Generate();
         $generate->setPath(BASE_PATH . '/app/Controller');
-        $config = new Config($data);
+        $config = new ClassConfig($data);
         $generate->setConfig($config);
         return $this->success(['a' => $generate->output('php'), 'b' => $config->__toObjectString(), 'c' => $config->__getClassname()]);
     }
