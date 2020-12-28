@@ -4,7 +4,7 @@ namespace App\Component\Generate\ClassFile;
 
 use App\Component\Generate\AbstractConfig;
 
-class Config extends AbstractConfig
+class ClassConfig extends AbstractConfig
 {
     /**
      * @var bool
