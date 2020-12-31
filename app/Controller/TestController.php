@@ -10,7 +10,7 @@ use App\Component\Generate\Generate;
 use App\Constant\Status\AdminStatus;
 use App\Entity\GenerateCodeEntity;
 use App\Service\Admin\AdminService;
-use App\Service\Generate\GenerateService;
+use App\Service\System\GenerateService;
 use Hyperf\Di\Annotation\Inject;
 use Hyperf\HttpServer\Annotation\GetMapping;
 use Hyperf\HttpServer\Annotation\PostMapping;
@@ -276,24 +276,28 @@ class TestController extends BaseController
                     'type'   => 'action',
                     'target' => 'button',
                     'path'   => 'remove',
+                    'method' => 'post',
                 ],
                 [
                     'name'   => '创建',
                     'type'   => 'action',
                     'target' => 'button',
                     'path'   => 'add',
+                    'method' => 'post',
                 ],
                 [
                     'name'   => '编辑',
                     'type'   => 'operation',
                     'target' => 'link',
                     'path'   => 'detail',
+                    'method' => 'post',
                 ],
                 [
                     'name'   => '删除',
                     'type'   => 'operation',
                     'target' => 'link',
                     'path'   => 'remove',
+                    'method' => 'post',
                 ],
             ],
             'list'       => [

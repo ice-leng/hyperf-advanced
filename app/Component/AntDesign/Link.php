@@ -3,6 +3,7 @@
 namespace App\Component\AntDesign;
 
 use App\Component\AntDesign\Constant\Status\ValueEnumTypeStatus;
+use App\Component\AntDesign\Constant\Type\FormMethod;
 use App\Component\AntDesign\Constant\Type\LinkTarget;
 use App\Component\AntDesign\Constant\Type\LinkType;
 use Lengbin\Common\Component\BaseObject;
@@ -36,6 +37,11 @@ class Link extends BaseObject
      * @var ValueEnumTypeStatus
      */
     private $status;
+
+    /**
+     * @var FormMethod
+     */
+    private $method;
 
     /**
      * @return string

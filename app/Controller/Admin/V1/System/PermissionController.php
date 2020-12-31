@@ -3,49 +3,49 @@
 namespace App\Controller\Admin\V1\System;
 
 use App\Controller\Controller;
-use App\Service\System\MenuService;
+use App\Service\System\PermissionService;
 use Hyperf\Di\Annotation\Inject;
 
-class MenuController extends Controller
+class PermissionController extends Controller
 {
     /**
      * @Inject()
-     * @var MenuService
+     * @var PermissionService
      */
-    protected $menuService;
+    protected $permissionService;
 
     public function list()
     {
         $params = $this->getValidateData();
-        $data = $this->menuService->getList($params);
+        $data = $this->permissionService->getList($params);
         return $this->success($data);
     }
 
     public function create()
     {
         $params = $this->getValidateData();
-        $this->menuService->create($params);
+        $this->permissionService->create($params);
         return $this->success([]);
     }
 
     public function update()
     {
         $params = $this->getValidateData();
-        $this->menuService->update($params);
+        $this->permissionService->update($params);
         return $this->success([]);
     }
 
     public function detail()
     {
         $params = $this->getValidateData();
-        $this->menuService->detail($params);
+        $this->permissionService->detail($params);
         return $this->success([]);
     }
 
     public function remove()
     {
         $params = $this->getValidateData();
-        $this->menuService->remove($params);
+        $this->permissionService->remove($params);
         return $this->success([]);
     }
 }

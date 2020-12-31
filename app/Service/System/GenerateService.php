@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Service\Generate;
+namespace App\Service\System;
 
 use App\Component\AntDesign\Link;
 use App\Entity\GenerateCodeEntity;
-use Hyperf\Utils\Str;
 use Lengbin\Helper\YiiSoft\StringHelper;
 use Lengbin\Hyperf\Common\Component\Generate\Model\GenerateModel;
 use Lengbin\Hyperf\Common\Framework\BaseService;
