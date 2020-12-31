@@ -35,11 +35,6 @@ class Table extends BaseObject
     public $pageConfig;
 
     /**
-     * @var array
-     */
-    public $search;
-
-    /**
      * @var Form[]
      */
     public $form;

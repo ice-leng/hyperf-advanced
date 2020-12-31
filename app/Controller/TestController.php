@@ -8,7 +8,9 @@ use App\Component\AntDesign\Table;
 use App\Component\Generate\ClassFile\ClassConfig;
 use App\Component\Generate\Generate;
 use App\Constant\Status\AdminStatus;
+use App\Entity\GenerateCodeEntity;
 use App\Service\Admin\AdminService;
+use App\Service\Generate\GenerateService;
 use Hyperf\Di\Annotation\Inject;
 use Hyperf\HttpServer\Annotation\GetMapping;
 use Hyperf\HttpServer\Annotation\PostMapping;
@@ -31,6 +33,12 @@ class TestController extends BaseController
      * @var AdminService
      */
     protected $adminService;
+
+    /**
+     * @Inject()
+     * @var GenerateService
+     */
+    protected $generateService;
 
     /**
      * @GetMapping(path="/init")
@@ -198,94 +206,108 @@ class TestController extends BaseController
         return $this->success($this->request->post());
     }
 
-    protected function generateCurd(array $params): array
-    {
-        $params = [
-            'controller' => 'app/Controller/AdminController',
-            'model'      => 'app/Model/Ad',
-            'actions'    => [],
-        ];
-        return [
-            'namespace'   => 'App\Controller',
-            'classname'   => 'AdminController',
-            'uses'        => [
-                'Hyperf\HttpServer\Annotation\Controller',
-                'Lengbin\Hyperf\Auth\RouterAuthAnnotation',
-                'Lengbin\Hyperf\Common\Framework\BaseController',
-            ],
-            'comments'    => [
-                'Class AdminController',
-                '@package App\Controller',
-                '@Controller()',
-                '@RouterAuthAnnotation(isPublic=true)',
-            ],
-            'inheritance' => 'BaseController',
-            'properties'  => [
-
-            ],
-            'methods'     => [
-
-            ],
-        ];
-    }
-
     /**
      * @GetMapping(path="/generate")
      */
     public function generate()
     {
-        $data = [
-            'namespace'   => 'App\Controller',
-            'classname'   => 'AdminController',
-            'uses'        => [
-                'Hyperf\HttpServer\Annotation\Controller',
-                'Lengbin\Hyperf\Auth\RouterAuthAnnotation',
-                'Lengbin\Hyperf\Common\Framework\BaseController',
-            ],
-            'comments'    => [
-                'Class AdminController',
-                '@package App\Controller',
-                '@Controller()',
-                '@RouterAuthAnnotation(isPublic=true)',
-            ],
-            'inheritance' => 'BaseController',
-            'constants'   => [
-                [
-                    'name'    => 'success',
-                    'default' => 1,
+//        $data = [
+//            'namespace'   => 'App\Controller',
+//            'classname'   => 'AdminController',
+//            'uses'        => [
+//                'Hyperf\HttpServer\Annotation\Controller',
+//                'Lengbin\Hyperf\Auth\RouterAuthAnnotation',
+//                'Lengbin\Hyperf\Common\Framework\BaseController',
+//            ],
+//            'comments'    => [
+//                'Class AdminController',
+//                '@package App\Controller',
+//                '@Controller()',
+//                '@RouterAuthAnnotation(isPublic=true)',
+//            ],
+//            'inheritance' => 'BaseController',
+//            'constants'   => [
+//                [
+//                    'name'    => 'success',
+//                    'default' => 1,
+//
+//                ],
+//                [
+//                    'name'    => 'fail',
+//                    'default' => "2",
+//
+//                ],
+//            ],
+//            'properties'  => [
+//                ["name" => 'abc', 'default' => 1.3],
+//                ["name" => 'abc2', 'default' => "hello world"],
+//                ["name" => 'abc3', 'default' => true],
+//                ["name" => 'abc4'],
+//            ],
+//            'methods'     => [
+//                [
+//                    "name"    => 'abc',
+//                    'params'  => [
+//                        ['name' => 'a', 'type' => 'int', 'default' => 1, 'comment' => '左边'],
+//                        ['name' => 'b', 'default' => 2, 'comment' => '中间'],
+//                        ['name' => 'c', 'type' => 'int'],
+//                        ['name' => 'd', 'comment' => '右边'],
+//                    ],
+//                    'return'  => 'int',
+//                    'content' => '',
+//                ],
+//            ],
+//        ];
+//        $generate = new Generate();
+//        $generate->setPath(BASE_PATH . '/app/Controller');
+//        $config = new ClassConfig($data);
+//        $generate->setConfig($config);
+//        return $this->success(['a' => $generate->output('php'), 'b' => $config->__toObjectString(), 'c' => $config->__getClassname()]);
+//
 
+        $params = [
+            'controller' => 'app/Controller/AdController',
+            'model'      => 'app/Model/Ad',
+            'pool'       => 'default',
+            'service'    => 'app/Service/AdService',
+            'actions'    => [
+                [
+                    'name'   => '批量删除',
+                    'type'   => 'action',
+                    'target' => 'button',
+                    'path'   => 'remove',
                 ],
                 [
-                    'name'    => 'fail',
-                    'default' => "2",
+                    'name'   => '创建',
+                    'type'   => 'action',
+                    'target' => 'button',
+                    'path'   => 'add',
+                ],
+                [
+                    'name'   => '编辑',
+                    'type'   => 'operation',
+                    'target' => 'link',
+                    'path'   => 'detail',
+                ],
+                [
+                    'name'   => '删除',
+                    'type'   => 'operation',
+                    'target' => 'link',
+                    'path'   => 'remove',
+                ],
+            ],
+            'list'       => [
 
-                ],
             ],
-            'properties'  => [
-                ["name" => 'abc', 'default' => 1.3],
-                ["name" => 'abc2', 'default' => "hello world"],
-                ["name" => 'abc3', 'default' => true],
-                ["name" => 'abc4'],
+            'search'     => [
+
             ],
-            'methods'     => [
-                [
-                    "name"    => 'abc',
-                    'params'  => [
-                        ['name' => 'a', 'type' => 'int', 'default' => 1, 'comment' => '左边'],
-                        ['name' => 'b', 'default' => 2, 'comment' => '中间'],
-                        ['name' => 'c', 'type' => 'int'],
-                        ['name' => 'd', 'comment' => '右边'],
-                    ],
-                    'return'  => 'int',
-                    'content' => '',
-                ],
+            'form'       => [
+
             ],
         ];
-
-        $generate = new Generate();
-        $generate->setPath(BASE_PATH . '/app/Controller');
-        $config = new ClassConfig($data);
-        $generate->setConfig($config);
-        return $this->success(['a' => $generate->output('php'), 'b' => $config->__toObjectString(), 'c' => $config->__getClassname()]);
+        $generateCodeEntity = new GenerateCodeEntity($params);
+        $this->generateService->file($generateCodeEntity);
+        return $this->success($generateCodeEntity->toArray());
     }
 }

@@ -84,9 +84,9 @@ class Column extends BaseObject
     /**
      * @param bool $copyable
      *
-     * @return BaseColumn
+     * @return Column
      */
-    public function setCopyable(bool $copyable): BaseColumn
+    public function setCopyable(bool $copyable): Column
     {
         $this->copyable = $copyable;
         return $this;
@@ -103,9 +103,9 @@ class Column extends BaseObject
     /**
      * @param bool $ellipsis
      *
-     * @return BaseColumn
+     * @return Column
      */
-    public function setEllipsis(bool $ellipsis): BaseColumn
+    public function setEllipsis(bool $ellipsis): Column
     {
         $this->ellipsis = $ellipsis;
         return $this;
