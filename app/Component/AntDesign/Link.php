@@ -137,4 +137,23 @@ class Link extends BaseObject
         $this->status = $status;
         return $this;
     }
+
+    /**
+     * @return FormMethod
+     */
+    public function getMethod(): FormMethod
+    {
+        return $this->method;
+    }
+
+    /**
+     * @param FormMethod $method
+     *
+     * @return Link
+     */
+    public function setMethod(FormMethod $method): Link
+    {
+        $this->method = $method;
+        return $this;
+    }
 }

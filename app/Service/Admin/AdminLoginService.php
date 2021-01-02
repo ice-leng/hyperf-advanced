@@ -27,7 +27,7 @@ class AdminLoginService extends BaseService
      *
      * @param Admin|null $admin
      */
-    protected function checkAdminStatus($admin): void
+    protected function checkAdminStatus(?Admin $admin): void
     {
         if (StringHelper::isEmpty($admin) || $admin->status === AdminStatus::FROZEN) {
             throw new BusinessException(AdminError::ERROR_ADMIN_FREEZE);

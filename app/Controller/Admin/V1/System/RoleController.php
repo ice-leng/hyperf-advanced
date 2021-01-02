@@ -3,7 +3,7 @@
 namespace App\Controller\Admin\V1\System;
 
 use App\Controller\Controller;
-use App\Service\System\RoleService;
+use App\Service\System\Manager\RoleService;
 use Hyperf\Di\Annotation\Inject;
 
 class RoleController extends Controller

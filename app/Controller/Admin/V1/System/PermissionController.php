@@ -3,7 +3,7 @@
 namespace App\Controller\Admin\V1\System;
 
 use App\Controller\Controller;
-use App\Service\System\PermissionService;
+use App\Service\System\Manager\PermissionService;
 use Hyperf\Di\Annotation\Inject;
 
 class PermissionController extends Controller
