@@ -2,10 +2,31 @@
 
 namespace App\Service\System\Manager;
 
+use App\Constant\Errors\System\MenuError;
 use Lengbin\Hyperf\Common\Entity\PageEntity;
+use Lengbin\Hyperf\Common\Exception\BusinessException;
+use Lengbin\YiiSoft\Rbac\Menu;
+use Throwable;
 
 class MenuService extends ManagerService
 {
+
+    /**
+     * @param array $params
+     *
+     * @return array
+     */
+    public function getMenus(array $params): array
+    {
+        $role = $params['role'] ?? '';
+        $menus = $this->manager->getMenus($role);
+        if (empty($params['pid'])) {
+            $params['pid'] = '';
+        }
+        return array_filter($menus, function ($menu) use ($params) {
+            return $menu->getPid() === $params['pid'];
+        });
+    }
 
     /**
      * @param array           $params
@@ -16,7 +37,100 @@ class MenuService extends ManagerService
      */
     public function getList(array $params = [], array $field = ['*'], ?PageEntity $pageEntity = null): array
     {
-        $menus = $this->manager->getMenus();
-        return $this->pageByArray($menus, $pageEntity);
+        $menus = $this->getMenus($params);
+        $results = $this->pageByArray($menus, $pageEntity);
+        return $this->toArray($results, function ($result) {
+            $result = $result->getAttributes();
+            $result['create_at'] = date('Y-m-d H:i:s', $result['created_at']);
+            $result['update_at'] = date('Y-m-d H:i:s', $result['updated_at']);
+            return $result;
+        });
+    }
+
+    /**
+     * @param array $params
+     *
+     * @return Menu
+     */
+    protected function populateMenu(array $params): Menu
+    {
+        return (new Menu($params['name']))->withPid($params['pid'])
+            ->withIcon($params['icon'])
+            ->withPath($params['path'])
+            ->withSort($params['sort'])
+            ->withTemplate($params['template'])
+            ->withRole($params['role']);
+    }
+
+    /**
+     * @param array $params
+     *
+     * @return array
+     */
+    public function create(array $params): array
+    {
+        try {
+            $menu = $this->populateMenu($params);
+            $this->manager->add($menu);
+            return $params;
+        } catch (Throwable $exception) {
+            throw new BusinessException(MenuError::ERROR_MENU_CREATE_FAIL);
+        }
+    }
+
+    /**
+     * @param array $params
+     *
+     * @return array
+     */
+    public function update(array $params): array
+    {
+        try {
+            $menu = $this->populateMenu($params);
+            $this->manager->update($params['name'], $menu);
+            return $params;
+        } catch (Throwable $exception) {
+            throw new BusinessException(MenuError::ERROR_MENU_UPDATE_FAIL);
+        }
+    }
+
+    public function findOne(string $name): Menu
+    {
+        $menu = $this->manager->getMenu($name);
+        if (!$menu) {
+            throw new BusinessException(MenuError::ERROR_MENU_NOT_FOUND);
+        }
+        return $menu;
+    }
+
+    /**
+     * @param array          $params
+     * @param array|string[] $field
+     *
+     * @return array
+     */
+    public function detail(array $params, array $field = ['*']): array
+    {
+        $menu = $this->findOne($params['name']);
+        $result = $menu->getAttributes();
+        $result['create_at'] = date('Y-m-d H:i:s', $result['created_at']);
+        $result['update_at'] = date('Y-m-d H:i:s', $result['updated_at']);
+        return $result;
+    }
+
+    /**
+     * @param array $params
+     *
+     * @return int
+     */
+    public function remove(array $params): int
+    {
+        try {
+            $menu = $this->findOne($params['name']);
+            $this->manager->remove($menu);
+            return 1;
+        } catch (Throwable $exception) {
+            throw new BusinessException(MenuError::ERROR_MENU_REMOVE_FAIL);
+        }
     }
 }

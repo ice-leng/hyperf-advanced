@@ -39,6 +39,26 @@ class Error extends BaseEnum
    const ERROR_COMMENTERRORCODE_INVALID_TOKEN = 'F-000-000-403';
    
     /**
+     * @Message("菜单不存在")
+     */
+   const ERROR_SYSTEM_MENUERROR_ERROR_MENU_NOT_FOUND = 'B-001-002-001';
+   
+    /**
+     * @Message("菜单创建失败")
+     */
+   const ERROR_SYSTEM_MENUERROR_ERROR_MENU_CREATE_FAIL = 'B-001-002-002';
+   
+    /**
+     * @Message("菜单更新失败")
+     */
+   const ERROR_SYSTEM_MENUERROR_ERROR_MENU_UPDATE_FAIL = 'B-001-002-003';
+   
+    /**
+     * @Message("菜单删除失败")
+     */
+   const ERROR_SYSTEM_MENUERROR_ERROR_MENU_REMOVE_FAIL = 'B-001-002-004';
+   
+    /**
      * @Message("账号被冻结，请联系管理员")
      */
    const ERROR_ADMINERROR_ERROR_ADMIN_FREEZE = 'B-001-001-001';

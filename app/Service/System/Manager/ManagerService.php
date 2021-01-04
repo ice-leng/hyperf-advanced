@@ -26,6 +26,7 @@ class ManagerService extends BaseService
         $total = count($params);
         $pageSize = $pageEntity->getPageSize();
         $offset = ($pageEntity->getPage() - 1) * $pageSize;
+        $params = array_values($params);
         $list = array_slice($params, $offset, $pageSize);
         return [
             'list'      => $list,

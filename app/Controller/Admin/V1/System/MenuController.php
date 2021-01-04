@@ -29,7 +29,8 @@ class MenuController extends Controller
      * @PostApi(path="/admin/v1/menu/list", summary="菜单列表", description="菜单列表")
      * @Body(rules={
      *     "page|页":"int|min:1",
-     *     "pageSize|页数":"int|min:1"
+     *     "pageSize|页数":"int|min:1",
+     *     "pid|上一级":"string|max:64"
      * })
      * @ApiResponse(code="0", template="page")
      */
@@ -41,6 +42,19 @@ class MenuController extends Controller
         return $this->success($data);
     }
 
+    /**
+     * @PostApi(path="/admin/v1/menu/create", summary="菜单创建", description="菜单创建")
+     * @Body(rules={
+     *     "name|菜单名称":"required|string|max:64",
+     *     "pid|上一级":"string|max:64",
+     *     "icon|菜单图标":"required|string|max:64",
+     *     "path|菜单路由":"string|max:255",
+     *     "template|模版":"string|max:64",
+     *     "role|角色":"required|string|max:64",
+     *     "sort|排序":"required|int",
+     * })
+     * @ApiResponse(code="0", template="success")
+     */
     public function create()
     {
         $params = $this->getValidateData();
@@ -48,6 +62,19 @@ class MenuController extends Controller
         return $this->success([]);
     }
 
+    /**
+     * @PostApi(path="/admin/v1/menu/update", summary="菜单更新", description="菜单更新")
+     * @Body(rules={
+     *     "name|菜单名称":"required|string|max:64",
+     *     "pid|上一级":"string|max:64",
+     *     "icon|菜单图标":"required|string|max:64",
+     *     "path|菜单路由":"string|max:255",
+     *     "template|模版":"string|max:64",
+     *     "role|角色":"required|string|max:64",
+     *     "sort|排序":"required|int",
+     * })
+     * @ApiResponse(code="0", template="success")
+     */
     public function update()
     {
         $params = $this->getValidateData();
@@ -55,13 +82,27 @@ class MenuController extends Controller
         return $this->success([]);
     }
 
+    /**
+     * @PostApi(path="/admin/v1/menu/detail", summary="菜单详情", description="菜单详情")
+     * @Body(rules={
+     *     "name|菜单名称":"required|string|max:64"
+     * })
+     * @ApiResponse(code="0", template="success")
+     */
     public function detail()
     {
         $params = $this->getValidateData();
-        $this->menuService->detail($params);
-        return $this->success([]);
+        $data = $this->menuService->detail($params);
+        return $this->success($data);
     }
 
+    /**
+     * @PostApi(path="/admin/v1/menu/remove", summary="菜单移除", description="菜单移除")
+     * @Body(rules={
+     *     "name|菜单名称":"required|string|max:64"
+     * })
+     * @ApiResponse(code="0", template="success")
+     */
     public function remove()
     {
         $params = $this->getValidateData();
