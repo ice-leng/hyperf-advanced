@@ -113,10 +113,11 @@ class PermissionService extends BaseService
             $data[] = $node->getName();
         }
         $description = explode("-", $permission->getDescription());
-        array_shift($description);
+        $group = array_shift($description);
         return [
             'name'             => $permission->getName(),
             'full_description' => $permission->getDescription(),
+            'group'            => $group,
             'description'      => implode('', $description),
             'rule_name'        => $permission->getRuleName(),
             'node'             => $data,
@@ -151,24 +152,31 @@ class PermissionService extends BaseService
         $result = [];
         $permissions = $this->manager->getPermissions();
         foreach ($permissions as $permission) {
-            $data = explode("-", $permission->getDescription());
-            if (count($data) === 1) {
+            $names = explode("-", $permission->getDescription());
+            if (count($names) === 1) {
                 continue;
             }
-            $title = array_shift($data);
+            $title = array_shift($names);
             if (empty($result[$title])) {
                 $result[$title] = [];
             }
             $result[$title][] = [
                 'name'             => $permission->getName(),
                 'full_description' => $permission->getDescription(),
-                'description'      => implode('', $data),
+                'description'      => implode('', $names),
                 'rule_name'        => $permission->getRuleName(),
                 'create_at'        => date('Y-m-d H:i:s', $permission->getCreatedAt()),
                 'update_at'        => date('Y-m-d H:i:s', $permission->getUpdatedAt()),
             ];
         }
-        return $result;
+        $data = [];
+        foreach ($result as $name => $item) {
+            $data[] = [
+                'group' => $name,
+                'item'  => $item,
+            ];
+        }
+        return $data;
     }
 
     /**
