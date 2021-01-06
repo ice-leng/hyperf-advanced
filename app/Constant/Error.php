@@ -39,6 +39,26 @@ class Error extends BaseEnum
    const ERROR_COMMENTERRORCODE_INVALID_TOKEN = 'F-000-000-403';
    
     /**
+     * @Message("权限不存在")
+     */
+   const ERROR_SYSTEM_PERMISSIONERROR_ERROR_PERMISSION_NOT_FOUND = 'B-001-004-001';
+   
+    /**
+     * @Message("权限创建失败")
+     */
+   const ERROR_SYSTEM_PERMISSIONERROR_ERROR_PERMISSION_CREATE_FAIL = 'B-001-004-002';
+   
+    /**
+     * @Message("权限更新失败")
+     */
+   const ERROR_SYSTEM_PERMISSIONERROR_ERROR_PERMISSION_UPDATE_FAIL = 'B-001-004-003';
+   
+    /**
+     * @Message("权限删除失败")
+     */
+   const ERROR_SYSTEM_PERMISSIONERROR_ERROR_PERMISSION_REMOVE_FAIL = 'B-001-004-004';
+   
+    /**
      * @Message("菜单不存在")
      */
    const ERROR_SYSTEM_MENUERROR_ERROR_MENU_NOT_FOUND = 'B-001-002-001';
@@ -57,6 +77,26 @@ class Error extends BaseEnum
      * @Message("菜单删除失败")
      */
    const ERROR_SYSTEM_MENUERROR_ERROR_MENU_REMOVE_FAIL = 'B-001-002-004';
+   
+    /**
+     * @Message("角色不存在")
+     */
+   const ERROR_SYSTEM_ROLEERROR_ERROR_ROLE_NOT_FOUND = 'B-001-003-001';
+   
+    /**
+     * @Message("角色创建失败")
+     */
+   const ERROR_SYSTEM_ROLEERROR_ERROR_ROLE_CREATE_FAIL = 'B-001-003-002';
+   
+    /**
+     * @Message("角色更新失败")
+     */
+   const ERROR_SYSTEM_ROLEERROR_ERROR_ROLE_UPDATE_FAIL = 'B-001-003-003';
+   
+    /**
+     * @Message("角色删除失败")
+     */
+   const ERROR_SYSTEM_ROLEERROR_ERROR_ROLE_REMOVE_FAIL = 'B-001-003-004';
    
     /**
      * @Message("账号被冻结，请联系管理员")

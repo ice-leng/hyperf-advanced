@@ -5,7 +5,18 @@ namespace App\Controller\Admin\V1\System;
 use App\Controller\Controller;
 use App\Service\System\Manager\RoleService;
 use Hyperf\Di\Annotation\Inject;
+use Hyperf\Apidog\Annotation\ApiController;
+use Hyperf\Apidog\Annotation\ApiResponse;
+use Hyperf\Apidog\Annotation\Body;
+use Hyperf\Apidog\Annotation\PostApi;
+use Lengbin\Hyperf\Common\Entity\PageEntity;
 
+/**
+ * Class RoleController
+ * @package App\Controller\Admin\V1\System
+ *
+ * @ApiController(tag="角色", description="角色管理")
+ */
 class RoleController extends Controller
 {
     /**
@@ -14,13 +25,31 @@ class RoleController extends Controller
      */
     protected $roleService;
 
+    /**
+     * @PostApi(path="/admin/v1/role/list", summary="角色列表", description="角色列表")
+     * @Body(rules={
+     *     "page|页":"int|min:1",
+     *     "pageSize|页数":"int|min:1",
+     * })
+     * @ApiResponse(code="0", template="page")
+     */
     public function list()
     {
         $params = $this->getValidateData();
-        $data = $this->roleService->getList($params);
+        $page = new PageEntity($params);
+        $data = $this->roleService->getList($params, [], $page);
         return $this->success($data);
     }
 
+    /**
+     * @PostApi(path="/admin/v1/role/create", summary="角色创建", description="角色创建")
+     * @Body(rules={
+     *     "name|角色名称":"required|string|max:64",
+     *     "description|描述":"string",
+     *     "permission.*|权限":"required|string|max:64",
+     * })
+     * @ApiResponse(code="0", template="success")
+     */
     public function create()
     {
         $params = $this->getValidateData();
@@ -28,6 +57,15 @@ class RoleController extends Controller
         return $this->success([]);
     }
 
+    /**
+     * @PostApi(path="/admin/v1/role/update", summary="角色更新", description="角色更新")
+     * @Body(rules={
+     *     "name|角色名称":"required|string|max:64",
+     *     "description|描述":"string",
+     *     "permission.*|权限":"required|string|max:64",
+     * })
+     * @ApiResponse(code="0", template="success")
+     */
     public function update()
     {
         $params = $this->getValidateData();
@@ -35,13 +73,27 @@ class RoleController extends Controller
         return $this->success([]);
     }
 
+    /**
+     * @PostApi(path="/admin/v1/role/detail", summary="角色详情", description="角色详情")
+     * @Body(rules={
+     *     "name|角色名称":"required|string|max:64"
+     * })
+     * @ApiResponse(code="0", template="success")
+     */
     public function detail()
     {
         $params = $this->getValidateData();
-        $this->roleService->detail($params);
-        return $this->success([]);
+        $data = $this->roleService->detail($params);
+        return $this->success($data);
     }
 
+    /**
+     * @PostApi(path="/admin/v1/role/remove", summary="角色移除", description="角色移除")
+     * @Body(rules={
+     *     "name|角色名称":"required|string|max:64"
+     * })
+     * @ApiResponse(code="0", template="success")
+     */
     public function remove()
     {
         $params = $this->getValidateData();

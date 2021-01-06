@@ -19,6 +19,7 @@ class CreateAdminTable extends Migration
             $table->string('role', 255)->comment('角色');
             $table->string('nickname', 32)->comment('昵称');
             $table->unsignedInteger('number')->default(1)->comment('工号');
+            $table->unsignedTinyInteger('is_supper_admin')->default(0)->comment('是否超级管理');
             $table->unsignedTinyInteger('status')->default(0)->comment('状态，1正常2冻结');
             $table->unsignedTinyInteger('enable')->comment('状态');
             $table->unsignedInteger('create_at');
