@@ -50,6 +50,9 @@ class MenuService extends BaseService
         $results = $this->pageByArray($menus, $pageEntity);
         return $this->toArray($results, function ($result) {
             $result = $result->getAttributes();
+            if (!is_array($result['role'])) {
+                $result['role'] = explode(',', $result['role']);
+            }
             $result['create_at'] = date('Y-m-d H:i:s', $result['created_at']);
             $result['update_at'] = date('Y-m-d H:i:s', $result['updated_at']);
             return $result;
@@ -63,12 +66,16 @@ class MenuService extends BaseService
      */
     protected function populateMenu(array $params): Menu
     {
+        $role = $params['role'];
+        if (!is_array($role)) {
+            $role = [$role];
+        }
         return (new Menu($params['name']))->withPid($params['pid'])
             ->withIcon($params['icon'])
             ->withPath($params['path'])
             ->withSort($params['sort'])
             ->withTemplate($params['template'])
-            ->withRole($params['role']);
+            ->withRole(implode(',', $role));
     }
 
     /**
@@ -127,6 +134,7 @@ class MenuService extends BaseService
     {
         $menu = $this->findOne($params['name']);
         $result = $menu->getAttributes();
+        $result['role'] = explode(',', $result['role']);
         $result['create_at'] = date('Y-m-d H:i:s', $result['created_at']);
         $result['update_at'] = date('Y-m-d H:i:s', $result['updated_at']);
         return $result;
