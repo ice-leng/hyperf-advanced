@@ -2,8 +2,7 @@
 
 namespace App\Entity;
 
-use App\Component\AntDesign\Form\Form;
-use App\Component\AntDesign\Link;
+use App\Component\AntDesign\Link\Link;
 use App\Component\AntDesign\Table;
 use Lengbin\Common\Component\BaseObject;
 
@@ -54,9 +53,9 @@ class GenerateCodeEntity extends BaseObject
     /**
      * 表单
      *
-     * @var Form
+     * @var array
      */
-    private $form;
+    private $tag;
 
     /**
      * @return string
@@ -173,25 +172,6 @@ class GenerateCodeEntity extends BaseObject
     }
 
     /**
-     * @return Form
-     */
-    public function getForm(): Form
-    {
-        return $this->form;
-    }
-
-    /**
-     * @param Form $form
-     *
-     * @return GenerateCodeEntity
-     */
-    public function setForm(Form $form): GenerateCodeEntity
-    {
-        $this->form = $form;
-        return $this;
-    }
-
-    /**
      * @return string
      */
     public function getPool(): string
@@ -207,6 +187,25 @@ class GenerateCodeEntity extends BaseObject
     public function setPool(string $pool): GenerateCodeEntity
     {
         $this->pool = $pool;
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getTag(): array
+    {
+        return $this->tag;
+    }
+
+    /**
+     * @param array $tag
+     *
+     * @return GenerateCodeEntity
+     */
+    public function setTag(array $tag): GenerateCodeEntity
+    {
+        $this->tag = $tag;
         return $this;
     }
 }

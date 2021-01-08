@@ -5,12 +5,11 @@ namespace App\Controller;
 use App\Component\AntDesign\Constant\Type\FormDateType;
 use App\Component\AntDesign\Constant\Type\ValueType;
 use App\Component\AntDesign\Table;
-use App\Component\Generate\ClassFile\ClassConfig;
-use App\Component\Generate\Generate;
 use App\Constant\Status\AdminStatus;
 use App\Entity\GenerateCodeEntity;
 use App\Service\Admin\AdminService;
 use App\Service\System\GenerateService;
+use Hyperf\Contract\ConfigInterface;
 use Hyperf\Di\Annotation\Inject;
 use Hyperf\HttpServer\Annotation\GetMapping;
 use Hyperf\HttpServer\Annotation\PostMapping;
@@ -264,53 +263,26 @@ class TestController extends BaseController
 //        $generate->setConfig($config);
 //        return $this->success(['a' => $generate->output('php'), 'b' => $config->__toObjectString(), 'c' => $config->__getClassname()]);
 //
-
+        $config = $this->container->get(ConfigInterface::class)->get('genCode');
         $params = [
             'controller' => 'app/Controller/AdController',
             'model'      => 'app/Model/Ad',
             'pool'       => 'default',
             'service'    => 'app/Service/AdService',
-            'actions'    => [
-                [
-                    'name'   => '批量删除',
-                    'type'   => 'action',
-                    'target' => 'button',
-                    'path'   => 'remove',
-                    'method' => 'post',
-                ],
-                [
-                    'name'   => '创建',
-                    'type'   => 'action',
-                    'target' => 'button',
-                    'path'   => 'add',
-                    'method' => 'post',
-                ],
-                [
-                    'name'   => '编辑',
-                    'type'   => 'operation',
-                    'target' => 'link',
-                    'path'   => 'detail',
-                    'method' => 'post',
-                ],
-                [
-                    'name'   => '删除',
-                    'type'   => 'operation',
-                    'target' => 'link',
-                    'path'   => 'remove',
-                    'method' => 'post',
-                ],
-            ],
-            'list'       => [
+            'actions'    => $config['actions'],
+            'table'       => [
 
             ],
             'search'     => [
 
             ],
-            'form'       => [
+            'tag'       => [
 
             ],
         ];
         $generateCodeEntity = new GenerateCodeEntity($params);
+        var_dump($generateCodeEntity);
+        die;
         $this->generateService->file($generateCodeEntity);
         return $this->success($generateCodeEntity->toArray());
     }
