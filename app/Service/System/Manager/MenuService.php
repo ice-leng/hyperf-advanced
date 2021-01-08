@@ -21,6 +21,12 @@ class MenuService extends BaseService
     protected $manager;
 
     /**
+     * @Inject
+     * @var RoleService
+     */
+    protected $roleService;
+
+    /**
      * @param array $params
      *
      * @return array
@@ -69,6 +75,9 @@ class MenuService extends BaseService
         $role = $params['role'];
         if (!is_array($role)) {
             $role = [$role];
+        }
+        foreach ($role as $item) {
+            $this->roleService->findOne($item);
         }
         return (new Menu($params['name']))->withPid($params['pid'])
             ->withIcon($params['icon'])

@@ -128,4 +128,9 @@ class Error extends BaseEnum
      */
    const ERROR_ADMINERROR_ERROR_ADMIN_ACCOUNT_OR_PASSWORD_FAIL = 'B-001-001-006';
    
+    /**
+     * @Message("账号已存在")
+     */
+   const ERROR_ADMINERROR_ERROR_ADMIN_EXIST = 'B-001-001-007';
+   
 }

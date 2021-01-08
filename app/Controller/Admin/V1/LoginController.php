@@ -31,7 +31,7 @@ class LoginController extends Controller
     protected $loginService;
 
     /**
-     * @PostApi(path="/admin/login", summary="登录", description="登录")
+     * @PostApi(path="/admin/v1/login", summary="登录", description="登录")
      * @Body(rules={
      *     "account|账号":"required|string|max:32",
      *     "password|密码":"required|string|max:32"
@@ -49,7 +49,7 @@ class LoginController extends Controller
     }
 
     /**
-     * @PostApi(path="/admin/login/refreshToken", summary="刷新token", description="刷新token")
+     * @PostApi(path="/admin/v1/login/refreshToken", summary="刷新token", description="刷新token")
      * @Body(rules={
      *     "refresh_token|刷新token" : "required|string"
      *     })
@@ -66,7 +66,7 @@ class LoginController extends Controller
     }
 
     /**
-     * @PostApi(path="/admin/login/logout", summary="注销", description="退出登录")
+     * @PostApi(path="/admin/v1/login/logout", summary="注销", description="退出登录")
      * @Header(key="Token|token", rule="required|string")
      *
      * @ApiResponse(code="0", template="success")

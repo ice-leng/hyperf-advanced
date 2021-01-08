@@ -7,6 +7,7 @@ use App\Service\System\Manager\MenuService;
 use Hyperf\Apidog\Annotation\ApiController;
 use Hyperf\Apidog\Annotation\ApiResponse;
 use Hyperf\Apidog\Annotation\Body;
+use Hyperf\Apidog\Annotation\Header;
 use Hyperf\Apidog\Annotation\PostApi;
 use Hyperf\Di\Annotation\Inject;
 use Lengbin\Hyperf\Common\Entity\PageEntity;
@@ -16,6 +17,7 @@ use Lengbin\Hyperf\Common\Entity\PageEntity;
  * @package App\Controller\Admin\V1\System
  *
  * @ApiController(tag="菜单", description="菜单管理")
+ * @Header(key="Token|token", rule="required|string")
  */
 class MenuController extends Controller
 {

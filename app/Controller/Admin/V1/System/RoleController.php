@@ -4,6 +4,7 @@ namespace App\Controller\Admin\V1\System;
 
 use App\Controller\Controller;
 use App\Service\System\Manager\RoleService;
+use Hyperf\Apidog\Annotation\Header;
 use Hyperf\Di\Annotation\Inject;
 use Hyperf\Apidog\Annotation\ApiController;
 use Hyperf\Apidog\Annotation\ApiResponse;
@@ -16,6 +17,7 @@ use Lengbin\Hyperf\Common\Entity\PageEntity;
  * @package App\Controller\Admin\V1\System
  *
  * @ApiController(tag="角色", description="角色管理")
+ * @Header(key="Token|token", rule="required|string")
  */
 class RoleController extends Controller
 {
@@ -30,13 +32,14 @@ class RoleController extends Controller
      * @Body(rules={
      *     "page|页":"int|min:1",
      *     "pageSize|页数":"int|min:1",
+     *     "isAll|是否获取全部":"int"
      * })
      * @ApiResponse(code="0", template="page")
      */
     public function list()
     {
         $params = $this->getValidateData();
-        $page = new PageEntity($params);
+        $page = empty($params['isAll']) ? new PageEntity($params) : null;
         $data = $this->roleService->getList($params, [], $page);
         return $this->success($data);
     }

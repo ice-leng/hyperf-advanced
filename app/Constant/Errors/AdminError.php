@@ -35,4 +35,9 @@ class AdminError extends BaseEnum
      * @Message("账号或密码错误")
      */
     public const ERROR_ADMIN_ACCOUNT_OR_PASSWORD_FAIL = 'B-001-001-006';
+
+    /**
+     * @Message("账号已存在")
+     */
+    public const ERROR_ADMIN_EXIST = 'B-001-001-007';
 }

@@ -3,6 +3,7 @@
 namespace App\Service\System\Manager;
 
 use App\Constant\Errors\System\RoleError;
+use Exception;
 use Hyperf\DbConnection\Db;
 use Hyperf\Di\Annotation\Inject;
 use Lengbin\Hyperf\Common\Entity\PageEntity;
@@ -37,7 +38,8 @@ class RoleService extends BaseService
     public function getList(array $params = [], array $field = ['*'], ?PageEntity $pageEntity = null): array
     {
         $roles = $this->manager->getRoles();
-        $results = $this->pageByArray($roles, $pageEntity);
+        $roles = array_values($roles);
+        $results = $pageEntity ? $this->pageByArray($roles, $pageEntity) : $roles;
         return $this->toArray($results, function ($result) {
             $result = [
                 'name'        => $result->getName(),
@@ -166,5 +168,29 @@ class RoleService extends BaseService
             Db::rollBack();
             throw new BusinessException(RoleError::ERROR_ROLE_REMOVE_FAIL);
         }
+    }
+
+    /**
+     * 为用户分配角色或权限。
+     *
+     * @param string $name
+     * @param string $adminId
+     *
+     * @throws Exception
+     */
+    public function assign(string $name, string $adminId)
+    {
+        $this->manager->assign($this->findOne($name), $adminId);
+    }
+
+    /**
+     * 取消用户的角色或权限。
+     *
+     * @param string $adminId
+     *
+     */
+    public function revoke(string $adminId)
+    {
+        $this->manager->revokeAll($adminId);
     }
 }

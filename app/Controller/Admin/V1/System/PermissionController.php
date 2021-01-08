@@ -4,6 +4,7 @@ namespace App\Controller\Admin\V1\System;
 
 use App\Controller\Controller;
 use App\Service\System\Manager\PermissionService;
+use Hyperf\Apidog\Annotation\Header;
 use Hyperf\Di\Annotation\Inject;
 use Hyperf\Apidog\Annotation\ApiController;
 use Hyperf\Apidog\Annotation\ApiResponse;
@@ -15,6 +16,7 @@ use Hyperf\Apidog\Annotation\PostApi;
  * @package App\Controller\Admin\V1\System
  *
  * @ApiController(tag="权限", description="权限管理")
+ * @Header(key="Token|token", rule="required|string")
  */
 class PermissionController extends Controller
 {
