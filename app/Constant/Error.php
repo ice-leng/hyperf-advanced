@@ -41,32 +41,32 @@ class Error extends BaseEnum
     /**
      * @Message("管理员删除失败")
      */
-   const ERROR_TEST_ADMINERROR_ERRORS_TEST_ADMIN_REMOVE_FAIL = 'B-001-007-001';
+   const ERROR_TEST_ADMINERROR_ERRORS_TEST_ADMIN_REMOVE_FAIL = 'B-001-006-001';
    
     /**
      * @Message("管理员创建失败")
      */
-   const ERROR_TEST_ADMINERROR_ERRORS_TEST_ADMIN_CREATE_FAIL = 'B-001-007-002';
+   const ERROR_TEST_ADMINERROR_ERRORS_TEST_ADMIN_CREATE_FAIL = 'B-001-006-002';
    
     /**
      * @Message("管理员导入失败")
      */
-   const ERROR_TEST_ADMINERROR_ERRORS_TEST_ADMIN_IMPORT_FAIL = 'B-001-007-003';
+   const ERROR_TEST_ADMINERROR_ERRORS_TEST_ADMIN_IMPORT_FAIL = 'B-001-006-003';
    
     /**
      * @Message("管理员导出失败")
      */
-   const ERROR_TEST_ADMINERROR_ERRORS_TEST_ADMIN_EXPORT_FAIL = 'B-001-007-004';
+   const ERROR_TEST_ADMINERROR_ERRORS_TEST_ADMIN_EXPORT_FAIL = 'B-001-006-004';
    
     /**
      * @Message("管理员不存在")
      */
-   const ERROR_TEST_ADMINERROR_ERRORS_TEST_ADMIN_NOT_FOUND = 'B-001-007-005';
+   const ERROR_TEST_ADMINERROR_ERRORS_TEST_ADMIN_NOT_FOUND = 'B-001-006-005';
    
     /**
      * @Message("管理员更新失败")
      */
-   const ERROR_TEST_ADMINERROR_ERRORS_TEST_ADMIN_UPDATE_FAIL = 'B-001-007-006';
+   const ERROR_TEST_ADMINERROR_ERRORS_TEST_ADMIN_UPDATE_FAIL = 'B-001-006-006';
    
     /**
      * @Message("错误字典生成文件失败")

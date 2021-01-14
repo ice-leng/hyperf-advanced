@@ -19,6 +19,30 @@ class BuildErrorCodeConfig extends BaseObject
     private $use;
 
     /**
+     * @var array
+     */
+    private $prefix;
+
+    /**
+     * @return array
+     */
+    public function getPrefix(): array
+    {
+        return $this->prefix;
+    }
+
+    /**
+     * @param array $prefix
+     *
+     * @return BuildErrorCodeConfig
+     */
+    public function setPrefix(array $prefix): BuildErrorCodeConfig
+    {
+        $this->prefix = $prefix;
+        return $this;
+    }
+
+    /**
      * @return string
      */
     public function getInheritance(): string

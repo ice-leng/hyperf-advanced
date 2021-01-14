@@ -10,7 +10,7 @@ class DefaultActionServiceBuild extends BaseActionServiceBuild
             return [];
         }
         return [
-            $this->getSpaces(2) . "throw new {$this->getExceptionName()}({$this->getErrors()['classname']}::{$this->getErrors()['constant'][$this->getName()]});",
+            "throw new {$this->getExceptionName()}({$this->getErrors()['classname']}::{$this->getErrors()['constant'][$this->getName()]});",
         ];
     }
 

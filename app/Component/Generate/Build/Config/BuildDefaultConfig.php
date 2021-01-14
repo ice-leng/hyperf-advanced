@@ -21,7 +21,7 @@ class BuildDefaultConfig extends BaseObject
 
     /**
      * 错误字典 默认配置
-     * @var BuildDefaultErrorCodeConfig
+     * @var BuildDefaultBaseConfig
      */
     private $errorCode;
 
@@ -70,19 +70,19 @@ class BuildDefaultConfig extends BaseObject
     }
 
     /**
-     * @return BuildDefaultErrorCodeConfig
+     * @return BuildDefaultBaseConfig
      */
-    public function getErrorCode(): BuildDefaultErrorCodeConfig
+    public function getErrorCode(): BuildDefaultBaseConfig
     {
         return $this->errorCode;
     }
 
     /**
-     * @param BuildDefaultErrorCodeConfig $errorCode
+     * @param BuildDefaultBaseConfig $errorCode
      *
      * @return BuildDefaultConfig
      */
-    public function setErrorCode(BuildDefaultErrorCodeConfig $errorCode): BuildDefaultConfig
+    public function setErrorCode(BuildDefaultBaseConfig $errorCode): BuildDefaultConfig
     {
         $this->errorCode = $errorCode;
         return $this;

@@ -64,14 +64,13 @@ class ErrorCodeBuild extends BaseBuild
      */
     protected function getPrefix(string $path): array
     {
-        $defaultErrorCode = $this->getConfig()->getDefault()->getErrorCode();
-        $defaultPath = $defaultErrorCode->getPath();
+        $defaultPath = $this->getConfig()->getDefault()->getErrorCode()->getPath();
         $directory = str_replace($defaultPath, '', $path);
         $errorPrefix = StringHelper::explode($directory, '/', true, true);
         // default  prefix
-        $prefix = ArrayHelper::get($defaultErrorCode->getPrefix(), 'default', 'B-001');
+        $prefix = ArrayHelper::get($this->getConfig()->getErrorCode()->getPrefix(), 'default', 'B-001');
         if (!empty($errorPrefix[0])) {
-            $appErrorPrefix = ArrayHelper::get($defaultErrorCode->getPrefix(), StringHelper::strtolower($errorPrefix[0]));
+            $appErrorPrefix = ArrayHelper::get($this->getConfig()->getErrorCode()->getPrefix(), StringHelper::strtolower($errorPrefix[0]));
             if (!empty($appErrorPrefix)) {
                 $prefix = $appErrorPrefix;
                 $defaultPath .= "/{$errorPrefix[0]}";
