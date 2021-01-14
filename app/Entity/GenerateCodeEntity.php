@@ -9,6 +9,12 @@ use Lengbin\Common\Component\BaseObject;
 class GenerateCodeEntity extends BaseObject
 {
     /**
+     * 名称
+     * @var string
+     */
+    private $name;
+
+    /**
      * 控制 path
      * @var string
      */
@@ -42,7 +48,7 @@ class GenerateCodeEntity extends BaseObject
      * 列表
      * @var Table
      */
-    private $table;
+    private $list;
 
     /**
      * 列表 搜索
@@ -136,9 +142,9 @@ class GenerateCodeEntity extends BaseObject
     /**
      * @return Table
      */
-    public function getTable(): Table
+    public function getList(): Table
     {
-        return $this->table;
+        return $this->list;
     }
 
     /**
@@ -146,9 +152,9 @@ class GenerateCodeEntity extends BaseObject
      *
      * @return GenerateCodeEntity
      */
-    public function setTable(Table $table): GenerateCodeEntity
+    public function setList(Table $table): GenerateCodeEntity
     {
-        $this->table = $table;
+        $this->list = $table;
         return $this;
     }
 
@@ -206,6 +212,25 @@ class GenerateCodeEntity extends BaseObject
     public function setTag(array $tag): GenerateCodeEntity
     {
         $this->tag = $tag;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     *
+     * @return GenerateCodeEntity
+     */
+    public function setName(string $name): GenerateCodeEntity
+    {
+        $this->name = $name;
         return $this;
     }
 }

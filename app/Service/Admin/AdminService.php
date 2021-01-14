@@ -16,6 +16,10 @@ use Lengbin\Hyperf\Common\Exception\BusinessException;
 use Lengbin\Hyperf\Common\Framework\BaseService;
 use Throwable;
 
+/**
+ * Class AdminService
+ * @package App\Service\Admin
+ */
 class AdminService extends BaseService
 {
 

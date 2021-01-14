@@ -39,6 +39,51 @@ class Error extends BaseEnum
    const ERROR_COMMENTERRORCODE_INVALID_TOKEN = 'F-000-000-403';
    
     /**
+     * @Message("管理员删除失败")
+     */
+   const ERROR_TEST_ADMINERROR_ERRORS_TEST_ADMIN_REMOVE_FAIL = 'B-001-007-001';
+   
+    /**
+     * @Message("管理员创建失败")
+     */
+   const ERROR_TEST_ADMINERROR_ERRORS_TEST_ADMIN_CREATE_FAIL = 'B-001-007-002';
+   
+    /**
+     * @Message("管理员导入失败")
+     */
+   const ERROR_TEST_ADMINERROR_ERRORS_TEST_ADMIN_IMPORT_FAIL = 'B-001-007-003';
+   
+    /**
+     * @Message("管理员导出失败")
+     */
+   const ERROR_TEST_ADMINERROR_ERRORS_TEST_ADMIN_EXPORT_FAIL = 'B-001-007-004';
+   
+    /**
+     * @Message("管理员不存在")
+     */
+   const ERROR_TEST_ADMINERROR_ERRORS_TEST_ADMIN_NOT_FOUND = 'B-001-007-005';
+   
+    /**
+     * @Message("管理员更新失败")
+     */
+   const ERROR_TEST_ADMINERROR_ERRORS_TEST_ADMIN_UPDATE_FAIL = 'B-001-007-006';
+   
+    /**
+     * @Message("错误字典生成文件失败")
+     */
+   const ERROR_SYSTEM_GENERATEERROR_ERROR_GENERATE_ERROR_CODE_CREATE_FAIL = 'B-001-005-001';
+   
+    /**
+     * @Message("服务生成文件失败")
+     */
+   const ERROR_SYSTEM_GENERATEERROR_ERROR_GENERATE_SERVICE_CREATE_FAIL = 'B-001-005-002';
+   
+    /**
+     * @Message("控制器生成文件失败")
+     */
+   const ERROR_SYSTEM_GENERATEERROR_ERROR_GENERATE_CONTROLLER_CREATE_FAIL = 'B-001-005-003';
+   
+    /**
      * @Message("权限不存在")
      */
    const ERROR_SYSTEM_PERMISSIONERROR_ERROR_PERMISSION_NOT_FOUND = 'B-001-004-001';

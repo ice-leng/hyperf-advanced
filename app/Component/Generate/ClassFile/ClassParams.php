@@ -27,6 +27,12 @@ class ClassParams extends BaseObject
     private $default;
 
     /**
+     * 是否 赋值
+     * @var bool
+     */
+    private $assign = false;
+
+    /**
      * @return mixed
      */
     public function getDefault()
@@ -41,6 +47,7 @@ class ClassParams extends BaseObject
      */
     public function setDefault($default): ClassParams
     {
+        $this->setAssign(true);
         $this->default = $default;
         return $this;
     }
@@ -99,6 +106,25 @@ class ClassParams extends BaseObject
     public function setComment(string $comment): ClassParams
     {
         $this->comment = $comment;
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getAssign(): bool
+    {
+        return $this->assign;
+    }
+
+    /**
+     * @param bool $assign
+     *
+     * @return ClassParams
+     */
+    public function setAssign(bool $assign): ClassParams
+    {
+        $this->assign = $assign;
         return $this;
     }
 }

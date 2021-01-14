@@ -167,12 +167,6 @@ class BaseForm extends BaseObject
         return $this;
     }
 
-    public function toArray(?object $object = null): array
-    {
-        $this->getName();
-        return parent::toArray($object);
-    }
-
     /**
      * @return string
      */

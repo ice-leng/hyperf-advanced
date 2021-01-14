@@ -2,89 +2,36 @@
 
 namespace App\Service\System;
 
+use App\Component\Generate\Build\BuildClass;
+use App\Component\Generate\Build\Config\BuildConfig;
+use App\Component\Generate\Build\ControllerBuild;
+use App\Component\Generate\Build\ErrorCodeBuild;
+use App\Component\Generate\Build\Model\HyperfModelBuild;
+use App\Component\Generate\Build\ServiceBuild;
 use App\Entity\GenerateCodeEntity;
-use Lengbin\Helper\YiiSoft\StringHelper;
-use Lengbin\Hyperf\Common\Component\Generate\Model\GenerateModel;
 use Lengbin\Hyperf\Common\Framework\BaseService;
 
 class GenerateService extends BaseService
 {
-    protected function getPath(string $name)
+    public function crud(GenerateCodeEntity $generateCodeEntity): array
     {
-        return str_replace('\\', '/', $name);
+        $config = new BuildConfig($this->config->get('genCode', []));
+        $model = new HyperfModelBuild([
+            'path' => $generateCodeEntity->getModel(),
+            'pool' => $generateCodeEntity->getPool(),
+        ]);
+        $build = (new BuildClass())->setGenerateCodeEntity($generateCodeEntity)
+            ->setRoot(BASE_PATH)
+            ->setConfig($config)
+            ->setModel($model)
+            ->setService(new ServiceBuild())
+            ->setErrorCode(new ErrorCodeBuild())
+            ->setController(new ControllerBuild());
+        return $build->run();
     }
 
-    protected function getNamespace(string $name): string
+    public function html(GenerateCodeEntity $generateCodeEntity): array
     {
-        return implode('\\', array_map(function ($str) {
-            return StringHelper::ucfirst($str);
-        }, explode('\\', $this->getPath($name))));
-    }
-
-    protected function controllerPhpFile(string $path, array $actions): array
-    {
-        $namespace = $this->getNamespace(StringHelper::dirname($path));
-        $classname = StringHelper::basename($path);
-        return [
-            'namespace'   => $namespace,
-            'classname'   => $classname,
-            'uses'        => [
-                'Hyperf\HttpServer\Annotation\Controller',
-                'Lengbin\Hyperf\Auth\RouterAuthAnnotation',
-                'Lengbin\Hyperf\Common\Framework\BaseController',
-            ],
-            'comments'    => [
-                'Class AdminController',
-                '@package App\Controller',
-                '@Controller()',
-                '@RouterAuthAnnotation(isPublic=true)',
-            ],
-            'inheritance' => 'BaseController',
-            'properties'  => [
-
-            ],
-            'methods'     => [
-
-            ],
-        ];
-    }
-
-    protected function servicePhpFile(string $path, array $actions): array
-    {
-        return [
-            'namespace'   => 'App\Controller',
-            'classname'   => 'AdminController',
-            'uses'        => [
-                'Hyperf\HttpServer\Annotation\Controller',
-                'Lengbin\Hyperf\Auth\RouterAuthAnnotation',
-                'Lengbin\Hyperf\Common\Framework\BaseController',
-            ],
-            'comments'    => [
-                'Class AdminController',
-                '@package App\Controller',
-                '@Controller()',
-                '@RouterAuthAnnotation(isPublic=true)',
-            ],
-            'inheritance' => 'BaseController',
-            'properties'  => [
-
-            ],
-            'methods'     => [
-
-            ],
-        ];
-    }
-
-    protected function modelPhpFile(string $path, string $pool): array
-    {
-        $model = new GenerateModel();
-        $model->create('ad');
-    }
-
-    public function file(GenerateCodeEntity $generateCodeEntity)
-    {
-        $this->controllerPhpFile($generateCodeEntity->getController(), $generateCodeEntity->getActions());
-        $this->servicePhpFile($generateCodeEntity->getService(), $generateCodeEntity->getActions());
-        $this->modelPhpFile($generateCodeEntity->getModel(), $generateCodeEntity->getPool());
+        // todo 未实现 前端代码 自动生成
     }
 }

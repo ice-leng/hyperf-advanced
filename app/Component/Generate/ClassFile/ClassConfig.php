@@ -531,11 +531,12 @@ class ClassConfig extends AbstractConfig
                             $classParams->setType("mixed");
                         }
                         $classParam .= $classParamName;
-                        if (!empty($classParams->getDefault())) {
+                        if ($classParams->getAssign()) {
                             $classParam .= (" = " . $classMethod->getValueType($classParams->getDefault()));
                         }
                         $params[] = $classParam;
-                        $classMethod->addComment("@param {$classParams->getType()} {$classParamName} {$classParams->getComment()}");
+                        $type = str_replace('?', 'null|', $classParams->getType());
+                        $classMethod->addComment("@param {$type} {$classParamName} {$classParams->getComment()}");
                     }
                 }
                 $param = implode(", ", $params);
@@ -559,7 +560,7 @@ class ClassConfig extends AbstractConfig
                     $classMethod->setContent("{$this->getSpaces(2)}// TODO: Implement {$classMethod->getName()}() method.");
                 }
                 $data[] = $classMethod->getContent();
-                $data[] = "{$this->getSpaces()}}";
+                $data[] = "{$this->getSpaces()}}\n";
             }
         }
         return implode("\n", $data);

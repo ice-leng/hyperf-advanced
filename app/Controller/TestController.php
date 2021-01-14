@@ -13,6 +13,7 @@ use Hyperf\Contract\ConfigInterface;
 use Hyperf\Di\Annotation\Inject;
 use Hyperf\HttpServer\Annotation\GetMapping;
 use Hyperf\HttpServer\Annotation\PostMapping;
+use Lengbin\Helper\YiiSoft\VarDumper;
 use Lengbin\Hyperf\Auth\RouterAuthAnnotation;
 use Lengbin\Hyperf\Common\Constant\SoftDeleted;
 use Lengbin\Hyperf\Common\Entity\PageEntity;
@@ -229,7 +230,6 @@ class TestController extends BaseController
 //                [
 //                    'name'    => 'success',
 //                    'default' => 1,
-//
 //                ],
 //                [
 //                    'name'    => 'fail',
@@ -263,27 +263,26 @@ class TestController extends BaseController
 //        $generate->setConfig($config);
 //        return $this->success(['a' => $generate->output('php'), 'b' => $config->__toObjectString(), 'c' => $config->__getClassname()]);
 //
-        $config = $this->container->get(ConfigInterface::class)->get('genCode');
+        $config = $this->container->get(ConfigInterface::class)->get('genCode.default');
         $params = [
-            'controller' => 'app/Controller/AdController',
-            'model'      => 'app/Model/Ad',
+            'name'       => '管理员',
+            'model'      => 'app/Model/Admin',
             'pool'       => 'default',
-            'service'    => 'app/Service/AdService',
+            'controller' => 'app/Controller/Test/AdminController',
+            'service'    => 'app/Service/Test/AdminService',
             'actions'    => $config['actions'],
-            'table'       => [
+            'list'       => [// todo 白名单
 
             ],
             'search'     => [
 
             ],
-            'tag'       => [
+            'tag'        => [
 
             ],
         ];
         $generateCodeEntity = new GenerateCodeEntity($params);
-        var_dump($generateCodeEntity);
-        die;
-        $this->generateService->file($generateCodeEntity);
-        return $this->success($generateCodeEntity->toArray());
+        $data = $this->generateService->crud($generateCodeEntity);
+        return $this->success($data);
     }
 }

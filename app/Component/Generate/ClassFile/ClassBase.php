@@ -224,6 +224,9 @@ class ClassBase extends BaseObject
             case 'unknown type':
                 $value = '{unknown}';
                 break;
+            case 'array':
+                $value = json_encode($value);
+                break;
             default:
                 break;
         }
