@@ -4,7 +4,7 @@ use Hyperf\Database\Schema\Schema;
 use Hyperf\Database\Schema\Blueprint;
 use Hyperf\Database\Migrations\Migration;
 
-class CreateAdminTable extends Migration
+class Init extends Migration
 {
     /**
      * Run the migrations.
