@@ -75,14 +75,10 @@ class ControllerBuild extends BaseBuild
         }
 
         // path
-        $paths = [
-            $this->getConfig()->getController()->getPrefix(),
-        ];
         $directory = str_replace($this->getConfig()->getDefault()->getController()->getPath(), '', $this->getGenerateCodeEntity()->getController());
         $controllerPath = StringHelper::dirname($directory);
-        if ($controllerPath !== '/') {
-            $paths[] = $controllerPath;
-        }
+        $paths = StringHelper::explode($controllerPath, '/', true, true);
+        array_unshift($paths, $this->getConfig()->getController()->getPrefix());
         $paths[] = StringHelper::basename($directory, 'Controller');
         $paths[] = $name;
 
