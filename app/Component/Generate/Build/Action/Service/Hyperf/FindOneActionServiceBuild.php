@@ -1,15 +1,17 @@
 <?php
 
-namespace App\Component\Generate\Build\Action\Service;
+namespace App\Component\Generate\Build\Action\Service\Hyperf;
+
+use App\Component\Generate\Build\Action\Service\BaseActionServiceBuild;
 
 class FindOneActionServiceBuild extends BaseActionServiceBuild
 {
     public function getContent(): array
     {
         return [
-            "\$model = {$this->getModel()['classname']}::findOneCondition(\$params, \$field);",
+            "\$model = {$this->getModel()->getClassname()}::findOneCondition(\$params, \$field);",
             'if (!$model) {',
-            $this->getSpaces() . "throw new {$this->getExceptionName()}({$this->getErrors()['classname']}::{$this->getErrors()['constant']['notFound']});",
+                $this->throwExceptionForError('notFound'),
             '}',
             'return $model;',
         ];
@@ -25,6 +27,6 @@ class FindOneActionServiceBuild extends BaseActionServiceBuild
 
     public function getReturn(): string
     {
-        return $this->getModel()['classname'];
+        return $this->getModel()->getClassname();
     }
 }

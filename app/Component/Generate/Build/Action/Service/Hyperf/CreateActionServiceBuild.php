@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Component\Generate\Build\Action\Service;
+namespace App\Component\Generate\Build\Action\Service\Hyperf;
+
+use App\Component\Generate\Build\Action\Service\BaseActionServiceBuild;
 
 class CreateActionServiceBuild extends BaseActionServiceBuild
 {
@@ -8,10 +10,10 @@ class CreateActionServiceBuild extends BaseActionServiceBuild
     {
         // todo  判断 exist
         return [
-            "\$model = new {$this->getModel()['classname']}();",
+            "\$model = new {$this->getModel()->getClassname()}();",
             '$status = $model->insert($params);',
             'if (!$status) {',
-            $this->getSpaces() . "throw new {$this->getExceptionName()}({$this->getErrors()['classname']}::{$this->getErrors()['constant']['create']});",
+                $this->throwExceptionForError($this->getName()),
             '}',
             'return $model->toArray();',
         ];

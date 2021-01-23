@@ -119,11 +119,12 @@ return [
             ];
         },
         'properties'  => function ($build) {
+            $serviceName = $build->getService()->getClassname();
             $properties[] = [
-                "name"     => $build->getServiceName(),
+                "name"     => lcfirst($serviceName),
                 'comments' => [
                     '@Inject()',
-                    "@var {$build->getService()['classname']}",
+                    "@var {$serviceName}",
                 ],
             ];
             return $properties;
@@ -149,13 +150,15 @@ return [
         'use'         => 'Lengbin\Hyperf\Common\Framework\BaseService',
     ],
     //  build action config
+    // class = （firstNamespace ? firstNamespace : namespace ）. path . suffix
     'action'     => [
         'service'    => [
-            'namespace' => '\App\Component\Generate\Build\Action\Service',
+            'namespace' => '\App\Component\Generate\Build\Action\Service\Hyperf',
             'suffix'    => 'ActionServiceBuild',
+//            'firstNamespace'
         ],
         'controller' => [
-            'namespace' => '\App\Component\Generate\Build\Action\Controller',
+            'namespace' => '\App\Component\Generate\Build\Action\Controller\Hyperf',
             'suffix'    => 'ActionControllerBuild',
         ],
     ],

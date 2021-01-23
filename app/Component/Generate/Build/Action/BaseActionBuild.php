@@ -2,6 +2,8 @@
 
 namespace App\Component\Generate\Build\Action;
 
+use App\Component\Generate\Build\Collection\ErrorCodeBuildCollection;
+
 abstract class BaseActionBuild
 {
     /**
@@ -57,9 +59,49 @@ abstract class BaseActionBuild
     }
 
     /**
+     * @param string $name
+     * @param int    $level
+     *
+     * @return string
+     */
+    public function throwExceptionForError(string $name, int $level = 1): string
+    {
+        return $this->getSpaces($level) . "throw new {$this->getExceptionName()}({$this->getError()->getClassname()}::{$this->getError()->getConstant($name)});";
+    }
+
+    /**
      * @var string
      */
     protected $name;
+
+    /**
+     * @var string
+     */
+    protected $exceptionName;
+
+    /**
+     * @var ErrorCodeBuildCollection
+     */
+    protected $error;
+
+    /**
+     * @return ErrorCodeBuildCollection
+     */
+    public function getError(): ErrorCodeBuildCollection
+    {
+        return $this->error;
+    }
+
+    /**
+     * @param ErrorCodeBuildCollection $error
+     *
+     * @return BaseActionBuild
+     */
+    public function setError(ErrorCodeBuildCollection $error): BaseActionBuild
+    {
+        $this->error = $error;
+        return $this;
+    }
 
     /**
      * @return string
@@ -77,6 +119,25 @@ abstract class BaseActionBuild
     public function setName(string $name): BaseActionBuild
     {
         $this->name = $name;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getExceptionName(): string
+    {
+        return $this->exceptionName;
+    }
+
+    /**
+     * @param string $exceptionName
+     *
+     * @return BaseActionBuild
+     */
+    public function setExceptionName(string $exceptionName): BaseActionBuild
+    {
+        $this->exceptionName = $exceptionName;
         return $this;
     }
 }

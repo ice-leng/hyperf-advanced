@@ -10,7 +10,7 @@ use Hyperf\Apidog\Annotation\Body;
 use Hyperf\Apidog\Annotation\Header;
 use Hyperf\Apidog\Annotation\PostApi;
 use Hyperf\Di\Annotation\Inject;
-use Lengbin\Hyperf\Common\Entity\PageEntity;
+use Lengbin\Common\Component\Entity\PageEntity;
 
 /**
  * Class MenuController

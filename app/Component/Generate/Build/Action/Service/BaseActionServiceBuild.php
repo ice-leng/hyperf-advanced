@@ -3,7 +3,7 @@
 namespace App\Component\Generate\Build\Action\Service;
 
 use App\Component\Generate\Build\Action\BaseActionBuild;
-use App\Entity\GenerateCodeEntity;
+use App\Component\Generate\Build\Collection\ModelBuildCollection;
 
 abstract class BaseActionServiceBuild extends BaseActionBuild
 {
@@ -22,24 +22,14 @@ abstract class BaseActionServiceBuild extends BaseActionBuild
     public function getComment(): array
     {
         return [
-            $this->getDescription()
+            $this->getDescription(),
         ];
     }
 
     /**
-     * @var array
-     */
-    protected $errors;
-
-    /**
-     * @var array
+     * @var ModelBuildCollection
      */
     protected $model;
-
-    /**
-     * @var string
-     */
-    protected $exceptionName;
 
     /**
      * @var string
@@ -47,59 +37,21 @@ abstract class BaseActionServiceBuild extends BaseActionBuild
     protected $description;
 
     /**
-     * @return array
+     * @return ModelBuildCollection
      */
-    public function getErrors(): array
-    {
-        return $this->errors;
-    }
-
-    /**
-     * @param array $errors
-     *
-     * @return BaseActionServiceBuild
-     */
-    public function setErrors(array $errors): BaseActionServiceBuild
-    {
-        $this->errors = $errors;
-        return $this;
-    }
-
-    /**
-     * @return array
-     */
-    public function getModel(): array
+    public function getModel(): ModelBuildCollection
     {
         return $this->model;
     }
 
     /**
-     * @param array $model
+     * @param ModelBuildCollection $model
      *
      * @return BaseActionServiceBuild
      */
-    public function setModel(array $model): BaseActionServiceBuild
+    public function setModel(ModelBuildCollection $model): BaseActionServiceBuild
     {
         $this->model = $model;
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getExceptionName(): string
-    {
-        return $this->exceptionName;
-    }
-
-    /**
-     * @param string $exceptionName
-     *
-     * @return BaseActionServiceBuild
-     */
-    public function setExceptionName(string $exceptionName): BaseActionServiceBuild
-    {
-        $this->exceptionName = $exceptionName;
         return $this;
     }
 
@@ -114,9 +66,9 @@ abstract class BaseActionServiceBuild extends BaseActionBuild
     /**
      * @param string $description
      *
-     * @return BaseActionBuild
+     * @return BaseActionServiceBuild
      */
-    public function setDescription(string $description): BaseActionBuild
+    public function setDescription(string $description): BaseActionServiceBuild
     {
         $this->description = $description;
         return $this;

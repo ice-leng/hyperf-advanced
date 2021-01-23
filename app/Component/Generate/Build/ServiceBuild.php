@@ -3,54 +3,58 @@
 namespace App\Component\Generate\Build;
 
 use App\Component\Generate\Build\Action\Service\BaseActionServiceBuild;
+use App\Component\Generate\Build\Collection\BaseBuildCollection;
+use App\Component\Generate\Build\Collection\ErrorCodeBuildCollection;
+use App\Component\Generate\Build\Collection\ModelBuildCollection;
+use App\Component\Generate\ClassFile\ClassConfig;
 use Lengbin\Helper\YiiSoft\Arrays\ArrayHelper;
 use Lengbin\Helper\YiiSoft\StringHelper;
 
 class ServiceBuild extends BaseBuild
 {
     /**
-     * @var array
+     * @var ErrorCodeBuildCollection
      */
     private $errorCode;
 
     /**
-     * @var array
+     * @var ModelBuildCollection
      */
     private $model;
 
     /**
-     * @return array
+     * @return ErrorCodeBuildCollection
      */
-    public function getErrorCode(): array
+    public function getErrorCode(): ErrorCodeBuildCollection
     {
         return $this->errorCode;
     }
 
     /**
-     * @param array $errorCode
+     * @param ErrorCodeBuildCollection $errorCode
      *
      * @return ServiceBuild
      */
-    public function setErrorCode(array $errorCode): ServiceBuild
+    public function setErrorCode(ErrorCodeBuildCollection $errorCode): ServiceBuild
     {
         $this->errorCode = $errorCode;
         return $this;
     }
 
     /**
-     * @return array
+     * @return ModelBuildCollection
      */
-    public function getModel(): array
+    public function getModel(): ModelBuildCollection
     {
         return $this->model;
     }
 
     /**
-     * @param array $model
+     * @param ModelBuildCollection $model
      *
      * @return ServiceBuild
      */
-    public function setModel(array $model): ServiceBuild
+    public function setModel(ModelBuildCollection $model): ServiceBuild
     {
         $this->model = $model;
         return $this;
@@ -84,18 +88,22 @@ class ServiceBuild extends BaseBuild
          */
         $model = new $classname;
         $model->setModel($this->getModel())
-            ->setErrors($this->getErrorCode())
+            ->setError($this->getErrorCode())
             ->setName($actionName)
-            ->setDescription($description)
-            ->setExceptionName($this->getConfig()->getException()->getInheritance());
+            ->setExceptionName($this->getConfig()->getException()->getInheritance())
+            ->setDescription($description);
         return [$model->getMethod(), $model->getUses()];
     }
 
-    public function build(): array
+    /**
+     * @return BaseBuildCollection
+     * @throws \Exception
+     */
+    public function build(): BaseBuildCollection
     {
         $uses = [
-            $this->getModel()['class'],
-            $this->getErrorCode()['class'],
+            $this->getModel()->getClass(),
+            $this->getErrorCode()->getClass(),
             $this->getConfig()->getException()->getUse(),
             $this->getConfig()->getService()->getUse(),
         ];
@@ -136,7 +144,7 @@ class ServiceBuild extends BaseBuild
         $class = $this->getNamespace($this->getGenerateCodeEntity()->getService());
         $classname = StringHelper::basename($class);
         $namespace = StringHelper::dirname($class);
-        $params = [
+        $config = [
             'namespace'   => $namespace,
             'classname'   => $classname,
             'uses'        => $uses,
@@ -147,10 +155,11 @@ class ServiceBuild extends BaseBuild
             'inheritance' => $this->getConfig()->getService()->getInheritance(),
             'methods'     => $methods,
         ];
-        $this->output($params, StringHelper::dirname($this->getGenerateCodeEntity()->getService()));
-        return [
+        $file = $this->output(new ClassConfig($config), StringHelper::dirname($this->getGenerateCodeEntity()->getService()));
+        return new BaseBuildCollection([
             'classname' => $classname,
             'class'     => $class,
-        ];
+            'file'      => $file,
+        ]);
     }
 }

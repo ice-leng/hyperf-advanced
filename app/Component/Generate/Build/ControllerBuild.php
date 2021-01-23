@@ -4,56 +4,61 @@ namespace App\Component\Generate\Build;
 
 use App\Component\Generate\Build\Action\Controller\BaseActionControllerBuild;
 use App\Component\Generate\Build\Action\Controller\ValidateParse\BaseValidateParse;
+use App\Component\Generate\Build\Collection\BaseBuildCollection;
+use App\Component\Generate\Build\Collection\ControllerBuildCollection;
+use App\Component\Generate\Build\Collection\ErrorCodeBuildCollection;
+use App\Component\Generate\ClassFile\ClassConfig;
+use Exception;
 use Lengbin\Helper\YiiSoft\Arrays\ArrayHelper;
 use Lengbin\Helper\YiiSoft\StringHelper;
 
 class ControllerBuild extends BaseBuild
 {
     /**
-     * @var array
+     * @var BaseBuildCollection
      */
     private $service;
 
     /**
-     * @var string
+     * @var ErrorCodeBuildCollection
      */
-    private $serviceName;
+    private $errorCode;
 
     /**
-     * @return array
+     * @return BaseBuildCollection
      */
-    public function getService(): array
+    public function getService(): BaseBuildCollection
     {
         return $this->service;
     }
 
     /**
-     * @param array $service
+     * @return ErrorCodeBuildCollection
+     */
+    public function getErrorCode(): ErrorCodeBuildCollection
+    {
+        return $this->errorCode;
+    }
+
+    /**
+     * @param ErrorCodeBuildCollection $errorCode
      *
      * @return ControllerBuild
      */
-    public function setService(array $service): ControllerBuild
+    public function setErrorCode(ErrorCodeBuildCollection $errorCode): ControllerBuild
     {
-        $this->service = $service;
+        $this->errorCode = $errorCode;
         return $this;
     }
 
     /**
-     * @return string
-     */
-    public function getServiceName(): string
-    {
-        return $this->serviceName;
-    }
-
-    /**
-     * @param string $serviceName
+     * @param BaseBuildCollection $service
      *
      * @return ControllerBuild
      */
-    public function setServiceName(string $serviceName): ControllerBuild
+    public function setService(BaseBuildCollection $service): ControllerBuild
     {
-        $this->serviceName = $serviceName;
+        $this->service = $service;
         return $this;
     }
 
@@ -78,7 +83,10 @@ class ControllerBuild extends BaseBuild
         $directory = str_replace($this->getConfig()->getDefault()->getController()->getPath(), '', $this->getGenerateCodeEntity()->getController());
         $controllerPath = StringHelper::dirname($directory);
         $paths = StringHelper::explode($controllerPath, '/', true, true);
-        array_unshift($paths, $this->getConfig()->getController()->getPrefix());
+        $prefix = $this->getConfig()->getController()->getPrefix();
+        if (!StringHelper::isEmpty($prefix)) {
+            array_unshift($paths, $prefix);
+        }
         $paths[] = StringHelper::basename($directory, 'Controller');
         $paths[] = $name;
 
@@ -95,16 +103,23 @@ class ControllerBuild extends BaseBuild
          * @var BaseActionControllerBuild $model
          */
         $model = new $classname;
-        $model->setName($name)->setValidateParse($parse)->setServiceName($this->getServiceName());
+        $model->setName($name)
+            ->setValidateParse($parse)
+            ->setError($this->getErrorCode())
+            ->setExceptionName($this->getConfig()->getException()->getInheritance())
+            ->setServiceName(lcfirst($this->getService()->getClassname()));
         return [$model->getMethod(), $model->getUses(), $parse->getPath()];
     }
 
-    public function build(): array
+    /**
+     * @return ControllerBuildCollection
+     * @throws Exception
+     */
+    public function build(): ControllerBuildCollection
     {
-        $this->setServiceName(lcfirst($this->getService()['classname']));
         $properties = call_user_func($this->getConfig()->getController()->getProperties(), $this);
         $uses = $this->getConfig()->getController()->getUses();
-        $uses[] = $this->getService()['class'];
+        $uses[] = $this->getService()->getClass();
         $routs = $methods = $actions = [];
 
         // todo 如果有 查询 则有 list
@@ -136,7 +151,7 @@ class ControllerBuild extends BaseBuild
             "@package {$namespace}",
         ];
         $comment = ArrayHelper::merge($comment, call_user_func($this->getConfig()->getController()->getComment(), $this));
-        $params = [
+        $config = [
             'namespace'   => $namespace,
             'classname'   => $classname,
             'uses'        => $uses,
@@ -145,7 +160,12 @@ class ControllerBuild extends BaseBuild
             'properties'  => $properties,
             'methods'     => $methods,
         ];
-        $this->output($params, StringHelper::dirname($this->getGenerateCodeEntity()->getController()));
-        return $routs;
+        $file = $this->output(new ClassConfig($config), StringHelper::dirname($this->getGenerateCodeEntity()->getController()));
+        return new ControllerBuildCollection([
+            'classname' => $classname,
+            'class'     => $class,
+            'rout'      => $routs,
+            'file'      => $file,
+        ]);
     }
 }

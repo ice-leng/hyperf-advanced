@@ -2,6 +2,11 @@
 
 namespace App\Component\Generate\Build;
 
+use App\Component\Generate\Build\Collection\BaseBuildCollection;
+use App\Component\Generate\Build\Collection\ErrorCodeBuildCollection;
+use App\Component\Generate\Build\Collection\ModelBuildCollection;
+use App\Component\Generate\ClassFile\ClassConfig;
+use Exception;
 use Lengbin\Helper\Util\FileHelper;
 use Lengbin\Helper\YiiSoft\Arrays\ArrayHelper;
 use Lengbin\Helper\YiiSoft\StringHelper;
@@ -22,27 +27,26 @@ class ErrorCodeBuild extends BaseBuild
     ];
 
     /**
-     * 表名
-     * @var string
+     * @var ModelBuildCollection
      */
-    private $modelName;
+    private $model;
 
     /**
-     * @return string
+     * @return ModelBuildCollection
      */
-    public function getModelName(): string
+    public function getModel(): ModelBuildCollection
     {
-        return $this->modelName;
+        return $this->model;
     }
 
     /**
-     * @param string $modelName
+     * @param ModelBuildCollection $model
      *
      * @return ErrorCodeBuild
      */
-    public function setModelName(string $modelName): ErrorCodeBuild
+    public function setModel(ModelBuildCollection $model): ErrorCodeBuild
     {
-        $this->modelName = $modelName;
+        $this->model = $model;
         return $this;
     }
 
@@ -52,7 +56,7 @@ class ErrorCodeBuild extends BaseBuild
      */
     protected function getName(): string
     {
-        return $this->getModelName() . 'Error';
+        return $this->getModel()->getClassname() . 'Error';
     }
 
     /**
@@ -79,7 +83,7 @@ class ErrorCodeBuild extends BaseBuild
         $scan = FileHelper::scan($this->getRoot() . '/' . $defaultPath);
         $number = iterator_count($scan) + 1;
         $prefix .= '-' . str_pad($number, 3, "0", STR_PAD_LEFT);
-        $errorPrefix[] = $this->getModelName();
+        $errorPrefix[] = $this->getModel()->getClassname();
         array_unshift($errorPrefix, 'errors');
         return [
             'value' => $prefix,
@@ -128,6 +132,7 @@ class ErrorCodeBuild extends BaseBuild
             ],
         ];
 
+        // 修改的 归于 更新
         if ($isChange && empty($constants['update'])) {
             $num++;
             $constants['update'] = [
@@ -142,7 +147,11 @@ class ErrorCodeBuild extends BaseBuild
         return $constants;
     }
 
-    public function build(): array
+    /**
+     * @return ErrorCodeBuildCollection
+     * @throws Exception
+     */
+    public function build(): ErrorCodeBuildCollection
     {
         $defaultConfig = $this->getConfig()->getDefault();
         // 错误码 目录结构 基于 服务目录结构
@@ -154,11 +163,11 @@ class ErrorCodeBuild extends BaseBuild
         $class = $this->getNamespace($path . '/' . $this->getName());
         $namespace = StringHelper::dirname($class);
 
-        $params = [
+        $config = [
             'namespace'   => $namespace,
             'classname'   => $this->getName(),
             'uses'        => [
-                $this->getConfig()->getErrorCode()->getUse()
+                $this->getConfig()->getErrorCode()->getUse(),
             ],
             'comments'    => [
                 "class {$this->getName()}",
@@ -167,14 +176,12 @@ class ErrorCodeBuild extends BaseBuild
             'inheritance' => $this->getConfig()->getErrorCode()->getInheritance(),
             'constants'   => $constants,
         ];
-        $this->output($params, $path);
-        return [
+        $file = $this->output(new ClassConfig($config), $path);
+        return new ErrorCodeBuildCollection([
             'classname' => $this->getName(),
             'class'     => $class,
-            'path'      => $path . '/' . $this->getName(),
-            'constant' => array_map(function ($constant) {
-                return $constant['name'];
-            }, $constants),
-        ];
+            'file'      => $file,
+            'constants' => ArrayHelper::getColumn($constants, 'name'),
+        ]);
     }
 }

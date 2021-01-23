@@ -11,7 +11,7 @@ use Hyperf\DbConnection\Db;
 use Hyperf\Di\Annotation\Inject;
 use Lengbin\Helper\Util\PasswordHelper;
 use Lengbin\Hyperf\Common\Constant\SoftDeleted;
-use Lengbin\Hyperf\Common\Entity\PageEntity;
+use Lengbin\Common\Component\Entity\PageEntity;
 use Lengbin\Hyperf\Common\Exception\BusinessException;
 use Lengbin\Hyperf\Common\Framework\BaseService;
 use Throwable;

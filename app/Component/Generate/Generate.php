@@ -2,6 +2,7 @@
 
 namespace App\Component\Generate;
 
+use Exception;
 use Lengbin\Helper\Util\FileHelper;
 
 class Generate
@@ -58,14 +59,19 @@ class Generate
     /**
      * @param string $suffix
      *
-     * @return bool
+     * @return string
+     * @throws Exception
      */
-    public function output(string $suffix): bool
+    public function output(string $suffix): string
     {
         $file = implode(DIRECTORY_SEPARATOR, [
                 $this->getPath(),
                 $this->getConfig()->getFileName(),
             ]) . '.' . FileHelper::getExtension($suffix);
-        return FileHelper::putFile($file, $this->getConfig()->getContent());
+        $status = FileHelper::putFile($file, $this->getConfig()->getContent());
+        if (!$status) {
+            throw new Exception("{$file} generate fail");
+        }
+        return $file;
     }
 }

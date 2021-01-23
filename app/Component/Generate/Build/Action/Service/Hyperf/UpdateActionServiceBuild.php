@@ -1,18 +1,20 @@
 <?php
 
-namespace App\Component\Generate\Build\Action\Service;
+namespace App\Component\Generate\Build\Action\Service\Hyperf;
+
+use App\Component\Generate\Build\Action\Service\BaseActionServiceBuild;
 
 class UpdateActionServiceBuild extends BaseActionServiceBuild
 {
     public function getContent(): array
     {
         // todo  判断 exist
-        $primaryKey = $this->getModel()['primaryKey'];
+        $primaryKey = $this->getModel()->getPrimaryKey();
         return [
             "\$model = \$this->findOne(['{$primaryKey}' => \$params['{$primaryKey}']]);",
             '$status = $model->update($params);',
             'if (!$status) {',
-            $this->getSpaces() . "throw new {$this->getExceptionName()}({$this->getErrors()['classname']}::{$this->getErrors()['constant']['update']});",
+                $this->throwExceptionForError($this->getName()),
             '}',
             'return $model->toArray();',
         ];

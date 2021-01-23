@@ -4,7 +4,7 @@ namespace App\Service\System\Manager;
 
 use App\Constant\Errors\System\MenuError;
 use Hyperf\Di\Annotation\Inject;
-use Lengbin\Hyperf\Common\Entity\PageEntity;
+use Lengbin\Common\Component\Entity\PageEntity;
 use Lengbin\Hyperf\Common\Exception\BusinessException;
 use Lengbin\Hyperf\Common\Framework\BaseService;
 use Lengbin\YiiSoft\Rbac\ManagerInterface;

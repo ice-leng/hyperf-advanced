@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Component\Generate\Build\Action\Controller;
+namespace App\Component\Generate\Build\Action\Controller\Hyperf;
+
+use App\Component\Generate\Build\Action\Controller\BaseActionControllerBuild;
 
 class DefaultActionControllerBuild extends BaseActionControllerBuild
 {

@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Component\Generate\Build\Action\Service;
+namespace App\Component\Generate\Build\Action\Service\Hyperf;
 
+use App\Component\Generate\Build\Action\Service\BaseActionServiceBuild;
+use Lengbin\Common\Component\Entity\PageEntity;
 use Lengbin\Hyperf\Common\Constant\SoftDeleted;
-use Lengbin\Hyperf\Common\Entity\PageEntity;
 
 class ListActionServiceBuild extends BaseActionServiceBuild
 {
@@ -19,7 +20,7 @@ class ListActionServiceBuild extends BaseActionServiceBuild
     public function getContent(): array
     {
         $data = [
-            "\$query = {$this->getModel()['classname']}::query();",
+            "\$query = {$this->getModel()->getClassname()}::query();",
             '$query->select($field);',
             "\$query->where(['enable' => SoftDeleted::ENABLE]);",
         ];

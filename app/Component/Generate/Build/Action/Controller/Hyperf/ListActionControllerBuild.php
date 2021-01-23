@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Component\Generate\Build\Action\Controller;
+namespace App\Component\Generate\Build\Action\Controller\Hyperf;
 
-use Lengbin\Hyperf\Common\Entity\PageEntity;
+use App\Component\Generate\Build\Action\Controller\BaseActionControllerBuild;
+use Lengbin\Common\Component\Entity\PageEntity;
 
 class ListActionControllerBuild extends BaseActionControllerBuild
 {

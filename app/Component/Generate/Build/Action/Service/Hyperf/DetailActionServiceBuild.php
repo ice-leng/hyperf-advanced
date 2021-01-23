@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Component\Generate\Build\Action\Service;
+namespace App\Component\Generate\Build\Action\Service\Hyperf;
+
+use App\Component\Generate\Build\Action\Service\BaseActionServiceBuild;
 
 class DetailActionServiceBuild extends BaseActionServiceBuild
 {

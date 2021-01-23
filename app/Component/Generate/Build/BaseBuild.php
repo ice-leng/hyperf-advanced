@@ -6,6 +6,7 @@ use App\Component\Generate\Build\Config\BuildConfig;
 use App\Component\Generate\ClassFile\ClassConfig;
 use App\Component\Generate\Generate;
 use App\Entity\GenerateCodeEntity;
+use Exception;
 use Lengbin\Common\Component\BaseObject;
 use Lengbin\Helper\YiiSoft\StringHelper;
 
@@ -65,16 +66,17 @@ abstract class BaseBuild extends BaseObject
     }
 
     /**
-     * @param array  $params
-     * @param string $path
+     * @param ClassConfig $config
+     * @param string      $path
      *
-     * @return bool
+     * @return string
+     * @throws Exception
      */
-    protected function output(array $params, string $path): bool
+    protected function output(ClassConfig $config, string $path): string
     {
         $generate = new Generate();
         $generate->setPath($this->getRoot() . '/' . $path);
-        $generate->setConfig(new ClassConfig($params));
+        $generate->setConfig($config);
         return $generate->output('php');
     }
 
@@ -109,5 +111,5 @@ abstract class BaseBuild extends BaseObject
         return $this;
     }
 
-    abstract public function build(): array;
+    abstract public function build();
 }
