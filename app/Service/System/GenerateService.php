@@ -30,7 +30,6 @@ class GenerateService extends BaseService
         $errorCode = (new ErrorCodeBuild($params))->setModel($model)->build();
         $service = (new ServiceBuild($params))->setModel($model)->setErrorCode($errorCode)->build();
         $controller = (new ControllerBuild($params))->setErrorCode($errorCode)->setService($service)->build();
-        var_dump($errorCode, $service, $controller);
         return [
             'file' => [
                 'model'      => $model->getFile(),
