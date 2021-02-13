@@ -7,18 +7,21 @@ declare(strict_types=1);
  * @link     https://www.hyperf.io
  * @document https://doc.hyperf.io
  * @contact  group@hyperf.io
- * @license  https://github.com/hyperf-cloud/hyperf/blob/master/LICENSE
+ * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
+
+use App\Exception\Handler\ApiDogExceptionHandler;
+use Lengbin\Hyperf\Common\Exception\Handler\AppExceptionHandler;
+use Lengbin\Hyperf\Common\Exception\Handler\BusinessExceptionHandler;
+use Lengbin\Hyperf\Auth\Exception\Handler\AuthTokenExceptionHandler;
 
 return [
     'handler' => [
-        'http'    => [
-            \Lengbin\Hyperf\Helper\Exception\Handler\InvalidTokenExceptionHandler::class,
-            \Lengbin\Hyperf\Helper\Exception\Handler\BusinessExceptionHandler::class,
-            App\Exception\Handler\AppExceptionHandler::class,
-        ],
-        'backend' => [
-            \Backend\Exception\Handler\BackendExceptionHandler::class,
+        'http' => [
+            AuthTokenExceptionHandler::class,
+            ApiDogExceptionHandler::class,
+            BusinessExceptionHandler::class,
+            AppExceptionHandler::class,
         ],
     ],
 ];

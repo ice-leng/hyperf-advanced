@@ -8,7 +8,7 @@
 
 If You Like This Please Give Me Star
 
-基于 yii 扩展的高级hyerf框架
+基于 Hyperf 2.0 && YII3
 
 目前还在研发中，请慎用
 
@@ -24,25 +24,20 @@ The preferred way to install this extension is through [composer](http://getcomp
 Either run
 
 ```
-git clone https://github.com/ice-leng/hyperf-advanced.git
+git clone -b 2.0 https://github.com/ice-leng/hyperf-advanced.git
 ```
 使用扩展
 --------------
- - [ ] API
-    - [x] [接口文档](https://github.com/ice-leng/hyperf-swagger)
-    - [x] [帮助类](https://github.com/ice-leng/hyperf-helper)
-    - [x] [token机制](https://github.com/ice-leng/hyperf-jwt)
-    - [x] [auth访问权限](https://github.com/ice-leng/hyperf-auth)
-    - [x] [Yii Db](https://github.com/ice-leng/hyperf-yii-db)
-    - [ ] ActiveRecode 文件生成脚手架
-    - [ ] elk 接入日志分析系统
-    - [ ] jaeger tracing 
- - [ ] Backend
-    - [x] [permission 权限](https://github.com/ice-leng/hyperf-yii-rbac)
-    - [ ] [session访问权限](https://github.com/ice-leng/hyperf-auth)
-    - [ ] 导航menu
-    - [ ] 混编模版
+- [jwt](https://github.com/ice-leng/hyperf-jwt)
+- [授权验证-yii，支持路由白名单](https://github.com/ice-leng/hyperf-auth)
+- [枚举，错误码合并生成](https://github.com/ice-leng/hyperf-error-code)
+- [swagger，路由](https://github.com/daodao97/apidog)
+- [rbac, 菜单](https://github.com/ice-leng/hyperf-yii-rbac)
 
+感谢
+--------------
+[Hyperf](https://github.com/hyperf)
 
+[Yii](https://github.com/yiisoft)
 
-
+[dadao](https://github.com/daodao97)

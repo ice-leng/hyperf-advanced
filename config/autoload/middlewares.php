@@ -7,17 +7,19 @@ declare(strict_types=1);
  * @link     https://www.hyperf.io
  * @document https://doc.hyperf.io
  * @contact  group@hyperf.io
- * @license  https://github.com/hyperf-cloud/hyperf/blob/master/LICENSE
+ * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
+
+use Hyperf\Apidog\Middleware\ApiValidationMiddleware;
+use Lengbin\Hyperf\Auth\Middleware\ApiMiddleware;
+use Lengbin\Hyperf\Common\Middleware\CorsMiddleware;
+use Lengbin\Hyperf\YiiSoft\Rbac\Middleware\PermissionMiddleware;
 
 return [
     'http' => [
-        \Lengbin\Hyperf\Auth\Middleware\CorsMiddleware::class,
-        \Lengbin\Hyperf\Auth\Middleware\ApiMiddleware::class,
-        \Lengbin\Hyperf\Helper\Middleware\ServerMiddleware::class
-    ],
-    'backend' => [
-        \Hyperf\Session\Middleware\SessionMiddleware::class,
-        \Lengbin\Hyperf\Auth\Middleware\WebMiddleware::class,
+        CorsMiddleware::class,
+        ApiMiddleware::class,
+        ApiValidationMiddleware::class,
+        PermissionMiddleware::class
     ],
 ];
