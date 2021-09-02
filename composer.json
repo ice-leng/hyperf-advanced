@@ -13,6 +13,7 @@
     "license": "Apache-2.0",
     "require": {
         "php": ">=7.4",
+        "ext-json": "*",
         "daodao97/apidog": "^1.5",
         "hyperf/cache": "~2.2.0",
         "hyperf/command": "~2.2.0",
