@@ -12,10 +12,14 @@
     "description": "A coroutine framework that focuses on hyperspeed and flexible, specifically use for build microservices and middlewares.",
     "license": "Apache-2.0",
     "require": {
-        "php": ">=7.3",
+        "php": ">=7.4",
+        "daodao97/apidog": "^1.5",
         "hyperf/cache": "~2.2.0",
         "hyperf/command": "~2.2.0",
         "hyperf/config": "~2.2.0",
+        "hyperf/constants": "~2.2.0",
+        "hyperf/crontab": "^2.2",
+        "hyperf/database": "~2.2.0",
         "hyperf/db-connection": "~2.2.0",
         "hyperf/framework": "~2.2.0",
         "hyperf/guzzle": "~2.2.0",
@@ -23,9 +27,9 @@
         "hyperf/logger": "~2.2.0",
         "hyperf/memory": "~2.2.0",
         "hyperf/process": "~2.2.0",
-        "hyperf/database": "~2.2.0",
         "hyperf/redis": "~2.2.0",
-        "hyperf/constants": "~2.2.0"
+        "hyperf/snowflake": "^2.2",
+        "hyperf/task": "^2.2"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^3.0",

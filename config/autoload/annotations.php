@@ -11,11 +11,14 @@ declare(strict_types=1);
  */
 return [
     'scan' => [
-        'paths' => [
+        'paths'              => [
             BASE_PATH . '/app',
         ],
         'ignore_annotations' => [
             'mixin',
+        ],
+        'class_map'          => [
+            \Hyperf\Utils\Coroutine::class => BASE_PATH . '/app/Kernel/ClassMap/Coroutine.php'
         ],
     ],
 ];

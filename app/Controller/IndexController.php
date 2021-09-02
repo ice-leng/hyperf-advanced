@@ -11,12 +11,35 @@ declare(strict_types=1);
  */
 namespace App\Controller;
 
+use App\Kernel\Context\Coroutine;
+use Hyperf\Contract\StdoutLoggerInterface;
+use Hyperf\Di\Annotation\Inject;
+
 class IndexController extends AbstractController
 {
+
+    /**
+     * @Inject()
+     * @var StdoutLoggerInterface
+     */
+    protected StdoutLoggerInterface $logger;
+
     public function index()
     {
         $user = $this->request->input('user', 'Hyperf');
         $method = $this->request->getMethod();
+
+        go(function () {
+            $this->logger->info('ccccc');
+        });
+
+        $this->logger->info('zzzz');
+
+        go(function () {
+            $this->logger->info('vvv');
+        });
+
+        $this->logger->info('xxxx');
 
         return [
             'method' => $method,

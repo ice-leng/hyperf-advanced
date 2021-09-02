@@ -8,9 +8,9 @@
 
 If You Like This Please Give Me Star
 
-基于 Hyperf 2.0 && YII3
+基于 Hyperf 2.0
 
-目前还在研发中，请慎用
+目前还在重构中，看看就行，别拉下来
 
 安装
 ------------
@@ -24,16 +24,5 @@ git clone -b 2.0 https://github.com/ice-leng/hyperf-advanced.git
 ```
 使用扩展
 --------------
-- [jwt](https://github.com/ice-leng/hyperf-jwt)
-- [授权验证-yii，支持路由白名单](https://github.com/ice-leng/hyperf-auth)
-- [枚举，错误码合并生成](https://github.com/ice-leng/hyperf-error-code)
 - [swagger，路由](https://github.com/daodao97/apidog)
-- [rbac, 菜单](https://github.com/ice-leng/hyperf-yii-rbac)
 
-感谢
---------------
-[Hyperf](https://github.com/hyperf)
-
-[Yii](https://github.com/yiisoft)
-
-[dadao](https://github.com/daodao97)

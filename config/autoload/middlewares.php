@@ -10,10 +10,16 @@ declare(strict_types=1);
  * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
 
-use Lengbin\Hyperf\Common\Middleware\CorsMiddleware;
+use App\Kernel\Middleware\CorsMiddleware;
+use App\Kernel\Middleware\DebugLogMiddleware;
+use App\Middleware\TokenMiddleware;
+use Hyperf\Apidog\Middleware\ApiValidationMiddleware;
 
 return [
     'http' => [
         CorsMiddleware::class,
+        DebugLogMiddleware::class,
+//	    TokenMiddleware::class,
+        ApiValidationMiddleware::class,
     ],
 ];
