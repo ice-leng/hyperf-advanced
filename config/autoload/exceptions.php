@@ -9,11 +9,15 @@ declare(strict_types=1);
  * @contact  group@hyperf.io
  * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
+
+use Hyperf\HttpServer\Exception\Handler\HttpExceptionHandler;
+use Lengbin\Hyperf\Common\Exceptions\Handler\AppExceptionHandler;
+
 return [
     'handler' => [
         'http' => [
-            Hyperf\HttpServer\Exception\Handler\HttpExceptionHandler::class,
-            App\Kernel\Exceptions\Handler\AppExceptionHandler::class,
+            HttpExceptionHandler::class,
+            AppExceptionHandler::class
         ],
     ],
 ];

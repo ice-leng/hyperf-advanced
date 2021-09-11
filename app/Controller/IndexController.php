@@ -9,12 +9,16 @@ declare(strict_types=1);
  * @contact  group@hyperf.io
  * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
+
 namespace App\Controller;
 
+use App\Constants\Errors\UserError;
 use Hyperf\Contract\StdoutLoggerInterface;
 use Hyperf\Di\Annotation\Inject;
+use Lengbin\Hyperf\Common\BaseController;
+use Lengbin\Hyperf\Common\Exceptions\BusinessException;
 
-class IndexController extends AbstractController
+class IndexController extends BaseController
 {
 
     /**
@@ -40,9 +44,9 @@ class IndexController extends AbstractController
 
         $this->logger->info('xxxx');
 
-        return [
-            'method' => $method,
+        return $this->response->success([
+            'method'  => $method,
             'message' => "Hello {$user}.",
-        ];
+        ]);
     }
 }

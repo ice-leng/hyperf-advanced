@@ -1,7 +1,5 @@
 <?php
 
-use Lengbin\Hyperf\Common\Error\CommentErrorCode;
-
 return [
     // enable false 将不会生成 swagger 文件
     'enable' => env('APP_ENV') !== 'prod',

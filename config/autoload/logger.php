@@ -10,7 +10,7 @@ declare(strict_types=1);
  * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
 
-use App\Kernel\Log\AppendRequestIdProcessor;
+use Lengbin\Hyperf\Common\Logs\AppendRequestIdProcessor;
 
 return [
     'default' => [
