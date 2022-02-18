@@ -84,7 +84,11 @@
         "analyse": "phpstan analyse --memory-limit 300M -l 0 -c phpstan.neon ./app ./config",
         "start": [
             "Composer\\Config::disableProcessTimeout",
-            "php ./bin/hyperf.php start"
+            "php -d swoole.use_shortname=Off ./bin/hyperf.php start"
+        ],
+        "error": [
+            "Composer\\Config::disableProcessTimeout",
+            "php -d swoole.use_shortname=Off ./bin/hyperf.php gen:error-code"
         ]
     }
 }

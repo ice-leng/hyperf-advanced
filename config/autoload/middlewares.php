@@ -11,7 +11,6 @@ declare(strict_types=1);
  */
 
 use App\Middleware\TokenMiddleware;
-use Hyperf\Apidog\Middleware\ApiValidationMiddleware;
 use Lengbin\Hyperf\Common\Middlewares\CorsMiddleware;
 use Lengbin\Hyperf\Common\Middlewares\DebugLogMiddleware;
 
@@ -20,6 +19,5 @@ return [
         CorsMiddleware::class,
         DebugLogMiddleware::class,
 //	    TokenMiddleware::class,
-        ApiValidationMiddleware::class,
     ],
 ];

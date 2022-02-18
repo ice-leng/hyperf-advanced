@@ -8,9 +8,7 @@
 
 If You Like This Please Give Me Star
 
-基于 Hyperf 2.0
-
-目前还在重构中，看看就行，别拉下来
+基于 Hyperf 2.2
 
 安装
 ------------
