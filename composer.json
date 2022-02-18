@@ -12,9 +12,8 @@
     "description": "A coroutine framework that focuses on hyperspeed and flexible, specifically use for build microservices and middlewares.",
     "license": "Apache-2.0",
     "require": {
-        "php": ">=7.4",
+        "php": ">=8.0",
         "ext-json": "*",
-        "daodao97/apidog": "^1.5",
         "hyperf/cache": "~2.2.0",
         "hyperf/command": "~2.2.0",
         "hyperf/config": "~2.2.0",
@@ -30,7 +29,8 @@
         "hyperf/process": "~2.2.0",
         "hyperf/task": "^2.2",
         "lengbin/hyperf-common": "2.0.x-dev",
-        "lengbin/hyperf-error-code": "2.0.x-dev"
+        "lengbin/hyperf-error-code": "2.0.x-dev",
+        "tangwei/apidocs": "dev-master"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^3.0",
@@ -66,6 +66,12 @@
         "sort-packages": true
     },
     "extra": [],
+    "repositories": {
+        "tangwei/apidocs": {
+            "type": "vcs",
+            "url": "https://github.com/ice-leng/api-docs.git"
+        }
+    },
     "scripts": {
         "post-root-package-install": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""

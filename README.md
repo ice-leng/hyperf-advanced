@@ -22,7 +22,3 @@ Either run
 ```
 git clone -b 2.0 https://github.com/ice-leng/hyperf-advanced.git
 ```
-使用扩展
---------------
-- [swagger，路由](https://github.com/daodao97/apidog)
-
