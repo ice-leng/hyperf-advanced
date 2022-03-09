@@ -12,11 +12,10 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use App\Constants\Errors\UserError;
 use Hyperf\Contract\StdoutLoggerInterface;
 use Hyperf\Di\Annotation\Inject;
 use Lengbin\Hyperf\Common\BaseController;
-use Lengbin\Hyperf\Common\Exceptions\BusinessException;
+use Lengbin\Hyperf\Common\Helpers\IpHelper;
 
 class IndexController extends BaseController
 {
@@ -26,6 +25,12 @@ class IndexController extends BaseController
      * @var StdoutLoggerInterface
      */
     protected StdoutLoggerInterface $logger;
+
+    /**
+     * @Inject()
+     * @var IpHelper
+     */
+    protected IpHelper $ipHelper;
 
     public function index()
     {
@@ -43,6 +48,7 @@ class IndexController extends BaseController
         });
 
         $this->logger->info('xxxx');
+        $this->logger->info($this->ipHelper->getClientIp());
 
         return $this->response->success([
             'method'  => $method,

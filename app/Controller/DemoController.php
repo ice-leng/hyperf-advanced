@@ -18,6 +18,7 @@ namespace App\Controller;
 
 use App\Entity\Request\DemoListRequest;
 use App\Entity\Response\DemoListResponse;
+use App\Middleware\TokenMiddleware;
 use Hyperf\ApiDocs\Annotation\Api;
 use Hyperf\ApiDocs\Annotation\ApiHeader;
 use Hyperf\ApiDocs\Annotation\ApiOperation;
@@ -25,6 +26,7 @@ use Hyperf\ApiDocs\Annotation\ApiResponse;
 use Hyperf\DTO\Annotation\Contracts\RequestBody;
 use Hyperf\DTO\Annotation\Contracts\Valid;
 use Hyperf\HttpServer\Annotation\Controller;
+use Hyperf\HttpServer\Annotation\Middleware;
 use Hyperf\HttpServer\Annotation\PostMapping;
 use Lengbin\Hyperf\Common\BaseController;
 use Psr\Http\Message\ResponseInterface;
@@ -32,6 +34,7 @@ use Psr\Http\Message\ResponseInterface;
 #[Controller(prefix: "/demo")]
 #[Api(tags: "demo管理", position: 0)]
 #[ApiHeader(name: 'Authorization')]
+#[Middleware(TokenMiddleware::class)]
 class DemoController extends BaseController
 {
 
