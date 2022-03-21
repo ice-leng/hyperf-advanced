@@ -17,13 +17,16 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Entity\Request\DemoFileRequest;
 use App\Entity\Request\DemoListRequest;
 use App\Entity\Response\DemoListResponse;
 use App\Middleware\TokenMiddleware;
 use Hyperf\ApiDocs\Annotation\Api;
+use Hyperf\ApiDocs\Annotation\ApiFormData;
 use Hyperf\ApiDocs\Annotation\ApiHeader;
 use Hyperf\ApiDocs\Annotation\ApiOperation;
 use Hyperf\DTO\Annotation\Contracts\RequestBody;
+use Hyperf\DTO\Annotation\Contracts\RequestFormData;
 use Hyperf\DTO\Annotation\Contracts\Valid;
 use Hyperf\HttpServer\Annotation\Controller;
 use Hyperf\HttpServer\Annotation\Middleware;
@@ -40,6 +43,32 @@ class DemoController extends BaseController
     #[ApiOperation('查询')]
     #[PostMapping(path: 'query')]
     public function query(#[RequestBody] #[Valid] DemoListRequest $request): DemoListResponse
+    {
+        var_dump($request);
+        die;
+        return new DemoListResponse([
+            'ages'       => [1],
+            'states'     => [1, 0],
+            'status'     => 1,
+            'image'      => 'https://www.baidu.com',
+            'addressArr' => [
+                [
+                    'street' => "a",
+                    'float' => 1.22,
+                    'city'  => [
+                        'cityName' => '成都'
+                    ]
+                ],
+            ],
+            'name'       => "demo",
+            'age'        => 1,
+        ]);
+    }
+
+    #[ApiOperation('文件')]
+    #[PostMapping(path: 'file')]
+    #[ApiFormData(name: 'file[]', type: 'file')]
+    public function file(#[RequestFormData] #[Valid] DemoFileRequest $request): DemoListResponse
     {
         var_dump($request);
         die;
