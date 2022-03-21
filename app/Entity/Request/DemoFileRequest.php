@@ -11,7 +11,6 @@ namespace App\Entity\Request;
 
 use Hyperf\ApiDocs\Annotation\ApiFileProperty;
 use Hyperf\ApiDocs\Annotation\ApiModelProperty;
-use Hyperf\DTO\Annotation\Validation\Integer;
 use Hyperf\HttpMessage\Upload\UploadedFile;
 use Lengbin\Common\Annotation\ArrayType;
 use Lengbin\Common\BaseObject;
