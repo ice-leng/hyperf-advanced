@@ -11,8 +11,9 @@ namespace App\Entity\Response;
 
 use Hyperf\ApiDocs\Annotation\ApiModelProperty;
 use Hyperf\DTO\Annotation\Validation\Required;
+use Lengbin\Common\BaseObject;
 
-class Address
+class Address extends BaseObject
 {
     public string $street = '';
 

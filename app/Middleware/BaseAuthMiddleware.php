@@ -104,6 +104,9 @@ abstract class BaseAuthMiddleware implements MiddlewareInterface
     {
         $token = $request->getHeaderLine('authorization');
         if (empty($token)) {
+            $token = $request->getQueryParams()['authorization'] ?? '';
+        }
+        if (empty($token)) {
             $token = $request->getCookieParams()['authorization'] ?? '';
         }
         if (empty($token)) {
@@ -138,13 +141,13 @@ abstract class BaseAuthMiddleware implements MiddlewareInterface
         // 记录 jwt解析 日志
         $this->logger($payload->toArray(), 'request-payload');
 
-        if ($payload->invalid) {
-            throw new BusinessException(CommonError::INVALID_TOKEN);
-        }
-
-        if ($payload->expired) {
-            throw new BusinessException(CommonError::TOKEN_EXPIRED);
-        }
+//        if ($payload->invalid) {
+//            throw new BusinessException(CommonError::INVALID_TOKEN);
+//        }
+//
+//        if ($payload->expired) {
+//            throw new BusinessException(CommonError::TOKEN_EXPIRED);
+//        }
 
         return $handler->handle($this->handlePayload($request, $payload));
     }

@@ -10,6 +10,7 @@ declare(strict_types=1);
 namespace App\Middleware;
 
 use App\Module\Login\JwtSubject;
+use Hyperf\Context\Context;
 use Psr\Http\Message\ServerRequestInterface;
 
 class TokenMiddleware extends BaseAuthMiddleware
@@ -30,6 +31,8 @@ class TokenMiddleware extends BaseAuthMiddleware
     {
 //        $data = $payload->data;
 //        $request->withAttribute('', $data['']);
+        $request = $request->withAttribute('userId', "123123");
+        Context::set(ServerRequestInterface::class, $request);
         return $request;
     }
 

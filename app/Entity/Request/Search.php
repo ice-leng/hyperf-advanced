@@ -18,8 +18,9 @@ use Hyperf\DTO\Annotation\Validation\Regex;
 use Hyperf\DTO\Annotation\Validation\Required;
 use Hyperf\DTO\Annotation\Validation\StartsWith;
 use Hyperf\DTO\Annotation\Validation\Str;
+use Lengbin\Common\BaseObject;
 
-class Search
+class Search extends BaseObject
 {
     #[ApiModelProperty('测试')]
     public string $test = 'tt';

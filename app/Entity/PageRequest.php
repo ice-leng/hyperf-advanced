@@ -17,8 +17,9 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use Hyperf\ApiDocs\Annotation\ApiModelProperty;
+use Lengbin\Common\BaseObject;
 
-class PageRequest
+class PageRequest extends BaseObject
 {
     #[ApiModelProperty('是否返回全部结果')]
     public ?int $all;

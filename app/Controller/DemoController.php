@@ -14,6 +14,7 @@ declare(strict_types=1);
  * @contact  group@hyperf.io
  * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
+
 namespace App\Controller;
 
 use App\Entity\Request\DemoListRequest;
@@ -22,14 +23,12 @@ use App\Middleware\TokenMiddleware;
 use Hyperf\ApiDocs\Annotation\Api;
 use Hyperf\ApiDocs\Annotation\ApiHeader;
 use Hyperf\ApiDocs\Annotation\ApiOperation;
-use Hyperf\ApiDocs\Annotation\ApiResponse;
 use Hyperf\DTO\Annotation\Contracts\RequestBody;
 use Hyperf\DTO\Annotation\Contracts\Valid;
 use Hyperf\HttpServer\Annotation\Controller;
 use Hyperf\HttpServer\Annotation\Middleware;
 use Hyperf\HttpServer\Annotation\PostMapping;
 use Lengbin\Hyperf\Common\BaseController;
-use Psr\Http\Message\ResponseInterface;
 
 #[Controller(prefix: "/demo")]
 #[Api(tags: "demo管理", position: 0)]
@@ -40,11 +39,26 @@ class DemoController extends BaseController
 
     #[ApiOperation('查询')]
     #[PostMapping(path: 'query')]
-    #[ApiResponse(code: '200', description: 'success', template: "page", className: DemoListResponse::class)]
-    public function query(#[RequestBody] #[Valid] DemoListRequest $request): ResponseInterface
+    public function query(#[RequestBody] #[Valid] DemoListRequest $request): DemoListResponse
     {
         var_dump($request);
-        return $this->response->success();
+        die;
+        return new DemoListResponse([
+            'ages'       => [1],
+            'states'     => [1, 0],
+            'status'     => 1,
+            'image'      => 'https://www.baidu.com',
+            'addressArr' => [
+                [
+                    'street' => "a",
+                    'float' => 1.22,
+                    'city'  => [
+                        'cityName' => '成都'
+                    ]
+                ],
+            ],
+            'name'       => "demo",
+            'age'        => 1,
+        ]);
     }
-
 }

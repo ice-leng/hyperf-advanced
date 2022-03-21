@@ -9,7 +9,9 @@ declare(strict_types=1);
 
 namespace App\Entity\Response;
 
-class City
+use Lengbin\Common\BaseObject;
+
+class City extends BaseObject
 {
     public string $cityName = '';
 }

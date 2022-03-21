@@ -17,10 +17,23 @@ declare(strict_types=1);
 namespace App\Entity\Request;
 
 use App\Entity\PageRequest;
+use Hyperf\ApiDocs\Annotation\ApiAttributeProperty;
+use Hyperf\ApiDocs\Annotation\ApiHeaderProperty;
 use Hyperf\ApiDocs\Annotation\ApiModelProperty;
+use Hyperf\ApiDocs\Annotation\ApiQueryProperty;
+use Lengbin\Common\BaseObject;
 
-class DemoListRequest
+class DemoListRequest extends BaseObject
 {
+    #[ApiHeaderProperty("aaa")]
+    protected string $header;
+
+    #[ApiAttributeProperty("bbbb")]
+    protected string $userId;
+
+    #[ApiQueryProperty("ccc")]
+    protected string $query;
+
     #[ApiModelProperty('关联条件')]
     public ?array $condition;
 
