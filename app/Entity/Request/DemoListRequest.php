@@ -18,24 +18,17 @@ namespace App\Entity\Request;
 
 use App\Entity\PageRequest;
 use Hyperf\ApiDocs\Annotation\ApiAttributeProperty;
-use Hyperf\ApiDocs\Annotation\ApiHeaderProperty;
 use Hyperf\ApiDocs\Annotation\ApiModelProperty;
-use Hyperf\ApiDocs\Annotation\ApiQueryProperty;
+use Lengbin\Common\Annotation\ArrayType;
 use Lengbin\Common\BaseObject;
 
 class DemoListRequest extends BaseObject
 {
-    #[ApiHeaderProperty("aaa")]
-    protected string $header;
-
     #[ApiAttributeProperty("bbbb")]
-    protected string $userId;
-
-    #[ApiQueryProperty("ccc")]
-    protected string $query;
+    protected ?string $userId;
 
     #[ApiModelProperty('关联条件')]
-    public ?array $condition;
+    public array $condition = [];
 
     #[ApiModelProperty('搜索条件')]
     public Search $search;

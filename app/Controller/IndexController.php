@@ -13,6 +13,7 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use Hyperf\Contract\StdoutLoggerInterface;
+use Hyperf\DbConnection\Db;
 use Hyperf\Di\Annotation\Inject;
 use Lengbin\Hyperf\Common\BaseController;
 use Lengbin\Hyperf\Common\Helpers\IpHelper;
@@ -37,18 +38,18 @@ class IndexController extends BaseController
         $user = $this->request->input('user', 'Hyperf');
         $method = $this->request->getMethod();
 
-        go(function () {
-            $this->logger->info('ccccc');
-        });
-
-        $this->logger->info('zzzz');
-
-        go(function () {
-            $this->logger->info('vvv');
-        });
-
-        $this->logger->info('xxxx');
-        $this->logger->info($this->ipHelper->getClientIp());
+//        go(function () {
+//            $this->logger->info('ccccc');
+//        });
+//
+//        $this->logger->info('zzzz');
+//
+//        go(function () {
+//            $this->logger->info('vvv');
+//        });
+//
+//        $this->logger->info('xxxx');
+//        $this->logger->info($this->ipHelper->getClientIp());
 
         return $this->response->success([
             'method'  => $method,

@@ -44,8 +44,9 @@ class DemoController extends BaseController
     #[PostMapping(path: 'query')]
     public function query(#[RequestBody] #[Valid] DemoListRequest $request): DemoListResponse
     {
+
         var_dump($request);
-        die;
+
         return new DemoListResponse([
             'ages'       => [1],
             'states'     => [1, 0],
@@ -70,8 +71,6 @@ class DemoController extends BaseController
     #[ApiFormData(name: 'file[]', type: 'file')]
     public function file(#[RequestFormData] #[Valid] DemoFileRequest $request): DemoListResponse
     {
-        var_dump($request);
-        die;
         return new DemoListResponse([
             'ages'       => [1],
             'states'     => [1, 0],

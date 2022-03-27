@@ -11,6 +11,7 @@ namespace App\Middleware;
 
 use App\Module\Login\JwtSubject;
 use App\Module\Login\LoginFactory;
+use Hyperf\Context\Context;
 use Hyperf\Di\Annotation\AnnotationCollector;
 use Hyperf\Di\Annotation\Inject;
 use Hyperf\HttpServer\Router\Dispatched;
@@ -149,7 +150,9 @@ abstract class BaseAuthMiddleware implements MiddlewareInterface
 //            throw new BusinessException(CommonError::TOKEN_EXPIRED);
 //        }
 
-        return $handler->handle($this->handlePayload($request, $payload));
+        $request = $this->handlePayload($request, $payload);
+        Context::set(ServerRequestInterface::class, $request);
+        return $handler->handle($request);
     }
 
     abstract protected function getTestPayload(ServerRequestInterface $request);

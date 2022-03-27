@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace App\Entity\Request;
 
+use Hyperf\ApiDocs\Annotation\ApiAttributeProperty;
 use Hyperf\ApiDocs\Annotation\ApiModelProperty;
 use Hyperf\DTO\Annotation\Validation\Between;
 use Hyperf\DTO\Annotation\Validation\In;
@@ -45,4 +46,7 @@ class Search extends BaseObject
     #[Between(1, 5)]
     #[Required]
     public int $num;
+
+    #[ApiAttributeProperty("bbbb")]
+    protected ?string $userId;
 }
