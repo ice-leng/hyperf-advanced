@@ -9,7 +9,6 @@ declare(strict_types=1);
 
 namespace App\Exception\Handler;
 
-use Hyperf\Contract\StdoutLoggerInterface;
 use Hyperf\ExceptionHandler\ExceptionHandler;
 use Hyperf\Validation\ValidationException;
 use Lengbin\Hyperf\Common\Constants\Errors\CommonError;
@@ -21,18 +20,12 @@ use Throwable;
 class ValidateExceptionHandler extends ExceptionHandler
 {
     /**
-     * @var StdoutLoggerInterface
-     */
-    protected $logger;
-
-    /**
      * @var Response
      */
-    protected $response;
+    protected Response $response;
 
-    public function __construct(StdoutLoggerInterface $logger, Response $response)
+    public function __construct(Response $response)
     {
-        $this->logger = $logger;
         $this->response = $response;
     }
 
@@ -43,20 +36,10 @@ class ValidateExceptionHandler extends ExceptionHandler
      */
     public function handle(Throwable $throwable, ResponseInterface $response)
     {
-        $msg = sprintf("%s: %s(%s) in %s:%s\nStack trace:\n%s",
-            get_class($throwable),
-            $throwable->getMessage(),
-            $throwable->getCode(),
-            $throwable->getFile(),
-            $throwable->getLine(),
-            $throwable->getTraceAsString()
-        );
-        $this->logger->debug($msg);
-
         $this->stopPropagation();
         $serverError = CommonError::INVALID_PARAMS();
         $systemError = new BusinessException($serverError->getValue());
-        $message = current($throwable->errors())[0];
+        $message = $throwable->validator->errors()->first();
         return $this->response->fail($systemError->getRealCode(), $message);
     }
 

@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types=1);
+
 /**
  * This file is part of Hyperf.
  *
@@ -10,16 +11,16 @@ declare(strict_types=1);
  * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
 
-use App\Exception\Handler\ValidateExceptionHandler;
-use Hyperf\HttpServer\Exception\Handler\HttpExceptionHandler;
+use App\Common\Exception\Handler\ValidateExceptionHandler;
+use App\Exception\Handler\TokenExceptionHandler;
 use Lengbin\Hyperf\Common\Exceptions\Handler\AppExceptionHandler;
 
 return [
     'handler' => [
         'http' => [
-            HttpExceptionHandler::class,
+            TokenExceptionHandler::class,
             ValidateExceptionHandler::class,
-            AppExceptionHandler::class
+            AppExceptionHandler::class,
         ],
     ],
 ];

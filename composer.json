@@ -29,6 +29,7 @@
         "hyperf/memory": "~2.2.0",
         "hyperf/process": "~2.2.0",
         "hyperf/task": "^2.2",
+        "lengbin/hyperf-auth": "dev-master",
         "lengbin/hyperf-common": "3.0.x-dev",
         "lengbin/hyperf-error-code": "2.0.x-dev",
         "tangwei/apidocs": "dev-master",
@@ -52,7 +53,8 @@
     },
     "autoload": {
         "psr-4": {
-            "App\\": "app/"
+            "App\\": "app/",
+            "Ice\\": "ice/"
         },
         "files": []
     },

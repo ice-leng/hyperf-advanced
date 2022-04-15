@@ -9,38 +9,19 @@ declare(strict_types=1);
 
 namespace App\Middleware;
 
-use App\Module\Login\JwtSubject;
+use Lengbin\Hyperf\Auth\JwtSubject;
+use Lengbin\Hyperf\Auth\Middleware\BaseAuthMiddleware;
 use Psr\Http\Message\ServerRequestInterface;
 
 class TokenMiddleware extends BaseAuthMiddleware
 {
-
-    public const LOGIN_TYPE_TOKEN = 'client';
-
-    protected function getTestPayload(ServerRequestInterface $request)
+    protected function getTestPayload(ServerRequestInterface $request): JwtSubject
     {
-        $payload = new JwtSubject();
-        $payload->data = [
-
-        ];
-        return $payload;
+        // TODO: Implement getTestPayload() method.
     }
 
     protected function handlePayload(ServerRequestInterface $request, JwtSubject $payload): ServerRequestInterface
     {
-//        $data = $payload->data;
-//        $request->withAttribute('', $data['']);
-        return $request->withAttribute('userId', "123123");;
+        return $request->withAttribute('userId', "123123");
     }
-
-    protected function validateToken(?string $token): JwtSubject
-    {
-        return $this->parseToken($token, function ($payload) {
-//            if (empty($payload->data['user_id']) || ($payload->key !== self::LOGIN_TYPE_TOKEN)) {
-//                throw new BusinessException(CommonError::INVALID_TOKEN);
-//            }
-            return $payload;
-        });
-    }
-
 }
