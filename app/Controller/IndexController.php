@@ -5,59 +5,48 @@ declare(strict_types=1);
  * This file is part of Hyperf.
  *
  * @link     https://www.hyperf.io
- * @document https://doc.hyperf.io
+ * @document https://hyperf.wiki
  * @contact  group@hyperf.io
- * @license  https://github.com/hyperf-cloud/hyperf/blob/master/LICENSE
+ * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
 
 namespace App\Controller;
 
-use Common\Controller\RestController;
-use Hyperf\HttpServer\Annotation\Controller;
-use Hyperf\HttpServer\Annotation\GetMapping;
-use Hyperf\HttpServer\Annotation\RequestMapping;
-use Lengbin\Hyperf\Auth\AuthAnnotation;
+use App\Constants\Errors\UserError;
+use Hyperf\Contract\StdoutLoggerInterface;
+use Hyperf\Di\Annotation\Inject;
+use Lengbin\Hyperf\Common\BaseController;
+use Lengbin\Hyperf\Common\Exceptions\BusinessException;
 
-/**
- * Class IndexController
- * @package App\Controller
- * @Controller()
- */
-class IndexController extends RestController
+class IndexController extends BaseController
 {
 
     /**
-     * @RequestMapping(path="/", methods={"get", "post"})
-     * @AuthAnnotation(isPublic=true)
-     * @return array
+     * @Inject()
+     * @var StdoutLoggerInterface
      */
+    protected StdoutLoggerInterface $logger;
+
     public function index()
     {
         $user = $this->request->input('user', 'Hyperf');
         $method = $this->request->getMethod();
-        return [
+
+        go(function () {
+            $this->logger->info('ccccc');
+        });
+
+        $this->logger->info('zzzz');
+
+        go(function () {
+            $this->logger->info('vvv');
+        });
+
+        $this->logger->info('xxxx');
+
+        return $this->response->success([
             'method'  => $method,
             'message' => "Hello {$user}.",
-        ];
+        ]);
     }
-
-    /**
-     * @GetMapping(path="/test/{id:\d{1,3}}")
-     * @AuthAnnotation(isWhitelist=true)
-     */
-    public function test($id)
-    {
-        return ['11' =>  $id];
-    }
-
-    /**
-     * @GetMapping(path="/test2")
-     */
-    public function test2()
-    {
-        return [
-            'id' => $this->getAuth()->getId()
-        ];
-    }
-
 }

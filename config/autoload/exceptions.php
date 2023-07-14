@@ -5,20 +5,19 @@ declare(strict_types=1);
  * This file is part of Hyperf.
  *
  * @link     https://www.hyperf.io
- * @document https://doc.hyperf.io
+ * @document https://hyperf.wiki
  * @contact  group@hyperf.io
- * @license  https://github.com/hyperf-cloud/hyperf/blob/master/LICENSE
+ * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
+
+use Hyperf\HttpServer\Exception\Handler\HttpExceptionHandler;
+use Lengbin\Hyperf\Common\Exceptions\Handler\AppExceptionHandler;
 
 return [
     'handler' => [
-        'http'    => [
-            \Lengbin\Hyperf\Helper\Exception\Handler\InvalidTokenExceptionHandler::class,
-            \Lengbin\Hyperf\Helper\Exception\Handler\BusinessExceptionHandler::class,
-            App\Exception\Handler\AppExceptionHandler::class,
-        ],
-        'backend' => [
-            \Backend\Exception\Handler\BackendExceptionHandler::class,
+        'http' => [
+            HttpExceptionHandler::class,
+            AppExceptionHandler::class
         ],
     ],
 ];
